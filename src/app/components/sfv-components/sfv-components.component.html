@@ -1,0 +1,109 @@
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+  <h2>Cálculo componentes del SFV</h2>
+</mat-toolbar>
+<div fxLayout="row" class="main-content">
+  <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
+    <h2>Ingresar los datos del SFV</h2>
+    <h3>Datos generales</h3>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>Potencia de planta FV</span>
+      <mat-form-field class="field-fv-potency">
+        <input matInput placeholder="Ingrese la potencia de planta FV">
+      </mat-form-field>
+      <span>kW</span>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>Calcular Potencia de planta</span>
+      <mat-slide-toggle #calc_power_toggle>{{calc_power_toggle.checked? 'Desactivar': 'Activar'}}</mat-slide-toggle>
+    </div>
+    <ng-container *ngIf="calc_power_toggle.checked">
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+        <span>
+          Cantidad total de paneles FV
+        </span>
+        <mat-form-field class="field-fv-potency">
+          <input matInput placeholder="Ingrese la cantidad de paneles">
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+        <span>
+          Potencia de panel FV
+        </span>
+        <mat-form-field class="field-fv-potency">
+          <input matInput placeholder="Ingrese la potencia del panel">
+        </mat-form-field>
+        <span>W</span>
+
+      </div>
+    </ng-container>
+    <mat-divider></mat-divider>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>
+        Temperatura ambiente
+      </span>
+      <mat-form-field class="short-number">
+        <input matInput value="30">
+      </mat-form-field>
+      <span>°C</span>
+
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>
+        Temperatura ambiente más baja esperada
+      </span>
+      <mat-form-field class="short-number">
+        <input matInput value="18">
+      </mat-form-field>
+      <span>°C</span>
+
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+  <mat-divider [vertical]="true"></mat-divider>
+  <div fxLayout="column" fxFlex="50%">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>Seleccione el tipo de inversores</span>
+      <mat-radio-group fxLayout="column">
+        <mat-radio-button #micro_inversors_radio value="1">Microinversores</mat-radio-button>
+        <mat-radio-button value="2">Inversores de cadena</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div *ngIf="micro_inversors_radio.checked" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span> Número de campos FV </span>
+      <mat-form-field class="short-number">
+        <input matInput type="number" value="1">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>
+          Tipo de servicio
+      </span>
+      <mat-form-field>
+          <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+          <span>
+              Tension de servicio (V)
+          </span>
+          <mat-form-field>
+              <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+                <mat-option *ngFor="let food of foods" [value]="food.value">
+                  {{food.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+          <span>Indique el lugar de la instalacion</span>
+          <mat-radio-group fxLayout="column">
+            <mat-radio-button  value="1">Suelo</mat-radio-button>
+            <mat-radio-button value="2">Techo/Cubierta</mat-radio-button>
+          </mat-radio-group>
+        </div>
+  </div>
+</div>
