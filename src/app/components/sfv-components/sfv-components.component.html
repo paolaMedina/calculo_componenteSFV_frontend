@@ -64,14 +64,14 @@
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
       <span>Seleccione el tipo de inversores</span>
       <mat-radio-group fxLayout="column">
-        <mat-radio-button #micro_inversors_radio value="1">Microinversores</mat-radio-button>
-        <mat-radio-button value="2">Inversores de cadena</mat-radio-button>
+        <mat-radio-button  value="1">Microinversores</mat-radio-button>
+        <mat-radio-button #macro_inversors_radio value="2">Inversores de cadena</mat-radio-button>
       </mat-radio-group>
     </div>
-    <div *ngIf="micro_inversors_radio.checked" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+    <div *ngIf="macro_inversors_radio.checked" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
       <span> Número de campos FV </span>
       <mat-form-field class="short-number">
-        <input matInput type="number" value="1">
+        <input [(ngModel)]="sfv.total_fields_fv" matInput type="number" value="1">
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
@@ -105,5 +105,7 @@
             <mat-radio-button value="2">Techo/Cubierta</mat-radio-button>
           </mat-radio-group>
         </div>
+
   </div>
 </div>
+<button routerLink="./fv-fields-config" (click)="initFvFields()"mat-button fxFlexAlign="start start"> Configurar campos FV</button>

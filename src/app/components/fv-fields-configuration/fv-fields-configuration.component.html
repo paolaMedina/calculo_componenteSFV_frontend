@@ -1,3 +1,15 @@
-<p>
-  fv-fields-configuration works!
-</p>
+
+
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+        <button routerLink = "/" class="left-button"  mat-button> Volver </button>
+        <span>Configuración de campos FV</span>
+      </mat-toolbar> 
+<div fxLayout="column">
+
+
+    <div  *ngFor="let fvField of fvFields" fxLayout="row" fxLayoutAlign="left center">
+      <h5>{{fvField.name}}</h5>
+      <button [routerLink]="['/fv-field-config', fvField.id]" class="align-rigth" fxFlexAlign="end" mat-icon-button> <mat-icon>keyboard_arrow_right</mat-icon></button>
+    </div>
+  </div>
+  <mat-divider></mat-divider>

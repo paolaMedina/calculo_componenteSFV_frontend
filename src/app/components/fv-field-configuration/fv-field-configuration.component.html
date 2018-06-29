@@ -1,0 +1,48 @@
+
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+    <button routerLink = "/fv-fields-config" class="left-button"  mat-button> Volver </button>
+    <span>Configuración del campo FV</span>
+  </mat-toolbar> 
+<div fxLayout="row" class="main-content">
+
+  <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
+      <span>Indique nombre de campo FV</span>
+      <mat-form-field class="field-fv-potency">
+        <input matInput [(ngModel)]="fvField.name">
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
+        <span>
+            Seleccione Fabricante de panel solar FV
+        </span>
+        <mat-form-field>
+          <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+            <mat-option *ngFor="let food of foods" [value]="food.value">
+              {{food.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    
+      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
+          <span>
+              Seleccione el modelo del panel solar FV
+          </span>
+          <mat-form-field>
+            <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+  </div>
+
+
+
+
+  <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
+  </div>
+
+</div>

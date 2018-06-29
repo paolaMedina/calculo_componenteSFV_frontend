@@ -7,12 +7,16 @@ import { SfvComponentsComponent } from './components/sfv-components/sfv-componen
 import { SharedModule } from './shared/shared.module';
 import { FvFieldsConfigurationComponent } from '@app/components/fv-fields-configuration/fv-fields-configuration.component';
 import { CoreModule } from '@app/core/core.module';
+import { FvFieldConfigurationComponent } from './components/fv-field-configuration/fv-field-configuration.component';
+import { CotizationBuilderComponent } from './pages/cotization-builder/cotization-builder.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SfvComponentsComponent,
-    FvFieldsConfigurationComponent
+    FvFieldsConfigurationComponent,
+    FvFieldConfigurationComponent,
+    CotizationBuilderComponent
   ],
   imports: [
     BrowserModule,

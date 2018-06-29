@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { Sfv } from '@app/core/models';
 import { SfvFormBuilder } from '@app/core/forms';
+import { FvFieldService, SfvService } from '@app/core/services';
 
 export interface Food {
   value: string;
@@ -22,11 +23,19 @@ export class SfvComponentsComponent implements OnInit {
     {value: 'tacos-2', viewValue: 'Tacos'}
   ];
   constructor(
-    sfvFormBuilder: SfvFormBuilder
+    private sfvFormBuilder: SfvFormBuilder,
+    private sfvService: SfvService,
+    private fvFieldsService: FvFieldService
   ) {
+    this.sfv = this.sfvService.get();
     this.sfvForm = sfvFormBuilder.makeForm();
    }
-
+   initFvFields() {
+     if ( this.sfv.total_fields_fv >= 1 ) {
+       this.fvFieldsService.setTotalFvFields(this.sfv.total_fields_fv);
+      this.fvFieldsService.initFvFields();
+     }
+   }
   ngOnInit() {
   }
 
