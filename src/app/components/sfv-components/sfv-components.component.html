@@ -1,20 +1,24 @@
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
   <h2>Cálculo componentes del SFV</h2>
 </mat-toolbar>
-<div fxLayout="row" class="main-content">
+<form [formGroup]="sfvForm" fxLayout="column" class="main-content">
+  <div fxLayout="row">
   <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
     <h2>Ingresar los datos del SFV</h2>
     <h3>Datos generales</h3>
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
       <span>Potencia de planta FV</span>
       <mat-form-field class="field-fv-potency">
-        <input matInput placeholder="Ingrese la potencia de planta FV">
+        <input formControlName="power_of_plant_fv" matInput placeholder="Ingrese la potencia de planta FV">
+        <mat-error *ngIf="!sfvForm.get('power_of_plant_fv').valid">
+          Por favor ingrese una potencia de planta valida
+        </mat-error>
       </mat-form-field>
       <span>kW</span>
     </div>
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
       <span>Calcular Potencia de planta</span>
-      <mat-slide-toggle #calc_power_toggle>{{calc_power_toggle.checked? 'Desactivar': 'Activar'}}</mat-slide-toggle>
+      <mat-slide-toggle  #calc_power_toggle>{{calc_power_toggle.checked? 'Desactivar': 'Activar'}}</mat-slide-toggle>
     </div>
     <ng-container *ngIf="calc_power_toggle.checked">
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
@@ -22,7 +26,7 @@
           Cantidad total de paneles FV
         </span>
         <mat-form-field class="field-fv-potency">
-          <input matInput placeholder="Ingrese la cantidad de paneles">
+          <input formControlName="total_panels_fv" matInput placeholder="Ingrese la cantidad de paneles">
         </mat-form-field>
       </div>
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
@@ -30,7 +34,7 @@
           Potencia de panel FV
         </span>
         <mat-form-field class="field-fv-potency">
-          <input matInput placeholder="Ingrese la potencia del panel">
+          <input formControlName="power_of_panel_fv" matInput placeholder="Ingrese la potencia del panel">
         </mat-form-field>
         <span>W</span>
 
@@ -57,55 +61,52 @@
       <span>°C</span>
 
     </div>
-    <mat-divider></mat-divider>
   </div>
   <mat-divider [vertical]="true"></mat-divider>
   <div fxLayout="column" fxFlex="50%">
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
       <span>Seleccione el tipo de inversores</span>
       <mat-radio-group fxLayout="column">
-        <mat-radio-button  value="1">Microinversores</mat-radio-button>
+        <mat-radio-button value="1">Microinversores</mat-radio-button>
         <mat-radio-button #macro_inversors_radio value="2">Inversores de cadena</mat-radio-button>
       </mat-radio-group>
     </div>
-    <div *ngIf="macro_inversors_radio.checked" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-      <span> Número de campos FV </span>
-      <mat-form-field class="short-number">
-        <input [(ngModel)]="sfv.total_fields_fv" matInput type="number" value="1">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>
+        Tipo de servicio
+      </span>
+      <mat-form-field>
+        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
       <span>
-          Tipo de servicio
+        Tension de servicio (V)
       </span>
       <mat-form-field>
-          <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{food.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-          <span>
-              Tension de servicio (V)
-          </span>
-          <mat-form-field>
-              <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-                <mat-option *ngFor="let food of foods" [value]="food.value">
-                  {{food.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
-      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-          <span>Indique el lugar de la instalacion</span>
-          <mat-radio-group fxLayout="column">
-            <mat-radio-button  value="1">Suelo</mat-radio-button>
-            <mat-radio-button value="2">Techo/Cubierta</mat-radio-button>
-          </mat-radio-group>
-        </div>
+        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+      <span>Indique el lugar de la instalacion</span>
+      <mat-radio-group fxLayout="column">
+        <mat-radio-button value="1">Suelo</mat-radio-button>
+        <mat-radio-button value="2">Techo/Cubierta</mat-radio-button>
+      </mat-radio-group>
+    </div>
 
   </div>
 </div>
-<button routerLink="./fv-fields-config" (click)="initFvFields()"mat-button fxFlexAlign="start start"> Configurar campos FV</button>
+<mat-divider></mat-divider>
+
+<button routerLink="/fv-fields-config" fxFlexAlign ="center start" fxFlex="20%" (click)="saveSfv()" type="submit"  mat-button > Configurar campos FV</button>
+
+</form>

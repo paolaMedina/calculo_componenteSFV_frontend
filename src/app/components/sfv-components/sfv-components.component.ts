@@ -24,19 +24,21 @@ export class SfvComponentsComponent implements OnInit {
   ];
   constructor(
     private sfvFormBuilder: SfvFormBuilder,
-    private sfvService: SfvService,
-    private fvFieldsService: FvFieldService
+    private sfvService: SfvService
   ) {
     this.sfv = this.sfvService.get();
-    this.sfvForm = sfvFormBuilder.makeForm();
+    this.sfvForm = this.sfvFormBuilder.makeForm();
    }
-   initFvFields() {
-     if ( this.sfv.total_fields_fv >= 1 ) {
-       this.fvFieldsService.setTotalFvFields(this.sfv.total_fields_fv);
-      this.fvFieldsService.initFvFields();
-     }
+   saveSfv() {
+     console.log(this.sfvForm.valid);
+     this.sfvForm.markAsTouched();
+    if ( this.sfvForm.valid ) {
+      this.sfv = this.sfvFormBuilder.extractData(this.sfvForm);
+      this.sfvService.set(this.sfv);
+    }
    }
   ngOnInit() {
+
   }
 
 }
