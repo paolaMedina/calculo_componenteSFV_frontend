@@ -9,17 +9,26 @@ import { Observable } from 'rxjs';
   styleUrls: ['./fv-fields-configuration.component.scss']
 })
 export class FvFieldsConfigurationComponent implements OnInit, OnDestroy {
-  fvFields$: Observable<FvField[]>;
-  fvFields: FvField[];
+  fvFields: FvField[]; // should never access it directly 
   constructor(
     private _fvFieldService: FvFieldService,
     private cd: ChangeDetectorRef
   ) {
     this.fvFields = new Array<FvField>();
+    this._fvFieldService.getFvFieldsObservable().subscribe( (fvFields: FvField[]) => {
+      this.fvFields = fvFields;
+    }
+  );
   }
 
   ngOnInit() {
-    this.fvFields = this._fvFieldService.getFvFields();
+    this._fvFieldService.publishFvFields();
+  }
+  deleleteFvField( idFvField: string ) {
+    this._fvFieldService.deleteFvField(idFvField);
+  }
+  addDefaultFvField() {
+    this._fvFieldService.addDefaultFvField();
   }
   ngOnDestroy() {
     this.cd.detach(); // try this
