@@ -8,14 +8,21 @@ import { Observable, of, Subject } from 'rxjs';
 export class FvFieldService {
   private selectedFvField = new FvField();
   private totalFvFields: number;
+  private fvFields$$ = new  Subject<FvField[]>();
   private fvFields = new Array<FvField>();
   constructor() {
     this.totalFvFields = 0;
    }
-   getFvFields() {
+   public getFvFields() {
      return this.fvFields;
    }
-
+   getFvFieldsObservable(): Observable<FvField[]> {
+     return this.fvFields$$.asObservable();
+   }
+   public deleteFvField(idFvField: string) {
+     this.fvFields = this.fvFields.filter(fvField => fvField.id !== idFvField);
+     this.publishFvFields();
+   }
    public initFvFields(){
     if ( this.totalFvFields && this.totalFvFields > 0 ) {
       this.fvFields = new Array<FvField>();
@@ -25,6 +32,15 @@ export class FvFieldService {
         this.fvFields.push(fvField);
       }
     }
+    this.publishFvFields();
+   }
+   public publishFvFields() {
+     this.fvFields$$.next(this.fvFields);
+   }
+   public addDefaultFvField() {
+    let fvField = new FvField();
+    fvField.name = this.getDefaultName(this.fvFields.length);
+    this.fvFields.push(fvField);
    }
   /**
    * Return the default name for fv field in a list by its index at list
