@@ -10,7 +10,9 @@ export class SfvService {
   get(): Sfv {
     return this.sfv;
   }
-
+  set(sfv: Sfv) {
+    this.sfv = sfv;
+  }
   constructor() {
     this.sfv = new Sfv();
    }
