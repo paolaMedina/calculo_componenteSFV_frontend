@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "build-github": "ng build --prod --base-href 'https://paolamedina.github.io/calculo_componenteSFV_frontend/'",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
