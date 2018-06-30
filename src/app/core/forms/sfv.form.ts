@@ -9,22 +9,21 @@ export class SfvFormBuilder {
 
     constructor(private fb: FormBuilder) {
     }
-    makeForm(): FormGroup {
+    makeForm(sfv?: Sfv): FormGroup {
         let sfvForm: FormGroup;
         sfvForm = this.fb.group({
-            power_of_plant_fv: ['',  Validators.compose([Validators.required, CustomValidators.number])],
-            total_panels_fv: [''],
-            power_of_panel_fv: [''],
+            power_of_plant_fv: [sfv? sfv.power_of_plant_fv:'',  Validators.compose([Validators.required, CustomValidators.number])],
+            total_panels_fv: [sfv? sfv.total_panels_fv:''],
+            power_of_panel_fv: [sfv? sfv.power_of_panel_fv:''],
             calculate_plant_potential: [''],
-            number_of_fields_fv: ['', CustomValidators.number],
-            ambient_temperature: ['', Validators.compose([Validators.required, CustomValidators.celsius])],
-            lowest_ambient_temperature_expected: ['', Validators.compose([Validators.required, CustomValidators.celsius])],
-            investment_type: ['', Validators.required],
-            service_type: ['', Validators.required],
-            service_voltage: ['', Validators.required],
-            instalation_place: ['', Validators.required]
+            number_of_fields_fv: [sfv? sfv.number_of_fields_fv:'', CustomValidators.number],
+            ambient_temperature: [sfv? sfv.ambient_temperature:'', Validators.compose([Validators.required, CustomValidators.celsius])],
+            lowest_ambient_temperature_expected: [sfv? sfv.lowest_ambient_temperature_expected:'', Validators.compose([Validators.required, CustomValidators.celsius])],
+            investment_type: [sfv? sfv.investment_type:'', Validators.required],
+            service_type: [sfv? sfv.service_type:'', Validators.required],
+            service_voltage: [sfv? sfv.service_voltage:'', Validators.required],
+            instalation_place: [sfv? sfv.instalation_place:'', Validators.required]
         });
-        console.log(sfvForm);
         return sfvForm;
     }
     getAllErrors(form: FormGroup): any {
@@ -39,8 +38,10 @@ export class SfvFormBuilder {
     }
     extractData(form: FormGroup): Sfv {
         let sfv = new Sfv();
+        sfv.power_of_plant_fv = form.get('power_of_plant_fv').value;
         sfv.ambient_temperature = form.get('ambient_temperature').value;
         sfv.instalation_place = form.get('instalation_place').value;
+        sfv.number_of_fields_fv = form.get('number_of_fields_fv').value;
         sfv.investment_type = form.get('investment_type').value;
         sfv.lowest_ambient_temperature_expected = form.get('lowest_ambient_temperature_expected').value;
         sfv.power_of_panel_fv = form.get('power_of_panel_fv').value;
@@ -49,5 +50,6 @@ export class SfvFormBuilder {
         sfv.total_panels_fv =  form.get('total_panels_fv').value;
         return sfv;
     }
+
 
 }

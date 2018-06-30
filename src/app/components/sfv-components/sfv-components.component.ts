@@ -55,7 +55,10 @@ export class SfvComponentsComponent implements OnInit {
     }
    }
   ngOnInit() {
-
+    this.sfv = this.sfvService.get();
+    console.log(this.sfv);
+    this.sfvForm = this.sfvFormBuilder.makeForm(this.sfv);
+    console.log(this.sfvForm.get('investment_type').value);
   }
 
 }

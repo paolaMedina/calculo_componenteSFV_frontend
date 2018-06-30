@@ -5,6 +5,7 @@ export class Sfv {
     ambient_temperature: number;
     lowest_ambient_temperature_expected: number;
     investment_type: string;
+    number_of_fields_fv: number;
     service_type: string;
     service_voltage: number;
     instalation_place: string;
