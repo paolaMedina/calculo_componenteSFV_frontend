@@ -30,7 +30,7 @@ export class FvFieldService {
    */
   public initFvFields() {
     let fvField = new FvField();
-    fvField.name = this.getDefaultName(1);
+    fvField.name = this.getDefaultName(0);
     this.fvFields.push(fvField);
     this.publishFvFields();
   }
