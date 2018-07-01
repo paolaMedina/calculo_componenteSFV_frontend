@@ -2,7 +2,6 @@ import { Directive , Input, SimpleChanges } from '@angular/core';
 import {Validator,AbstractControl} from "@angular/forms";
 import {NG_VALIDATORS} from "@angular/forms";
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 @Directive({
   selector: '[requiredIf]',
    providers: [
@@ -15,13 +14,13 @@ export class RequiredIfDirective implements Validator {
 
   @Input("requiredIf")
     requiredIf$: Observable<boolean>;
-    requiredIf: boolean;
-    validate(c:AbstractControl) {
+    requiredIf: boolean = true;
+    validate(c: AbstractControl) {
   
        let value = c.value;
         if ((value == null || value == undefined || value == "") && this.requiredIf) {
                 return {
-                    requiredIf: {condition:this.requiredIf}
+                    requiredIf: {condition: this.requiredIf}
                 };
         }
         return null;
@@ -37,9 +36,5 @@ export class RequiredIfDirective implements Validator {
           this.requiredIf = value;
           if (this._onChange) this._onChange();
       });
-    /*
-    if (Object.keys(changes).includes('requiredIf') ) {
-      if (this._onChange) this._onChange();
-    }*/
   }
 }

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FvFieldsConfigurationComponent } from './fv-fields-configuration.component';
+import { FvFieldsConfigurationComponent } from '@app/components/fv-fields-configuration/fv-fields-configuration.component';
 
 describe('FvFieldsConfigurationComponent', () => {
   let component: FvFieldsConfigurationComponent;

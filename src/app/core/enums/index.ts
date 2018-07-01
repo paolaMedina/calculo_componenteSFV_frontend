@@ -1,0 +1,1 @@
+export * from '@app/core/enums/investor-type';

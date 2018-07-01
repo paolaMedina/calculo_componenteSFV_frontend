@@ -10,7 +10,7 @@
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
       <span>Potencia de planta FV</span>
       <mat-form-field class="field-fv-potency">
-        <input formControlName="power_of_plant_fv" matInput placeholder="Ingrese la potencia de planta FV">
+        <input type="number" formControlName="power_of_plant_fv" matInput placeholder="Ingrese la potencia de planta FV">
         <mat-error *ngIf="!sfvForm.get('power_of_plant_fv').valid">
           Por favor ingrese una potencia de planta valida
         </mat-error>
@@ -29,7 +29,7 @@
           Cantidad total de paneles FV
         </span>
         <mat-form-field class="field-fv-potency">
-          <input [requiredIf]="sfvForm.get('calculate_plant_potential').valueChanges" formControlName="total_panels_fv" matInput placeholder="Ingrese la cantidad de paneles">
+          <input type="number" [requiredIf]="sfvForm.get('calculate_plant_potential').valueChanges" formControlName="total_panels_fv" matInput placeholder="Ingrese la cantidad de paneles">
         </mat-form-field>
       </div>
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
@@ -37,7 +37,7 @@
           Potencia de panel FV
         </span>
         <mat-form-field class="field-fv-potency">
-          <input [requiredIf]="sfvForm.get('calculate_plant_potential').valueChanges" formControlName="power_of_panel_fv" matInput placeholder="Ingrese la potencia del panel">
+          <input  type="number" [requiredIf]="sfvForm.get('calculate_plant_potential').valueChanges" formControlName="power_of_panel_fv" matInput placeholder="Ingrese la potencia del panel">
         </mat-form-field>
         <span>W</span>
 
@@ -49,7 +49,7 @@
         Temperatura ambiente
       </span>
       <mat-form-field class="short-number">
-        <input formControlName="ambient_temperature" matInput>
+        <input type="number" formControlName="ambient_temperature" matInput>
       </mat-form-field>
       <span>°C</span>
 
@@ -59,7 +59,7 @@
         Temperatura ambiente más baja esperada
       </span>
       <mat-form-field class="short-number">
-        <input  formControlName="lowest_ambient_temperature_expected" matInput >
+        <input type="number" formControlName="lowest_ambient_temperature_expected" matInput >
       </mat-form-field>
       <span>°C</span>
 
@@ -69,7 +69,7 @@
   <div fxLayout="column" fxFlex="50%">
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
       <span>Seleccione el tipo de inversores</span>
-      <mat-radio-group formControlName="investment_type" [ngClass]="{'error': !sfvForm.get('investment_type').valid && sfvForm.get('investment_type').touched } " fxLayout="column">
+      <mat-radio-group formControlName="investor_type" [ngClass]="{'error': !sfvForm.get('investor_type').valid && sfvForm.get('investor_type').touched } " fxLayout="column">
         <mat-radio-button value="Microinversores">Microinversores</mat-radio-button>
         <mat-radio-button #macro_inversors_radio value="Inversores de cadena">Inversores de cadena</mat-radio-button>
       </mat-radio-group>

@@ -1,7 +1,8 @@
 import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { FvField } from '@app/core/models';
-import { FvFieldService } from '@app/core/services';
+import { FvField, Sfv } from '@app/core/models';
+import { FvFieldService, SfvService } from '@app/core/services';
 import { Observable } from 'rxjs';
+import { InvestorTypeEnum } from '@app/core/enums';
 
 @Component({
   selector: 'app-fv-fields-configuration',
@@ -10,9 +11,12 @@ import { Observable } from 'rxjs';
 })
 export class FvFieldsConfigurationComponent implements OnInit, OnDestroy {
   fvFields: FvField[]; // should never access it directly 
+  sfv: Sfv;
+  allow_add_and_delete: boolean;
   constructor(
     private _fvFieldService: FvFieldService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private _sfvService: SfvService
   ) {
     this.fvFields = new Array<FvField>();
     this._fvFieldService.getFvFieldsObservable().subscribe( (fvFields: FvField[]) => {
@@ -22,6 +26,14 @@ export class FvFieldsConfigurationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.sfv = this._sfvService.get();
+    if ( this.sfv.investor_type === InvestorTypeEnum.MicroInvestor ) {
+      this._fvFieldService.eliminateAllFieldsExceptFirst();
+      this.allow_add_and_delete = false;
+    } else {
+      this.allow_add_and_delete = true;
+    }
+    console.log(this.sfv.investor_type,  InvestorTypeEnum.MicroInvestor);
     this._fvFieldService.publishFvFields();
   }
   deleleteFvField( idFvField: string ) {

@@ -1,1 +1,1 @@
-export * from './required-if.directive';
+export * from '@app/shared/directives/required-if.directive';

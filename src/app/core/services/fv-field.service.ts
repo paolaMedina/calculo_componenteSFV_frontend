@@ -16,6 +16,9 @@ export class FvFieldService {
   public getFvFields() {
     return this.fvFields;
   }
+  public eliminateAllFieldsExceptFirst() {
+    this.fvFields = this.fvFields.slice(0,1);
+  }
   getFvFieldsObservable(): Observable<FvField[]> {
     return this.fvFields$$.asObservable();
   }
@@ -34,6 +37,11 @@ export class FvFieldService {
     this.fvFields.push(fvField);
     this.publishFvFields();
   }
+  /**
+   * 
+   *
+   * @memberof FvFieldService
+   */
   public publishFvFields() {
     this.fvFields$$.next(this.fvFields);
   }
