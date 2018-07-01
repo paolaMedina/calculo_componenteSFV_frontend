@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SfvComponentsComponent } from './sfv-components.component';
+import { SfvComponentsComponent } from '@app/components/sfv-components/sfv-components.component';
 
 describe('SfvComponentsComponent', () => {
   let component: SfvComponentsComponent;

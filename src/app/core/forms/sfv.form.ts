@@ -1,6 +1,6 @@
 
 import { FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
-import { CustomValidators } from './validators';
+import { CustomValidators } from '@app/core/forms/validators';
 import { Injectable } from '@angular/core';
 import { Sfv } from '@app/core/models';
 
@@ -19,7 +19,7 @@ export class SfvFormBuilder {
             number_of_fields_fv: [sfv? sfv.number_of_fields_fv:'', CustomValidators.number],
             ambient_temperature: [sfv? sfv.ambient_temperature:'', Validators.compose([Validators.required, CustomValidators.celsius])],
             lowest_ambient_temperature_expected: [sfv? sfv.lowest_ambient_temperature_expected:'', Validators.compose([Validators.required, CustomValidators.celsius])],
-            investment_type: [sfv? sfv.investment_type:'', Validators.required],
+            investor_type: [sfv? sfv.investor_type:'', Validators.required],
             service_type: [sfv? sfv.service_type:'', Validators.required],
             service_voltage: [sfv? sfv.service_voltage:'', Validators.required],
             instalation_place: [sfv? sfv.instalation_place:'', Validators.required]
@@ -42,7 +42,7 @@ export class SfvFormBuilder {
         sfv.ambient_temperature = form.get('ambient_temperature').value;
         sfv.instalation_place = form.get('instalation_place').value;
         sfv.number_of_fields_fv = form.get('number_of_fields_fv').value;
-        sfv.investment_type = form.get('investment_type').value;
+        sfv.investor_type = form.get('investor_type').value;
         sfv.lowest_ambient_temperature_expected = form.get('lowest_ambient_temperature_expected').value;
         sfv.power_of_panel_fv = form.get('power_of_panel_fv').value;
         sfv.service_type = form.get('service_type').value;

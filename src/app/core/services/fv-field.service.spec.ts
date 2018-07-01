@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { FvFieldService } from './fv-field.service';
+import { FvFieldService } from '@app/core/services/fv-field.service';
 
 describe('FvFieldService', () => {
   beforeEach(() => {

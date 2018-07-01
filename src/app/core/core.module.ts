@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SfvFormBuilder } from './forms';
-import { SfvService, FvFieldService } from './services/';
+import { SfvFormBuilder } from '@app/core/forms';
+import { SfvService, FvFieldService } from '@app/core/services';
 
 @NgModule({
   imports: [

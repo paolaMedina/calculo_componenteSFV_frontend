@@ -6,19 +6,19 @@
       </mat-toolbar> 
 <div fxLayout="column">
 
-<div *ngIf="fvFields.length === 0" >
+<div  *ngIf="fvFields.length === 0" >
   <h1> No se han registrado campos FV</h1>
 </div>
     <div  *ngFor="let fvField of fvFields" fxLayout="row" fxLayoutAlign="left center">
       <h5>{{fvField.name}}</h5>
       <span class="spacer"></span>
 
-      <button (click)="deleleteFvField(fvField.id)" fxFlexAlign="end" mat-icon-button> <mat-icon>delete</mat-icon></button>
+      <button  *ngIf="allow_add_and_delete"  (click)="deleleteFvField(fvField.id)" fxFlexAlign="end" mat-icon-button> <mat-icon>delete</mat-icon></button>
       <button [routerLink]="['/fv-field-config', fvField.id]" fxFlexAlign="end" mat-icon-button> <mat-icon>keyboard_arrow_right</mat-icon></button>
     </div>
   </div>
 
-  <button (click)="addDefaultFvField()"class="add-button"mat-mini-fab>
+  <button *ngIf="allow_add_and_delete" (click)="addDefaultFvField()"class="add-button"mat-mini-fab>
     <mat-icon aria-label="Example icon-button with a heart icon">add_circle_outline</mat-icon>
   </button>
   <mat-divider></mat-divider>

@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { SfvService } from './sfv.service';
+import { SfvService } from '@app/core/services/sfv.service';
 
 describe('SfvService', () => {
   beforeEach(() => {

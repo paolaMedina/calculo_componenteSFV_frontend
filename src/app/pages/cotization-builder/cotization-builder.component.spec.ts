@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CotizationBuilderComponent } from './cotization-builder.component';
+import { CotizationBuilderComponent } from '@app/pages/cotization-builder/cotization-builder.component';
 
 describe('CotizationBuilderComponent', () => {
   let component: CotizationBuilderComponent;

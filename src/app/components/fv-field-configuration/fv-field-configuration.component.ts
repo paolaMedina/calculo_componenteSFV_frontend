@@ -22,6 +22,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   saveChanges() {
     this._fvFieldService.updateField(this.fvField);
   }
+
   ngOnInit() {
     this.route.params.subscribe( params => {
       this.fvField = this._fvFieldService.get(params['id']);

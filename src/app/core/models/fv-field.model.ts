@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 export class FvField {
 
-   name: string;
+    name: string;
     id: string;
     manufacturer: string;
     solar_panel_model: string;
