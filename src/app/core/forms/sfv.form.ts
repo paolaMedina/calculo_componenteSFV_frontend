@@ -17,6 +17,7 @@ export class SfvFormBuilder {
             power_of_panel_fv: [sfv? sfv.power_of_panel_fv:''],
             calculate_plant_potential: [''],
             number_of_fields_fv: [sfv? sfv.number_of_fields_fv:'', CustomValidators.number],
+            instalation_place_ceiling_option: [''],
             ambient_temperature: [sfv? sfv.ambient_temperature:'', Validators.compose([Validators.required, CustomValidators.celsius])],
             lowest_ambient_temperature_expected: [sfv? sfv.lowest_ambient_temperature_expected:'', Validators.compose([Validators.required, CustomValidators.celsius])],
             investor_type: [sfv? sfv.investor_type:'', Validators.required],
