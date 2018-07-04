@@ -1,8 +1,7 @@
-
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
-    <button routerLink = "/fv-fields-config" class="left-button"  mat-button> Volver </button>
-    <span>Configuración del campo FV</span>
-  </mat-toolbar> 
+  <button routerLink="/fv-fields-config" class="left-button" mat-button> Volver </button>
+  <span>Configuración del campo FV</span>
+</mat-toolbar>
 <div fxLayout="row" class="main-content">
 
   <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
@@ -13,36 +12,113 @@
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
-        <span>
-            Seleccione Fabricante de panel solar FV
-        </span>
-        <mat-form-field>
-          <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{food.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    
-      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
-          <span>
-              Seleccione el modelo del panel solar FV
-          </span>
-          <mat-form-field>
-            <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+      <span>
+        Seleccione Fabricante de panel solar FV
+      </span>
+      <mat-form-field>
+        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
+      <span>
+        Seleccione el modelo del panel solar FV
+      </span>
+      <mat-form-field>
+        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- Fv panel specifications-->
+    <div class="container ">
+      <div class="panel-fv-specifications">
+        <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+          <span>Especificaciones panel FV </span>
+        </mat-toolbar>
+        <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="40px">
+          <div fxLayout="column" fxLayoutGap="15px">
+            <span>Potencia nominal (Pmax)</span>
+            <span>Tension a Pmax (VMPP)</span>
+            <span>Corriente a Pmax (IMPP)</span>
+            <span>Tension cto abierto (VOC) </span>
+            <span>Corriente cortocircuito (ISC)</span>
+            <span>Eficiencia de módulo</span>
+            <span>Coeficiente Voc</span>
+          </div>
+          <div fxLayout="column" fxLayoutGap="15px">
+            <span>255</span>
+            <span>255</span>
+            <span>255</span>
+            <span>255</span>
+            <span>255</span>
+            <span>255</span>
+            <span>255</span>
+          </div>
+          <div fxLayout="column" fxLayoutGap="15px">
+            <span>W</span>
+            <span>V DC</span>
+            <span>I DC</span>
+            <span>V DC</span>
+            <span>I DC</span>
+            <span>%</span>
+            <span>%/°C</span>
+          </div>
         </div>
+      </div>
+    </div>
   </div>
+  <!-- End Fv panel specifications-->
+
 
 
 
 
   <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
+      <span>
+        Seleccione Fabricante de panel solar FV
+      </span>
+      <mat-form-field>
+        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
+      <span>
+        Seleccione el modelo del panel solar FV
+      </span>
+      <mat-form-field>
+        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!--    MPPTs Distribution    -->
+    <div class="container">
+      <div fxLayout="column" class=" mppts-distribution">
+        <h4>Distribución MPPTs</h4>
+        <span>MPPT 1: X</span>
+        <span>MPPT 2: X</span>
+        <span>MPPT 3: NA</span>
+        <span>Potencia FV: 0W</span>
+        <span>Carga Inversor: %</span>
+      </div>
+    </div>
+    <!--    end of MPPTs Distribution    -->
+    <input placeHolder="Salida del inversor"mat-input> 
   </div>
 
 </div>
