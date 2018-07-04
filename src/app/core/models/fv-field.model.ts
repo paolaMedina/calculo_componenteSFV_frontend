@@ -3,8 +3,10 @@ export class FvField {
 
     name: string;
     id: string;
-    manufacturer: string;
-    solar_panel_model: string;
+    manufacturer_1: string;
+    solar_panel_model_1: string;
+    manufacturer_2: string;
+    solar_panel_model_2: string;
     MPPTs_config: any;
     cabling_details: any;
     constructor() {
