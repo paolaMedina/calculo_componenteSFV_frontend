@@ -9,6 +9,11 @@ import { FvFieldsConfigurationComponent } from '@app/components/fv-fields-config
 import { CoreModule } from '@app/core/core.module';
 import { FvFieldConfigurationComponent } from '@app/components/fv-field-configuration/fv-field-configuration.component';
 import { CotizationBuilderComponent } from '@app/pages/cotization-builder/cotization-builder.component';
+import { MpptConfigurationComponent } from './components/mppt-configuration/mppt-configuration.component';
+import { MpptsConfigurationComponent } from './components/mppts-configuration/mppts-configuration.component';
+import { MpptCablingComponent } from './components/mppt-cabling/mppt-cabling.component';
+import { OutputSourceCircuitComponent } from './components/mppt-cabling/output-source-circuit/output-source-circuit.component';
+import { InputSourceCircuitComponent } from './components/mppt-cabling/input-source-circuit/input-source-circuit.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { CotizationBuilderComponent } from '@app/pages/cotization-builder/cotiza
     SfvComponentsComponent,
     FvFieldsConfigurationComponent,
     FvFieldConfigurationComponent,
-    CotizationBuilderComponent
+    CotizationBuilderComponent,
+    MpptConfigurationComponent,
+    MpptsConfigurationComponent,
+    MpptCablingComponent,
+    OutputSourceCircuitComponent,
+    InputSourceCircuitComponent
   ],
   imports: [
     BrowserModule,
