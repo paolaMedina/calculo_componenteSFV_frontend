@@ -1,0 +1,138 @@
+<small>Nota: No contar en estos datos los conductores propios de los paneles para conexiones entre si</small>
+<div fxLayout="row"  fxLayoutGap="5%">
+  <div fxLayout="column" fxFlex.gt-md="50%"  fxFlex.lt-md="100%">
+    <mat-form-field>
+      <mat-select placeholder="Tipo de Alambrado">
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Canalization config -->
+    <div fxLayout="column">
+      <mat-form-field>
+        <mat-select placeholder="Tipo de canalización">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Canalización">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Tamaño de canalización">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Diseño de canalización">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <!-- End of Canalization config -->
+    <!-- Cable tray config first part -->
+    <div fxLayout="column">
+      <mat-form-field>
+        <mat-select placeholder="Diseño de bandeja">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Material bandeja">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="Tipo de acabado">
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <!-- End of Cable tray config first part -->
+      <!-- Cable tray config second part -->
+      <div fxLayout="row" fxLayoutAlign="left end">
+        <div fxLayout="column" fxFlex="50%" >
+          <mat-checkbox>Tapa superior para bandeja portacable</mat-checkbox>
+          <mat-checkbox>Tapa inferior para bandeja portacable</mat-checkbox>
+          <mat-checkbox>Perfiles separadores</mat-checkbox>
+        </div>
+        <div fxLayout="column" fxFlex="50%">
+        </div>
+        <div fxLayout="column" fxFlex="50%">
+          <mat-form-field>
+            <mat-select placeholder="Longitud de tramo (m)">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Ancho (mm)">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-select placeholder="Alto (mm)">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Tipo de carga">
+              <mat-option *ngFor="let food of foods" [value]="food.value">
+                {{food.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div fxLayout="column" fxFlex.gt-md="50%"  fxFlex.lt-md="100%">
+    <mat-form-field>
+      <mat-select placeholder="Tipo de conductor">
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Material del conductor">
+        <mat-option *ngFor="let food of foods" [value]="food.value">
+          {{food.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Distancia del conductor positivo">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Distancia del conductor negativo">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Caida de tension de diseño">
+        </mat-form-field>
+  </div>
+</div>
