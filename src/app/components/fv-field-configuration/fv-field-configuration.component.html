@@ -36,6 +36,7 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <button [routerLink]="['/mppts-config', fvField.id]" mat-button> Configurar MTTPs </button>
     <!-- Fv panel specifications-->
     <div class="container ">
       <div class="panel-fv-specifications">
@@ -75,11 +76,6 @@
     </div>
   </div>
   <!-- End Fv panel specifications-->
-
-
-
-
-
   <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
       <span>
