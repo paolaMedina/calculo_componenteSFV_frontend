@@ -6,6 +6,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RequiredIfDirective } from '@app/shared/directives';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,13 +15,16 @@ import { RequiredIfDirective } from '@app/shared/directives';
     FlexLayoutModule,
     ReactiveFormsModule,
     FormsModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   exports: [
+    /** Vendor */
     FlexLayoutModule,
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
+    /** Directives */
     RequiredIfDirective
   ],
   declarations: [RequiredIfDirective]
