@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-
-import { Sfv } from '@app/core/models';
-import { SfvFormBuilder } from '@app/core/forms';
-import { FvFieldService, SfvService } from '@app/core/services';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material';
+import { Router } from '@angular/router';
+
+import { Sfv, ManualSwitch } from '@app/core/models';
+import { SfvFormBuilder } from '@app/core/forms';
+import { SfvService, BaseDataService } from '@app/core/services';
 import { plant_fv_power } from '@app/core/lib';
 
 export interface Food {
@@ -20,6 +20,7 @@ export interface Food {
 export class SfvComponentsComponent implements OnInit {
   sfv: Sfv;
   sfvForm: FormGroup;
+  manual_switchs: ManualSwitch[];
   foods: Food[] = [
     {value: 'Trifásica', viewValue: 'Trifásica'},
     {value: 'Monofásica', viewValue: 'Monofásica'}
@@ -27,6 +28,7 @@ export class SfvComponentsComponent implements OnInit {
   constructor(
     private sfvFormBuilder: SfvFormBuilder,
     private sfvService: SfvService,
+    private baseDataService: BaseDataService,
     private router: Router,
     public snackBar: MatSnackBar
   ) {
@@ -62,6 +64,12 @@ export class SfvComponentsComponent implements OnInit {
     }
    }
   ngOnInit() {
+    this.baseDataService.getManualSwithches().subscribe(
+      (manual_switchs: ManualSwitch[]) => {
+        this.manual_switchs = manual_switchs;
+        console.log(this.manual_switchs, 'manual switchs from sfv component')
+
+       });
     this.sfv = this.sfvService.get();
     console.log(this.sfv);
     this.sfvForm = this.sfvFormBuilder.makeForm(this.sfv);
