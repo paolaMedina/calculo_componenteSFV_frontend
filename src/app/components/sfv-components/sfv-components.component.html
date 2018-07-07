@@ -1,10 +1,10 @@
-<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+<mat-toolbar color="primary" fxLayout="row " fxLayoutAlign="center center">
   <h2>Cálculo componentes del SFV</h2>
 </mat-toolbar>
 {{sfvForm.valid}}
 <form [formGroup]="sfvForm" fxLayout="column" class="main-content">
-  <div fxLayout="row">
-    <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
+  <div fxLayout="row wrap">
+    <div fxLayout="column" fxFlex.lg="49%"  fxFlex.lt-lg="100%" fxLayoutGap="20px">
       <h2>Ingresar los datos del SFV</h2>
       <h3>Datos generales</h3>
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
@@ -68,7 +68,7 @@
       </div>
     </div>
     <mat-divider [vertical]="true"></mat-divider>
-    <div fxLayout="column" fxFlex="50%">
+    <div fxLayout="column" fxFlex.lg="49%"  fxFlex.lt-lg="100%">
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
         <span>Seleccione el tipo de inversores</span>
         <mat-radio-group formControlName="investor_type" [ngClass]="{'error': !sfvForm.get('investor_type').valid && sfvForm.get('investor_type').touched } "
@@ -81,10 +81,10 @@
         <span>
           Tipo de servicio
         </span>
-        <mat-form-field>
+        <mat-form-field *ngIf="manual_switchs">
           <mat-select formControlName="service_type" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{food.viewValue}}
+            <mat-option *ngFor="let manual_switch of manual_switchs" [value]="manual_switch.referencia">
+              {{manual_switch.descripcion}}
             </mat-option>
           </mat-select>
         </mat-form-field>
