@@ -1,6 +1,6 @@
 <div class="mppt">
   <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
-    <span>MPPT {{number}}</span>
+    <span>MPPT {{mttp.id}}</span>
   </mat-toolbar>
   <div class="mppt-configuration" fxLayout="column" fxLayoutAlign="center center">
 
@@ -26,31 +26,12 @@
           <span>0 </span>
         </div>
       </div>
-      <!-- Nominal data-->
-      <div class="nominal-data">
-        <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
-          <span>Datos nominales del arreglo </span>
-        </mat-toolbar>
-        <div fxLayout="row">
-          <div fxLayout="column">
-            <span>Potencia nominal</span>
-            <span>Tension mpp</span>
-            <span>Corriente mp </span>
-            <span>Tensión máxima</span>
-            <span>Corriente máxima</span>
-          </div>
-          <span class="spacer"></span>
-          <div fxLayout="column">
-            <span>0W</span>
-            <span>0V</span>
-            <span>0A</span>
-            <span>0V</span>
-            <span>0A</span>
-          </div>
-        </div>
-
-      </div>
-      <!-- End of Nominal data-->
     </div>
   </div>
+  <!-- Nominal data-->
+  <app-nominal-array-data></app-nominal-array-data>
+  <!-- End of Nominal data-->
+  <div fxLayout="row" fxLayoutAlign="center center">
+  <button [routerLink]="['/mppt-config/cabling', 'some_id']" mat-button>Configurar cableado</button>
+</div>
 </div>

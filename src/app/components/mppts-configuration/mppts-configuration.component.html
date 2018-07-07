@@ -3,21 +3,21 @@
         <button routerLink="/" class="left-button" mat-button> Volver </button>
         <span>Configuracion MPPTs </span>
     </mat-toolbar>
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="20%">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10%">
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-            <span>Combinar MPPTs</span>
 
-            <mat-slide-toggle #combine_mppts> </mat-slide-toggle>
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+                    <span> Número de MTTPs</span>
+                    <mat-button-toggle-group #mttps_number="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
+                        <mat-button-toggle *ngFor="let r of getArray(number_of_mttps); let i = index" [value]="i+1">{{i+1}}</mat-button-toggle>
+
+                    </mat-button-toggle-group>
+                </div>
         </div>
-        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-            <span> Número de MTTPs</span>
-            <mat-button-toggle-group #mttps_number="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
-                <mat-button-toggle value="1">1</mat-button-toggle>
-                <mat-button-toggle value="2">2</mat-button-toggle>
-                <mat-button-toggle value="3">3</mat-button-toggle>
-                <mat-button-toggle value="4">4</mat-button-toggle>
-                <mat-button-toggle value="5">5</mat-button-toggle>
-                <mat-button-toggle value="6">6</mat-button-toggle>
+        <div *ngIf="mttps_number.value>1" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+            <span> Combinar MTTPs</span>
+            <mat-button-toggle-group [formControl]="mttpsCombinationControl" #mttps_combination="matButtonToggleGroup" (click)="combineMttps(mttps_combination.value)" name="mttpsCombinationControl" aria-label="mttpsCombinationControl">
+                <mat-button-toggle *ngFor="let value of getArrayCombined(mttps_number.value)" [value]="value" >{{value}}</mat-button-toggle>
             </mat-button-toggle-group>
         </div>
         <div fxLayout="row" fxLayoutGap="20px">
@@ -33,7 +33,7 @@
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
 
-            <app-mppt-configuration  *ngFor="let r of getArray(mttps_number.value); let i = index" [number]="i"></app-mppt-configuration>
+            <app-mppt-configuration  *ngFor="let mttp of mttps" [mttp]="mttp"></app-mppt-configuration>
     </div>
 
 </div>
