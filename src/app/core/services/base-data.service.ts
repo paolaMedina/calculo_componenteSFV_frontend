@@ -31,7 +31,7 @@ export class BaseDataService {
     if (this._manual_switches) {
       return of(this._manual_switches);
     } else {
-      return this.apiService.get('').
+      return this.apiService.get('interruptoresManuales').
         pipe(
           tap(
             (manual_switches: ManualSwitch[]) => {
