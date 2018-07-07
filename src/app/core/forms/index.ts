@@ -1,1 +1,1 @@
-export * from '@app/core/forms/sfv.form';
+export * from './sfv.form';

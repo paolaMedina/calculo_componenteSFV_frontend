@@ -3,10 +3,10 @@ import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
-import { Sfv, ManualSwitch } from '@app/core/models';
-import { SfvFormBuilder } from '@app/core/forms';
-import { SfvService, BaseDataService } from '@app/core/services';
-import { plant_fv_power } from '@app/core/lib';
+import { Sfv, ManualSwitch, BaseData } from '../../core/models';
+import { SfvFormBuilder } from '../../core/forms';
+import { SfvService, BaseDataService } from '../../core/services';
+import { plant_fv_power } from '../../core/lib';
 
 export interface Food {
   value: string;
@@ -64,11 +64,16 @@ export class SfvComponentsComponent implements OnInit {
     }
    }
   ngOnInit() {
+    this.baseDataService.getBaseData()
+    .subscribe(
+      (base_data: BaseData) => {
+        console.log(base_data, 'base data from sfv component')
+      }
+    );
     this.baseDataService.getManualSwithches().subscribe(
       (manual_switchs: ManualSwitch[]) => {
         this.manual_switchs = manual_switchs;
         console.log(this.manual_switchs, 'manual switchs from sfv component')
-
        });
     this.sfv = this.sfvService.get();
     console.log(this.sfv);
