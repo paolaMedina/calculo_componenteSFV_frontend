@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { SfvComponentsComponent } from '@app/components/sfv-components/sfv-components.component';
-import { FvFieldsConfigurationComponent } from '@app/components/fv-fields-configuration/fv-fields-configuration.component';
-import { FvFieldConfigurationComponent } from '@app/components/fv-field-configuration/fv-field-configuration.component';
+import { SfvComponentsComponent } from './components/sfv-components/sfv-components.component';
+import { FvFieldsConfigurationComponent } from './components/fv-fields-configuration/fv-fields-configuration.component';
+import { FvFieldConfigurationComponent } from './components/fv-field-configuration/fv-field-configuration.component';
 import { MpptsConfigurationComponent } from './components/mppts-configuration/mppts-configuration.component';
-import { MpptCablingComponent } from '@app/components/mppt-cabling/mppt-cabling.component';
+import { MpptCablingComponent } from './components/mppt-cabling/mppt-cabling.component';
 const routes: Routes = [
   {
     path: '',
