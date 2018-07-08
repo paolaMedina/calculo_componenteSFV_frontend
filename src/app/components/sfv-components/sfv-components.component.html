@@ -78,12 +78,12 @@
       </div>
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
         <span>
-          Tipo de servicio
+          Tipo de servicio 
         </span>
-        <mat-form-field *ngIf="servicios">
+        <mat-form-field *ngIf="tipos_de_servicio">
           <mat-select formControlName="service_type" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-            <mat-option *ngFor="let servicio of servicios" [value]="servicio">
-              {{servicio}}
+            <mat-option *ngFor="let tipo_servicio of tipos_de_servicio" [value]="tipo_servicio">
+              {{tipo_servicio}} 
             </mat-option>
           </mat-select>
         </mat-form-field>

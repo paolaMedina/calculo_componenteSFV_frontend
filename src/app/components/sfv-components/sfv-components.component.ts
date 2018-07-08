@@ -9,12 +9,6 @@ import { SfvService, BaseDataService } from '../../core/services';
 import { plant_fv_power, distinctOn, distinctWithoutZeros } from '../../core/lib';
 import { InvestorTypeEnum } from '../../core/enums/investor-type';
 
-export interface Food {
-  value: string;
-  viewValue: string;
-}
-
-
 
 @Component({
   selector: 'app-sfv-components',
@@ -30,16 +24,8 @@ export class SfvComponentsComponent implements OnInit {
   vsal2: String[];
   vsal3: String[];
   tensiones: String[];
-  servicios: String[];
-
-  
-  foods: Food[] = [
-    {value: 'Trifásica', viewValue: 'Trifásica'},
-    {value: 'Monofásica', viewValue: 'Monofásica'},
-    {value: 'Monofásica', viewValue: 'Monofásica'},
-    {value: 'Monofásica', viewValue: 'Monofásica'}
-  ];
-  
+  tipos_de_servicio: String[];
+ 
   
   constructor(
     private sfvFormBuilder: SfvFormBuilder,
@@ -79,36 +65,42 @@ export class SfvComponentsComponent implements OnInit {
         this.sfvForm.get('power_of_panel_fv').value, this.sfvForm.get('total_panels_fv').value));
     }
    }
+   updateTensiones(inversores: Inversor[] ) {
+    this.vsal1 = distinctOn<Inversor>(inversores, 'vsal_1');
+    this.vsal2 = distinctOn<Inversor>(inversores, 'vsal_2');
+    this.vsal3 = distinctOn<Inversor>(inversores, 'vsal_3');
+    const _tensiones =this.vsal2.concat(this.vsal1,this.vsal3);
+    this.tensiones=<Array<String>>distinctWithoutZeros(_tensiones);
+   }
   ngOnInit() {
+    this.sfv = this.sfvService.get();
+    this.sfvForm = this.sfvFormBuilder.makeForm(this.sfv);
+
+
+    /** Filtrar los tipos de tension */
+    this.sfvForm.get('service_type').valueChanges.subscribe (
+      (tipo_servicio: string) => {
+       const inversores_filtrados = this.inversores.filter(inversor => inversor.tipo_conex === tipo_servicio);
+       this.updateTensiones(inversores_filtrados);
+      }
+    )
     this.baseDataService.getBaseData()
     .subscribe(
       (base_data: BaseData) => {
         console.log(base_data, 'base data from sfv component')
       }
     );
-    this.baseDataService.getBaseData().subscribe(
-      (base_data: BaseData) => {
-        this.inversores = base_data.inversores;
-        this.vsal1 = distinctOn<Inversor>(this.inversores, 'vsal_1');
-        this.vsal2 = distinctOn<Inversor>(this.inversores, 'vsal_2');
-        this.vsal3 = distinctOn<Inversor>(this.inversores, 'vsal_3');
-        this.tensiones=this.vsal2.concat(this.vsal1,this.vsal3);
-        this.tensiones=<Array<String>>distinctWithoutZeros(this.tensiones);
-      });
-
+      /** Iniciar inversores, tensiones y tipos de servicio */
       this.baseDataService.getBaseData().subscribe(
         (base_data: BaseData) => {
           this.inversores = base_data.inversores;
-          this.servicios = distinctOn<Inversor>(this.inversores, 'tipo_conex');
-          console.log(this.servicios, 'servicios');
+          this.tipos_de_servicio = distinctOn<Inversor>(this.inversores, 'tipo_conex');
+          this.updateTensiones(this.inversores);
         });
 
 
 
-    this.sfv = this.sfvService.get();
-    console.log(this.sfv);
-    this.sfvForm = this.sfvFormBuilder.makeForm(this.sfv);
-    console.log(this.sfvForm.get('investor_type').value);
+
     /** Cuando la opcion Calcular Potencia de planta se modifica, se deben limpiar los campos */
     this.sfvForm.get('calculate_plant_potential').valueChanges.subscribe(()=>{
       this.sfvForm.get('power_of_plant_fv').setValue('');
