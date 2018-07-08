@@ -92,10 +92,10 @@
         <span>
           Tension de servicio (V)
         </span>
-        <mat-form-field>
+        <mat-form-field *ngIf="tension">
           <mat-select formControlName="service_voltage" #service_type [placeholder]="!service_type.value? 'Seleccione la tensión': ''">
-            <mat-option *ngFor="let food of foods" [value]="food.value">
-              {{food.viewValue}}
+            <mat-option *ngFor="let x of tension" [value]="x">
+              {{x}}
             </mat-option>
           </mat-select>
         </mat-form-field>
