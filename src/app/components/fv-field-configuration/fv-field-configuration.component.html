@@ -15,14 +15,17 @@
       <span>
         Seleccione Fabricante de panel solar FV
       </span>
-      <mat-form-field>
+      <mat-form-field *ngIf="fabricantes_paneles">
         <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+          <mat-option *ngFor="let fabricante of fabricantes_paneles" [value]="fabricante">
+            {{fabricante}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
+
+    
+
 
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
       <span>
@@ -79,12 +82,12 @@
   <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
       <span>
-        Seleccione Fabricante de panel solar FV
+        Seleccione Fabricante de inversor FV
       </span>
-      <mat-form-field>
+      <mat-form-field *ngIf="fabricantes_paneles">
         <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+          <mat-option *ngFor="let fabricante of fabricantes_paneles" [value]="fabricante">
+            {{fabricante}}
           </mat-option>
         </mat-select>
       </mat-form-field>
