@@ -3,16 +3,19 @@ import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
-import { Sfv, ManualSwitch, BaseData } from '../../core/models';
+import { Sfv, ManualSwitch, BaseData, Inversor } from '../../core/models';
 import { SfvFormBuilder } from '../../core/forms';
 import { SfvService, BaseDataService } from '../../core/services';
-import { plant_fv_power, distinctOn } from '../../core/lib';
+import { plant_fv_power, distinctOn, distinctWithoutZeros } from '../../core/lib';
 import { InvestorTypeEnum } from '../../core/enums/investor-type';
 
 export interface Food {
   value: string;
   viewValue: string;
 }
+
+
+
 @Component({
   selector: 'app-sfv-components',
   templateUrl: './sfv-components.component.html',
@@ -23,12 +26,20 @@ export class SfvComponentsComponent implements OnInit {
   sfvForm: FormGroup;
   INVESTOR_TYPE_ENUM: InvestorTypeEnum;
   manual_switchs: ManualSwitch[];
+  inversores: Inversor[];
+  vsal1: String[];
+  vsal2: String[];
+  vsal3: String[];
+  tension: String[];
+
+  
   foods: Food[] = [
     {value: 'Trifásica', viewValue: 'Trifásica'},
     {value: 'Monofásica', viewValue: 'Monofásica'},
     {value: 'Monofásica', viewValue: 'Monofásica'},
     {value: 'Monofásica', viewValue: 'Monofásica'}
   ];
+  
   constructor(
     private sfvFormBuilder: SfvFormBuilder,
     private sfvService: SfvService,
@@ -79,6 +90,21 @@ export class SfvComponentsComponent implements OnInit {
         this.manual_switchs = manual_switchs;
         console.log(this.manual_switchs, 'manual switchs from sfv component')
        });
+
+    this.baseDataService.getBaseData().subscribe(
+      (base_data: BaseData) => {
+        this.inversores = base_data.inversores;
+        this.vsal1 = distinctOn<Inversor>(this.inversores, 'vsal_1');
+        this.vsal2 = distinctOn<Inversor>(this.inversores, 'vsal_2');
+        this.vsal3 = distinctOn<Inversor>(this.inversores, 'vsal_3');
+        this.tension=this.vsal2.concat(this.vsal1,this.vsal3);
+        this.tension=distinctWithoutZeros(this.tension);
+        console.log(this.tension, 'tension');
+
+      });
+
+
+
     this.sfv = this.sfvService.get();
     console.log(this.sfv);
     this.sfvForm = this.sfvFormBuilder.makeForm(this.sfv);

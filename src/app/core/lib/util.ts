@@ -13,3 +13,24 @@ export function distinctOn<T>(objects: T[], distinct_by: string): any[] {
         return unique;
     }
 }
+/**
+ *Filtra los valores repetidos de un array ingresado
+ *
+ * @export
+ * @param {(Array<number|string|String>)} objects
+ * @returns {Array<String>}
+ */
+export function distinctNumbers(objects: Array<number|string|String>): Array<String>{
+    return Array.from(new Set(objects.map(item => String(item))));
+  }
+
+
+  export function excludeZero(objects: Array<number|string|String>): Array<number|string|String>{
+    return objects.filter(object => Number(object) !==0);
+  }
+
+  export function distinctWithoutZeros(objects: Array<number|string|String>): Array<number|string|String>{
+    return excludeZero(distinctNumbers(objects));
+  }
+
+  
