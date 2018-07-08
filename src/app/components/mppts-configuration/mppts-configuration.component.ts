@@ -30,10 +30,6 @@ export class MpptsConfigurationComponent implements OnInit {
     this.mttps_number_sufix = new Array<number>();
     this.mttpsCombinationControl = new FormControl();
     this.mttpsNumberControl = new FormControl();
-    this.mttpsNumberControl.valueChanges.subscribe( value => {
-      this.updateArrayCombined(Number(value));
-      this.setNumberOfMttps(Number(value));
-    })
    }
   setNumberOfMttps(newNumber: number) {
     console.log(newNumber);
@@ -112,7 +108,7 @@ export class MpptsConfigurationComponent implements OnInit {
    */
   separeCombinedMttps(combination: Combination){
     console.log(combination,"combination to separe")
-    let id_mptt_to_delete = combination;
+    let id_mptt_to_delete: string = combination.id;
     let id_mptt1: number;
     let id_mptt2: number;
     let index_mptt_to_delete: number;
@@ -136,13 +132,6 @@ export class MpptsConfigurationComponent implements OnInit {
     this.mttps.splice(index_mptt_to_delete, 0, newCombinedMptt1);
     this.mttps.splice(index_mptt_to_delete+1, 0, newCombinedMptt2);
     combination.is_combined = false;
-  }
-
-  isNotCombined(pairUpdated: {first: number, second: number}){
-    this.combinations[pairUpdated.second/2-1].is_combined = false;
-  }
-  isCombined(pairUpdated: {first: number, second: number}){
-    this.combinations[pairUpdated.second/2-1].is_combined = true;
   }
   /**
    * Return a combined array in duples by given size, only return duples, in inpair sizes 

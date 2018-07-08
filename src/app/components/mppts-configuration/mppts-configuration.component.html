@@ -1,23 +1,28 @@
-<div class="">
+<div fxLayout="column" fxLayoutGap="3%">
     <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
         <button routerLink="/" class="left-button" mat-button> Volver </button>
         <span>Configuracion MPPTs </span>
     </mat-toolbar>
-    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10%">
+    <div fxLayout.gt-lg="row wrap" fxLayoutGap.lg="5%" fxLayoutGap.gt-lg="5%" fxLayout.lt-lg="column wrap" fxLayoutGap.lt-lg="2%" fxLayoutAlign="center center" >
         <div  fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
 
             <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
                     <span> Número de MTTPs</span>
-                    <mat-button-toggle-group  (click)="combineOrDecombineMttps(mttps_number.value)"  #mttps_number="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle-group    #mttps_number="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
                         <mat-button-toggle [disabled]="some_combination_was_made"   >{{max_number_of_mttps}}</mat-button-toggle>
                     </mat-button-toggle-group>
                 </div>
         </div>
         <div *ngIf="max_number_of_mttps>1 && combinations.length > 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
             <span> Combinar/Separar MTTPs</span>
-            <mat-button-toggle-group [formControl]="mttpsCombinationControl" #mttps_combination="matButtonToggleGroup"  name="mttpsCombinationControl" aria-label="mttpsCombinationControl">
-                <mat-button-toggle *ngFor="let combination of combinations" [value]="combination" >{{combination.id}}{{combination.is_combined}}</mat-button-toggle>
-            </mat-button-toggle-group>
+            <div fxLayout="row" >
+                <button  
+                *ngFor="let combination of combinations" 
+                mat-raised-button class="combination-button" 
+                [matTooltip]="combination.is_combined? 'Separar MTTPs': 'Combinar MTTPs'"
+                [color]="combination.is_combined? 'warn': 'primary'"
+                (click)="combineOrDecombineMttps(combination)"  [value]="combination" >{{combination.id}}</button>
+            </div>
         </div>
         <div fxLayout="row" fxLayoutGap="20px">
             <div fxLayout="column">
