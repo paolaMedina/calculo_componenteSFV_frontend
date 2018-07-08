@@ -6,7 +6,8 @@ import { Router } from '@angular/router';
 import { Sfv, ManualSwitch, BaseData } from '../../core/models';
 import { SfvFormBuilder } from '../../core/forms';
 import { SfvService, BaseDataService } from '../../core/services';
-import { plant_fv_power } from '../../core/lib';
+import { plant_fv_power, distinctOn } from '../../core/lib';
+import { InvestorTypeEnum } from '../../core/enums/investor-type';
 
 export interface Food {
   value: string;
@@ -20,9 +21,12 @@ export interface Food {
 export class SfvComponentsComponent implements OnInit {
   sfv: Sfv;
   sfvForm: FormGroup;
+  INVESTOR_TYPE_ENUM: InvestorTypeEnum;
   manual_switchs: ManualSwitch[];
   foods: Food[] = [
     {value: 'Trifásica', viewValue: 'Trifásica'},
+    {value: 'Monofásica', viewValue: 'Monofásica'},
+    {value: 'Monofásica', viewValue: 'Monofásica'},
     {value: 'Monofásica', viewValue: 'Monofásica'}
   ];
   constructor(
@@ -71,7 +75,7 @@ export class SfvComponentsComponent implements OnInit {
       }
     );
     this.baseDataService.getManualSwithches().subscribe(
-      (manual_switchs: ManualSwitch[]) => {
+      (manual_switchs: ManualSwitch[]) =>  {
         this.manual_switchs = manual_switchs;
         console.log(this.manual_switchs, 'manual switchs from sfv component')
        });
