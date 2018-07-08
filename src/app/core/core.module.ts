@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SfvFormBuilder } from '@app/core/forms';
-import { SfvService, FvFieldService, BaseDataService } from '@app/core/services';
-import { ApiService } from '@app/core/services/api.service';
 import { HttpClient } from '@angular/common/http';
 
+
+import { SfvFormBuilder } from './forms';
+import { SfvService, FvFieldService, BaseDataService } from './services';
+import { ApiService } from './services/api.service';
+import { FvFormBuilder } from './forms/fv-field.form';
 @NgModule({
   imports: [
     CommonModule
@@ -15,6 +17,7 @@ import { HttpClient } from '@angular/common/http';
     HttpClient,
     /* Forms services */
     SfvFormBuilder,
+    FvFormBuilder,
     SfvService,
     FvFieldService,
     /* Shared services */
