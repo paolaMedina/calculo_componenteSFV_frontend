@@ -8,9 +8,6 @@ export function isOdd(n) {
     return Math.abs(n % 2) == 1;
  }
 
- export function distinctNumbers(objects: Array<number|string|String>): Array<number>{
-     return Array.from(new Set(objects.map(item => Number(item))));
- }
 export function distinctOn<T>(objects: T[], distinct_by: string): any[] {
 
     if (objects.length === 0) {
