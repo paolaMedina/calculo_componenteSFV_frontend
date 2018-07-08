@@ -4,20 +4,19 @@
         <span>Configuracion MPPTs </span>
     </mat-toolbar>
     <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10%">
-        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+        <div  fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
 
             <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
                     <span> Número de MTTPs</span>
-                    <mat-button-toggle-group #mttps_number="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
-                        <mat-button-toggle *ngFor="let r of getArray(number_of_mttps); let i = index" [value]="i+1">{{i+1}}</mat-button-toggle>
-
+                    <mat-button-toggle-group  (click)="combineOrDecombineMttps(mttps_number.value)"  #mttps_number="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
+                        <mat-button-toggle [disabled]="some_combination_was_made"   >{{max_number_of_mttps}}</mat-button-toggle>
                     </mat-button-toggle-group>
                 </div>
         </div>
-        <div *ngIf="mttps_number.value>1" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
-            <span> Combinar MTTPs</span>
-            <mat-button-toggle-group [formControl]="mttpsCombinationControl" #mttps_combination="matButtonToggleGroup" (click)="combineMttps(mttps_combination.value)" name="mttpsCombinationControl" aria-label="mttpsCombinationControl">
-                <mat-button-toggle *ngFor="let value of getArrayCombined(mttps_number.value)" [value]="value" >{{value}}</mat-button-toggle>
+        <div *ngIf="max_number_of_mttps>1 && combinations.length > 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+            <span> Combinar/Separar MTTPs</span>
+            <mat-button-toggle-group [formControl]="mttpsCombinationControl" #mttps_combination="matButtonToggleGroup"  name="mttpsCombinationControl" aria-label="mttpsCombinationControl">
+                <mat-button-toggle *ngFor="let combination of combinations" [value]="combination" >{{combination.id}}{{combination.is_combined}}</mat-button-toggle>
             </mat-button-toggle-group>
         </div>
         <div fxLayout="row" fxLayoutGap="20px">

@@ -98,7 +98,7 @@ export class SfvComponentsComponent implements OnInit {
         this.vsal2 = distinctOn<Inversor>(this.inversores, 'vsal_2');
         this.vsal3 = distinctOn<Inversor>(this.inversores, 'vsal_3');
         this.tension=this.vsal2.concat(this.vsal1,this.vsal3);
-        this.tension=distinctWithoutZeros(this.tension);
+        this.tension=<Array<String>>distinctWithoutZeros(this.tension);
         console.log(this.tension, 'tension');
 
       });
