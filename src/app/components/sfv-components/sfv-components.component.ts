@@ -25,12 +25,12 @@ export class SfvComponentsComponent implements OnInit {
   sfv: Sfv;
   sfvForm: FormGroup;
   INVESTOR_TYPE_ENUM: InvestorTypeEnum;
-  manual_switchs: ManualSwitch[];
   inversores: Inversor[];
   vsal1: String[];
   vsal2: String[];
   vsal3: String[];
-  tension: String[];
+  tensiones: String[];
+  servicios: String[];
 
   
   foods: Food[] = [
@@ -39,6 +39,7 @@ export class SfvComponentsComponent implements OnInit {
     {value: 'Monofásica', viewValue: 'Monofásica'},
     {value: 'Monofásica', viewValue: 'Monofásica'}
   ];
+  
   
   constructor(
     private sfvFormBuilder: SfvFormBuilder,
@@ -85,23 +86,22 @@ export class SfvComponentsComponent implements OnInit {
         console.log(base_data, 'base data from sfv component')
       }
     );
-    this.baseDataService.getManualSwithches().subscribe(
-      (manual_switchs: ManualSwitch[]) =>  {
-        this.manual_switchs = manual_switchs;
-        console.log(this.manual_switchs, 'manual switchs from sfv component')
-       });
-
     this.baseDataService.getBaseData().subscribe(
       (base_data: BaseData) => {
         this.inversores = base_data.inversores;
         this.vsal1 = distinctOn<Inversor>(this.inversores, 'vsal_1');
         this.vsal2 = distinctOn<Inversor>(this.inversores, 'vsal_2');
         this.vsal3 = distinctOn<Inversor>(this.inversores, 'vsal_3');
-        this.tension=this.vsal2.concat(this.vsal1,this.vsal3);
-        this.tension=<Array<String>>distinctWithoutZeros(this.tension);
-        console.log(this.tension, 'tension');
-
+        this.tensiones=this.vsal2.concat(this.vsal1,this.vsal3);
+        this.tensiones=<Array<String>>distinctWithoutZeros(this.tensiones);
       });
+
+      this.baseDataService.getBaseData().subscribe(
+        (base_data: BaseData) => {
+          this.inversores = base_data.inversores;
+          this.servicios = distinctOn<Inversor>(this.inversores, 'tipo_conex');
+          console.log(this.servicios, 'servicios');
+        });
 
 
 
