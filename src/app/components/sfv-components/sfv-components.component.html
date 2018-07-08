@@ -80,10 +80,10 @@
         <span>
           Tipo de servicio
         </span>
-        <mat-form-field *ngIf="manual_switchs">
+        <mat-form-field *ngIf="servicios">
           <mat-select formControlName="service_type" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-            <mat-option *ngFor="let manual_switch of manual_switchs" [value]="manual_switch.referencia">
-              {{manual_switch.descripcion}}
+            <mat-option *ngFor="let servicio of servicios" [value]="servicio">
+              {{servicio}}
             </mat-option>
           </mat-select>
         </mat-form-field>
@@ -92,10 +92,10 @@
         <span>
           Tension de servicio (V)
         </span>
-        <mat-form-field *ngIf="tension">
+        <mat-form-field *ngIf="tensiones">
           <mat-select formControlName="service_voltage" #service_type [placeholder]="!service_type.value? 'Seleccione la tensión': ''">
-            <mat-option *ngFor="let x of tension" [value]="x">
-              {{x}}
+            <mat-option *ngFor="let tension of tensiones" [value]="tension">
+              {{tension}}
             </mat-option>
           </mat-select>
         </mat-form-field>
