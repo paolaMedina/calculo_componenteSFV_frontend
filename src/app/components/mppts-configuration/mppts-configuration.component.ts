@@ -52,6 +52,12 @@ export class MpptsConfigurationComponent implements OnInit {
     /** Add the new mttp combined at `id_mptt1` position */
     this.mttps = this.mttps.splice(id_mptt1, 0, newCombinedMptt);
   }
+  /**
+   * Return a combined array in duples by given size, only return duples, in inpair sizes 
+   * the last element is not included
+   * Examples: size = 2, return ['1-2'];  size = 5 return ['1-2, '3-4']
+   * @param size 
+   */
   getArrayCombined(size: number): Array<string> {
     let arrayCombined = new  Array<string>();
     for(let i = 1; i <= size; i=i+2) {
@@ -66,8 +72,7 @@ export class MpptsConfigurationComponent implements OnInit {
         upper_bound = i + 1;
       }
       arrayCombined.push(`${lower_bound}${separator}${upper_bound}`);
-    }
-    console.log(arrayCombined);
+    };
     return arrayCombined;
   }
   ngOnInit() {

@@ -2,13 +2,13 @@
   <button routerLink="/fv-fields-config" class="left-button" mat-button> Volver </button>
   <span>Configuración del campo FV</span>
 </mat-toolbar>
-<div fxLayout="row" class="main-content">
+<div [formGroup]="fvFieldForm" fxLayout="row" class="main-content">
 
   <div fxLayout="column" fxFlex="50%" fxLayoutGap="20px">
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
       <span>Indique nombre de campo FV</span>
       <mat-form-field class="field-fv-potency">
-        <input matInput [(ngModel)]="fvField.name">
+        <input matInput *ngIf="fvField" [value]="fvField.name">
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
@@ -84,11 +84,13 @@
       <span>
         Seleccione Fabricante de inversor FV
       </span>
-      <mat-form-field *ngIf="fabricantes_paneles">
-        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-          <mat-option *ngFor="let fabricante of fabricantes_paneles" [value]="fabricante">
-            {{fabricante}}
-          </mat-option>
+      <mat-form-field>
+        <mat-select formControlName="manufacturer_2" #service_type placeholder="Seleccione un fabricante">
+          <ng-container *ngIf="manufacturesNamesUnique">
+            <mat-option *ngFor="let manufacturNameUnique of manufacturesNamesUnique" [value]="manufacturNameUnique">
+              {{manufacturNameUnique}}
+            </mat-option>
+          </ng-container>
         </mat-select>
       </mat-form-field>
     </div>
@@ -117,7 +119,7 @@
       </div>
     </div>
     <!--    end of MPPTs Distribution    -->
-    <input placeHolder="Salida del inversor"mat-input> 
+    <input placeHolder="Salida del inversor" mat-input>
   </div>
 
 </div>
