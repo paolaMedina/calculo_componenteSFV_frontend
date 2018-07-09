@@ -25,8 +25,14 @@ export class MttpFormBuilder {
                 }
               });
     }
-    extractData(form: FormGroup): Mttp {
-        let mttp = new Mttp('0');
+    extractData(form: FormGroup, initialId?: string): Mttp {
+        let mttp: Mttp;
+        if ( initialId ) {
+            mttp = new Mttp(initialId);    
+        } else {
+            mttp = new Mttp('0');
+        }
+        mttp.id
         mttp.number_of_panels_in_series_per_chain = form.get('number_of_panels_in_series_per_chain').value;
         mttp.number_of_chains_in_parallel = form.get('number_of_chains_in_parallel').value;
 

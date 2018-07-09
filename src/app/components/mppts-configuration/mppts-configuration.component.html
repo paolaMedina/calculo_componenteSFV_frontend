@@ -1,6 +1,7 @@
+<!-- [routerLink]="['/fv-field-config', fvField.id]" -->
 <div fxLayout="column" fxLayoutGap="3%">
     <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
-        <button [routerLink]="['/fv-field-config', fvField.id]" class="left-button" mat-button> Volver </button>
+        <button (click)="saveMttps()" class="left-button" mat-button> Volver </button>
         <span>Configuracion MPPTs </span>
     </mat-toolbar>
     <div fxLayout.gt-lg="row wrap" fxLayoutGap.lg="5%" fxLayoutGap.gt-lg="5%" fxLayout.lt-lg="column wrap" fxLayoutGap.lt-lg="2%" fxLayoutAlign="center center" >
@@ -37,7 +38,7 @@
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
 
-            <app-mppt-configuration  *ngFor="let mttp of mttps" [mttp]="mttp"></app-mppt-configuration>
+            <app-mppt-configuration #mppts *ngFor="let mttp of mttps" [mttp]="mttp"></app-mppt-configuration>
     </div>
 
 </div>

@@ -20,10 +20,24 @@ export class MpptConfigurationComponent implements OnInit {
     private _sfvService: SfvService,
     private _mttpFormBuilder: MttpFormBuilder
   ) {
-    this.mttpForm = this._mttpFormBuilder.makeForm();
     this._solarPanel = this._fvFieldService.getSelectedSolarPanel();
-    console.log(this._solarPanel, 'solar panel')
     this.mttpSpecifications = new MttpSpecifications();
+   
+   }
+   getMttpFromForm(){
+     return this._mttpFormBuilder.extractData(this.mttpForm,  this.mttp.id);
+   }
+
+  ngOnInit() {
+    this._sfv = this._sfvService.get();
+    /** If not default mttp is injected at input make form from that mttp */
+    if(this.mttp.number_of_chains_in_parallel !== -1) {
+      console.log(this.mttp, 'mttp from on init in mppt config comp')
+      this.mttpForm = this._mttpFormBuilder.makeForm(this.mttp);
+    } else {
+      this.mttpForm = this._mttpFormBuilder.makeForm();
+    }
+    /** Calculate and update mttpspecification after number of panels changes or number of chains change and only if both have values */
     this.mttpForm.get('number_of_chains_in_parallel')
     .valueChanges.subscribe(
       () => {
@@ -67,8 +81,4 @@ export class MpptConfigurationComponent implements OnInit {
   
     this.mttpSpecifications.tension_Mpp_MPPTn = tension_Mpp_MPPTn(number_of_panels_in_series_per_chain, this._solarPanel.vmpp );
     }
-  ngOnInit() {
-    this._sfv = this._sfvService.get();
-  }
-
 }

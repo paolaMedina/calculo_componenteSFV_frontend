@@ -80,6 +80,7 @@ export class FvFieldService {
   updateField(fvField: FvField) {
     let indexFvField = this.fvFields.findIndex(_fvField => _fvField.id === fvField.id);
     this.fvFields[indexFvField] = fvField;
+    console.log(this.fvFields[indexFvField], 'fv field from service after save and update in mppts config');
   }
   setSelectedField(fvField: FvField) {
     this.selectedFvField = this.fvFields.find(_fvField => _fvField.id === fvField.id);

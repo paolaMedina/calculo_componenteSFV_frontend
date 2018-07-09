@@ -8,7 +8,7 @@
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
       <span>Indique nombre de campo FV</span>
       <mat-form-field class="field-fv-potency">
-        <input matInput *ngIf="fvField" [value]="fvField.name" formControlName="name">
+        <input matInput *ngIf="fvField"  formControlName="name">
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
@@ -16,7 +16,7 @@
         Seleccione Fabricante de panel solar FV
       </span>
       <mat-form-field *ngIf="fabricantes_paneles">
-        <mat-select formControlName= "manufacturer_1" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+        <mat-select formControlName= "manufacturer_1" #service_type_select [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
           <mat-option *ngFor="let fabricante of fabricantes_paneles" [value]="fabricante">
             {{fabricante}}
           </mat-option>
@@ -32,8 +32,8 @@
         Seleccione el modelo del panel solar FV
       </span>
       <mat-form-field >
-        <mat-select formControlName  = "solar_panel_model_1" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-          <ng-container *ngIf="modelosPanel">
+        <mat-select formControlName  = "solar_panel_model_1" [matTooltip]="(fvFieldForm.get('manufacturer_1').value === '')? 'Seleccione primero un fabricante': ''" [placeholder]="fvFieldForm.get('manufacturer_1').value===''? 'Seleccione primero un fabricante': ''">
+          <ng-container >
             <mat-option *ngFor="let modelo of modelosPanel" [value]="modelo">
               {{modelo}}
             </mat-option>
@@ -41,7 +41,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <button [routerLink]="['/mppts-config', fvField.id]" mat-button> Configurar MTTPs </button>
+    <button (click)="goToMpptsConfig()" mat-button> Configurar MTTPs </button>
     <!-- Fv panel specifications-->
     <div class="container ">
       <div class="panel-fv-specifications">
@@ -103,7 +103,7 @@
       </span>
       <mat-form-field>
         <mat-select formControlName="solar_panel_model_2" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-          <ng-container *ngIf="modelosInversor">
+          <ng-container >
             <mat-option *ngFor="let modelo of modelosInversor" [value]="modelo">
               {{modelo}}
             </mat-option>

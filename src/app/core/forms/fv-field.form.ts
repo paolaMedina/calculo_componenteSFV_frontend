@@ -29,8 +29,11 @@ export class FvFormBuilder {
                 }
               });
     }
-    extractData(form: FormGroup): FvField {
+    extractData(form: FormGroup, initial_id?: string): FvField {
         let fvField = new FvField();
+        if ( initial_id ) {
+            fvField.id = initial_id;
+        }
         fvField.name = form.get('name').value;
         fvField.manufacturer_1 = form.get('manufacturer_1').value;
         fvField.solar_panel_model_1 = form.get('solar_panel_model_1').value;

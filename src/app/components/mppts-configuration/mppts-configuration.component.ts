@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import { Mttp, FvField, Inversor } from '../../core/models';
 import { isOdd } from '../../core/lib';
 import { FvFieldService } from '../../core/services';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { MpptConfigurationComponent } from '../mppt-configuration/mppt-configuration.component';
+import { MatSnackBar } from '@angular/material';
 class Combination {
   id: string;
   is_combined: boolean;
@@ -21,22 +23,20 @@ class Combination {
 export class MpptsConfigurationComponent implements OnInit {
   //@Input() max_number_of_mttps = 5;
   max_number_of_mttps:number;
+  @ViewChildren('mppts') mpptComponents: QueryList<MpptConfigurationComponent>;
   fvField: FvField;
-  mttpsCombinationControl: FormControl;
   mttpsNumberControl: FormControl;
-  some_combination_was_made: boolean = false;
   combinations: Array<Combination>;
-  mttps_number_sufix: number[];
   mttps: Mttp[];
   private _inversor:Inversor;
   constructor(
     private _fvFieldService: FvFieldService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router,
+    public snackBar: MatSnackBar
   ) {
     this.mttps = new Array<Mttp>();
     this.combinations = new  Array<Combination>();
-    this.mttps_number_sufix = new Array<number>();
-    this.mttpsCombinationControl = new FormControl();
     this.mttpsNumberControl = new FormControl();
     this._inversor = this._fvFieldService.getSelectedInversor();
    }
@@ -70,8 +70,6 @@ export class MpptsConfigurationComponent implements OnInit {
    * @param combination String in format `n-n+1`, `mttps[n]` and `mttps[n+1]` should be combined in one mttp
    */
   combineMttps(combination: Combination){
-    this.some_combination_was_made = true;
-    console.log(combination, 'hola :v');
     let id_mptt1: number;
     let id_mptt2: number;
     let index_mptt1: number;
@@ -167,17 +165,74 @@ export class MpptsConfigurationComponent implements OnInit {
       arrayCombined.pop();
     }
     this.combinations =  arrayCombined;
+  } 
+    /**
+   * Marks all controls in a form group as touched
+   * @param formGroup - The group to caress..hah
+   */
+  private markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+
+      if (control.controls) {
+        control.controls.forEach(c => this.markFormGroupTouched(c));
+      }
+    });
+  }
+  markAllMpptsFormsAsTouched() {
+    this.mpptComponents.forEach(
+      (mpptComponent: MpptConfigurationComponent) => {
+        this.markFormGroupTouched(mpptComponent.mttpForm);
+      }
+    );
+  }
+  checkAllMpptsFormsValid(): boolean {
+    let _validForms = true;
+    if (this.mpptComponents
+      .some(
+        (mpptComponent: MpptConfigurationComponent ) => !mpptComponent.mttpForm.valid)) 
+        {
+          _validForms = false;
+    }
+    return _validForms;
+  }
+  getMttpsFromChildren(): Mttp[]{
+    return this.mpptComponents.map(
+      mpptComponent=>
+      mpptComponent.getMttpFromForm()
+    )
+  }
+  saveMttps() {
+    this.markAllMpptsFormsAsTouched();
+
+    if( !this.checkAllMpptsFormsValid() ) {
+      this.snackBar.open( "Se han encontrado algunos errores", "Aceptar", {
+        duration: 2000,
+      });
+    } else {
+      console.log(this.getMttpsFromChildren(), 'mppts from children')
+      this.fvField.mttps = this.getMttpsFromChildren();
+      console.log(this.fvField, 'fv field from mppts configuration save ')
+      this._fvFieldService.updateField(this.fvField);
+      this.snackBar.open( "Datos almacenados correctamente", "Aceptar", {
+        duration: 2000,
+      });
+      this.router.navigate(['/fv-field-config', this.fvField.id]);
+    }
+
   }
   ngOnInit() {
     this.route.params.subscribe( params => {
       this.fvField = this._fvFieldService.get(params['fv_id']);
-      console.log(this.fvField, 'fv field from mppts');
+      console.log(this.fvField, 'fvfield from mppts config route params subscribe');
+      if ( this.fvField.mttps ) {
+        this.mttps = this.fvField.mttps;
+      } else {
+        this.initMttps(this.max_number_of_mttps);
+      }
+      this.updateArrayCombined(Number(this.max_number_of_mttps));
     });
     this.max_number_of_mttps=this._inversor.no_mppt;
-
-    for(let i=0; i < this.max_number_of_mttps; i++){
-      this.mttps_number_sufix.push(i);
-    }
     this.initMttps(this.max_number_of_mttps);
     this.updateArrayCombined(Number(this.max_number_of_mttps));
   }
