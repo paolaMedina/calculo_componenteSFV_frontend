@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 
 import { FvField, Inversor, BaseData, PanelSolar } from '../../core/models';
-import { FvFieldService, BaseDataService } from '../../core/services';
+import { FvFieldService, BaseDataService, SfvService } from '../../core/services';
 import { distinctOn } from '../../core/lib';
 import { FvFormBuilder } from '../../core/forms/fv-field.form';
 export interface Food {
@@ -35,6 +35,8 @@ export class FvFieldConfigurationComponent implements OnInit {
   isc:string;
   eficiencia:string;
   coeficiente :string;
+  _tension:number;
+  
 
   foods: Food[] = [
     {value: 'steak-0', viewValue: 'Steak'},
@@ -43,6 +45,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   ];
 
   constructor(
+    private _sfvService: SfvService,
     private _fvFieldService: FvFieldService,
     private _fvFormBuilder: FvFormBuilder,
     private _baseDataService: BaseDataService,
@@ -50,6 +53,10 @@ export class FvFieldConfigurationComponent implements OnInit {
     public snackBar: MatSnackBar,
     private route: ActivatedRoute) {
     this.fvFieldForm = this._fvFormBuilder.makeForm();
+    
+    /* valor Tension de servicio seleccionada*/
+    this._tension = this._sfvService.get().service_voltage;
+    console.log(this._tension, 'inversor');
      }
   saveChanges() {
     this.fvField = this._fvFormBuilder.extractData(this.fvFieldForm);

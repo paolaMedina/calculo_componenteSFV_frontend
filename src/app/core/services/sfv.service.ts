@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Sfv } from '@app/core/models';
+import { Sfv, Inversor } from '@app/core/models';
 
 @Injectable({
   providedIn: 'root'
@@ -16,4 +16,5 @@ export class SfvService {
   constructor() {
     this.sfv = new Sfv();
    }
+
 }
