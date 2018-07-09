@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
-import { CustomValidators } from '../forms/validators';
+import { CustomValidators } from './validators';
 import { FvField } from '../models';
 
 @Injectable()
