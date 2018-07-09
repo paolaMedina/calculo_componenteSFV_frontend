@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { Mttp, FvField } from '../../core/models';
+import { Mttp, FvField, Inversor } from '../../core/models';
 import { isOdd } from '../../core/lib';
 import { FvFieldService } from '../../core/services';
 import { ActivatedRoute } from '@angular/router';
@@ -19,7 +19,8 @@ class Combination {
   styleUrls: ['./mppts-configuration.component.scss']
 })
 export class MpptsConfigurationComponent implements OnInit {
-  @Input() max_number_of_mttps = 5;
+  //@Input() max_number_of_mttps = 5;
+  max_number_of_mttps:number;
   fvField: FvField;
   mttpsCombinationControl: FormControl;
   mttpsNumberControl: FormControl;
@@ -27,6 +28,7 @@ export class MpptsConfigurationComponent implements OnInit {
   combinations: Array<Combination>;
   mttps_number_sufix: number[];
   mttps: Mttp[];
+  private _inversor:Inversor;
   constructor(
     private _fvFieldService: FvFieldService,
     private route: ActivatedRoute
@@ -36,6 +38,7 @@ export class MpptsConfigurationComponent implements OnInit {
     this.mttps_number_sufix = new Array<number>();
     this.mttpsCombinationControl = new FormControl();
     this.mttpsNumberControl = new FormControl();
+    this._inversor = this._fvFieldService.getSelectedInversor();
    }
   setNumberOfMttps(newNumber: number) {
     console.log(newNumber);
@@ -170,6 +173,8 @@ export class MpptsConfigurationComponent implements OnInit {
       this.fvField = this._fvFieldService.get(params['fv_id']);
       console.log(this.fvField, 'fv field from mppts');
     });
+    this.max_number_of_mttps=this._inversor.no_mppt;
+
     for(let i=0; i < this.max_number_of_mttps; i++){
       this.mttps_number_sufix.push(i);
     }
