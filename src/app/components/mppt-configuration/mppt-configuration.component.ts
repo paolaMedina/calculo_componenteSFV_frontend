@@ -52,11 +52,11 @@ export class MpptConfigurationComponent implements OnInit {
     this.mttpSpecifications.potencia_nominal = potencia_nominal(this.mttpSpecifications.total_de_paneles, this._solarPanel.pmax);
     this.mttpSpecifications.corriente_maxima_MPPTn = corriente_maxima_MPPTn(number_of_chains_in_parallel, Number(this._solarPanel.isc));
     this.mttpSpecifications.corriente_Mpp_MPPTn = corriente_Mpp_MPPTn(number_of_chains_in_parallel, Number(this._solarPanel.impp));
-    this.mttpSpecifications.tension_maxima_MPPTn = tension_maxima_MPPTn(
+    this.mttpSpecifications.tension_maxima_MPPTn = Number(tension_maxima_MPPTn(
       number_of_panels_in_series_per_chain, 
       Number(this._solarPanel.voc), 
       parseFloat(this._solarPanel.coef_voc.substr(0, this._solarPanel.coef_voc.length -1).replace(',','.')), 
-      Number(this._sfv.lowest_ambient_temperature_expected) );
+      Number(this._sfv.lowest_ambient_temperature_expected) ).toFixed(2)) ;
       console.log(
         number_of_panels_in_series_per_chain, 
         Number(this._solarPanel.voc), 

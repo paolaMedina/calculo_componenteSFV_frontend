@@ -88,10 +88,10 @@ export class FvFieldConfigurationComponent implements OnInit {
   }
    updatePanelSeleccionado(panel:PanelSolar){
     this.pmax=String(panel.pmax);
-    this.vmpp=panel.vmpp;
-    this.impp=panel.impp;
-    this.voc=panel.voc;
-    this.isc=panel.isc;
+    this.vmpp=String(Number(panel.vmpp).toFixed(3));
+    this.impp=String(Number(panel.impp).toFixed(3));
+    this.voc=String(Number(panel.voc).toFixed(3));
+    this.isc=String(Number(panel.isc).toFixed(3));
     this.eficiencia=panel.eficiencia;
     this.coeficiente=panel.coef_voc;
    }
