@@ -14,7 +14,7 @@ export function corriente_Mpp_MPPTn (no_de_cadenas_en_paralelo: number, impp_pan
 export function tension_maxima_MPPTn(
     no_paneles_en_serie_por_cadena: number,
     voc_panel: number,
-    coefc_Voc: number, temp_ambiente_mas_baja_esperada
+    coefc_Voc: number, temp_ambiente_mas_baja_esperada: number
 ): number {
     return no_paneles_en_serie_por_cadena * voc_panel * coefc_Voc * (temp_ambiente_mas_baja_esperada - 25  );
 }
