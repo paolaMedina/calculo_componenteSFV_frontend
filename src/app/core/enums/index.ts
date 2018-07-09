@@ -1,2 +1,2 @@
-export * from '@app/core/enums/investor-type';
-export * from './type-of-wiring';
+export * from './investor-type.enum';
+export * from './type-of-wiring.enum';
