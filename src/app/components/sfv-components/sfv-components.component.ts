@@ -7,7 +7,7 @@ import { Sfv, ManualSwitch, BaseData, Inversor } from '../../core/models';
 import { SfvFormBuilder } from '../../core/forms';
 import { SfvService, BaseDataService } from '../../core/services';
 import { plant_fv_power, distinctOn, distinctWithoutZeros } from '../../core/lib';
-import { InvestorTypeEnum } from '../../core/enums/investor-type';
+import { InvestorTypeEnum } from '../../core/enums';
 
 
 @Component({
