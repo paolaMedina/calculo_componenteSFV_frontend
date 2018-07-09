@@ -29,8 +29,8 @@ export class MpptConfigurationComponent implements OnInit {
       () => {
         if (this.mttpForm.get('number_of_panels_in_series_per_chain').value !== '') {
           this.updateMttpSpecifications(
-            Number(this.mttpForm.get('number_of_chains_in_parallel').value),
-            Number(this.mttpForm.get('number_of_panels_in_series_per_chain').value)
+            Number(this.mttpForm.get('number_of_panels_in_series_per_chain').value),
+            Number(this.mttpForm.get('number_of_chains_in_parallel').value)
           );
         }
       }
@@ -40,8 +40,8 @@ export class MpptConfigurationComponent implements OnInit {
       () => {
         if (this.mttpForm.get('number_of_chains_in_parallel').value !== '') {
           this.updateMttpSpecifications(
-            Number(this.mttpForm.get('number_of_chains_in_parallel').value),
-            Number(this.mttpForm.get('number_of_panels_in_series_per_chain').value)
+            Number(this.mttpForm.get('number_of_panels_in_series_per_chain').value),
+            Number(this.mttpForm.get('number_of_chains_in_parallel').value) 
           );
         }
       }
