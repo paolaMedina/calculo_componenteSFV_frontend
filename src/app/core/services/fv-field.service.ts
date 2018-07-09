@@ -1,17 +1,24 @@
 import { Injectable } from '@angular/core';
 import { FvField } from '@app/core/models';
-import { Observable, of, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { PanelSolar } from '../models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class FvFieldService {
   private selectedFvField = new FvField();
-  private totalFvFields: number;
   private fvFields$$ = new Subject<FvField[]>();
   private fvFields = new Array<FvField>();
+  private selectedSolarPanel: PanelSolar;
   constructor() {
     this.initFvFields();
+  }
+  public setSelectedSolarPanel(solarPanel: PanelSolar) {
+    this.selectedSolarPanel = solarPanel;
+  }
+  public getSelectedSolarPanel(): PanelSolar{
+    return this.selectedSolarPanel;
   }
   public getFvFields() {
     return this.fvFields;
@@ -59,12 +66,6 @@ export class FvFieldService {
    */
   private getDefaultName(fieldNumber: number): string {
     return `Campo FV ${fieldNumber}`;
-  }
-  getTotalFvFields(): number {
-    return this.totalFvFields;
-  }
-  setTotalFvFields(newValue: number) {
-    this.totalFvFields = newValue;
   }
   getSelectedFvField() {
     return this.selectedFvField;
