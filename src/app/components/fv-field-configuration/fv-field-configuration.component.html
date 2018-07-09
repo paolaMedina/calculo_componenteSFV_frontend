@@ -8,7 +8,7 @@
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
       <span>Indique nombre de campo FV</span>
       <mat-form-field class="field-fv-potency">
-        <input matInput *ngIf="fvField" [value]="fvField.name">
+        <input matInput *ngIf="fvField" [value]="fvField.name" formControlName="name">
       </mat-form-field>
     </div>
     <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
@@ -100,7 +100,7 @@
         Seleccione el modelo del panel solar FV
       </span>
       <mat-form-field>
-        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+        <mat-select formControlName="solar_panel_model_2" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
           <mat-option *ngFor="let food of foods" [value]="food.value">
             {{food.viewValue}}
           </mat-option>
