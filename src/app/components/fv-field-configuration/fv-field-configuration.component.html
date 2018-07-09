@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
-  <button routerLink="/fv-fields-config" class="left-button" mat-button> Volver </button>
+  <button (click)="return()" class="left-button" mat-button> Volver </button>
   <span>Configuración del campo FV</span>
 </mat-toolbar>
 <div [formGroup]="fvFieldForm" fxLayout="row" class="main-content">

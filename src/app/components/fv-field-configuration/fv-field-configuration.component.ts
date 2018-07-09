@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 import { FvField, Inversor, BaseData, PanelSolar } from '../../core/models';
 import { FvFieldService, BaseDataService } from '../../core/services';
@@ -45,18 +46,39 @@ export class FvFieldConfigurationComponent implements OnInit {
     private _fvFieldService: FvFieldService,
     private _fvFormBuilder: FvFormBuilder,
     private _baseDataService: BaseDataService,
+    private router: Router,
+    public snackBar: MatSnackBar,
     private route: ActivatedRoute) {
     this.fvFieldForm = this._fvFormBuilder.makeForm();
      }
   saveChanges() {
+    this.fvField = this._fvFormBuilder.extractData(this.fvFieldForm);
     this._fvFieldService.updateField(this.fvField);
   }
+  return() {
 
+    this.fvFieldForm.markAsTouched();
+    this.fvFieldForm.get('name').markAsTouched()
+    this.fvFieldForm.get('manufacturer_1').markAsTouched()
+    this.fvFieldForm.get('solar_panel_model_1').markAsTouched()
+    this.fvFieldForm.get('manufacturer_2').markAsTouched()
+    this.fvFieldForm.get('solar_panel_model_2').markAsTouched()
+    if ( this.fvFieldForm.valid ) {
+      this.saveChanges();
+      this.router.navigate(['/fv-fields-config']);
+    } else {
+      this.openSnackBar("Se han enontrado algunos errores",  "Aceptar");
+    }
+  }
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open( message, action, {
+      duration: 2000,
+    });
+  }
   updateModelosPaneles(paneles: PanelSolar[] ) {
     this.modelos = distinctOn<PanelSolar>(paneles, 'descripcion');
 
    }
-
    updatePanelSeleccionado(panel:PanelSolar){
     this.pmax=String(panel.pmax);
     this.vmpp=panel.vmpp;
@@ -100,7 +122,8 @@ export class FvFieldConfigurationComponent implements OnInit {
     )
     this.route.params.subscribe( params => {
       this.fvField = this._fvFieldService.get(params['id']);
-      console.log(this.fvField);
+      this.fvFieldForm.get('name').setValue(this.fvField.name);
+      console.log(this.fvField, 'fv field from fv field configuration');
     });
 
     this._baseDataService.getBaseData()

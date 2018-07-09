@@ -1,8 +1,10 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-import { Mttp } from '../../core/models';
+import { Mttp, FvField } from '../../core/models';
 import { isOdd } from '../../core/lib';
+import { FvFieldService } from '../../core/services';
+import { ActivatedRoute } from '@angular/router';
 class Combination {
   id: string;
   is_combined: boolean;
@@ -18,13 +20,17 @@ class Combination {
 })
 export class MpptsConfigurationComponent implements OnInit {
   @Input() max_number_of_mttps = 5;
+  fvField: FvField;
   mttpsCombinationControl: FormControl;
   mttpsNumberControl: FormControl;
   some_combination_was_made: boolean = false;
   combinations: Array<Combination>;
   mttps_number_sufix: number[];
   mttps: Mttp[];
-  constructor() {
+  constructor(
+    private _fvFieldService: FvFieldService,
+    private route: ActivatedRoute
+  ) {
     this.mttps = new Array<Mttp>();
     this.combinations = new  Array<Combination>();
     this.mttps_number_sufix = new Array<number>();
@@ -160,6 +166,10 @@ export class MpptsConfigurationComponent implements OnInit {
     this.combinations =  arrayCombined;
   }
   ngOnInit() {
+    this.route.params.subscribe( params => {
+      this.fvField = this._fvFieldService.get(params['fv_id']);
+      console.log(this.fvField, 'fv field from mppts');
+    });
     for(let i=0; i < this.max_number_of_mttps; i++){
       this.mttps_number_sufix.push(i);
     }
