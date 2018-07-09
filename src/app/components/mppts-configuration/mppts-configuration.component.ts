@@ -90,7 +90,7 @@ export class MpptsConfigurationComponent implements OnInit {
     /** Create a new mttp combined */
     newCombinedMptt = new Mttp(Mttp.getCombinedName(id_mptt1, id_mptt2));  
     /** Add the new mttp combined at `id_mptt1` position */
-    this.mttps.splice(id_mptt1-1, 0, newCombinedMptt);
+    this.mttps.splice(index_mptt1, 0, newCombinedMptt);
     combination.is_combined = true;
     console.log(this.combinations);
   }
