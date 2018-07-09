@@ -31,11 +31,13 @@
       <span>
         Seleccione el modelo del panel solar FV
       </span>
-      <mat-form-field *ngIf="modelos">
+      <mat-form-field >
         <mat-select formControlName  = "solar_panel_model_1" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-          <mat-option *ngFor="let modelo of modelos" [value]="modelo">
-            {{modelo}}
-          </mat-option>
+          <ng-container *ngIf="modelosPanel">
+            <mat-option *ngFor="let modelo of modelosPanel" [value]="modelo">
+              {{modelo}}
+            </mat-option>
+          </ng-container>
         </mat-select>
       </mat-form-field>
     </div>
@@ -85,7 +87,7 @@
         Seleccione Fabricante de inversor FV
       </span>
       <mat-form-field>
-        <mat-select formControlName="manufacturer_2" #service_type placeholder="Seleccione un fabricante">
+        <mat-select formControlName="manufacturer_2" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
           <ng-container *ngIf="manufacturesNamesUnique">
             <mat-option *ngFor="let manufacturNameUnique of manufacturesNamesUnique" [value]="manufacturNameUnique">
               {{manufacturNameUnique}}
@@ -101,9 +103,11 @@
       </span>
       <mat-form-field>
         <mat-select formControlName="solar_panel_model_2" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
-          </mat-option>
+          <ng-container *ngIf="modelosInversor">
+            <mat-option *ngFor="let modelo of modelosInversor" [value]="modelo">
+              {{modelo}}
+            </mat-option>
+          </ng-container>
         </mat-select>
       </mat-form-field>
     </div>
