@@ -37,6 +37,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   coeficiente :string;
   _tension:string;
   _servicio:string;
+  inversores_filtrados:Inversor[];
   inversores_filtrado_final:Inversor[];
   modelosInversor:string[];
   
@@ -122,7 +123,6 @@ export class FvFieldConfigurationComponent implements OnInit {
     this.fvFieldForm.get('solar_panel_model_1').valueChanges.subscribe (
       (modelo: string) => {
        const panel_seleccionado = this.paneles_solares.filter(panel => panel.descripcion === modelo)[0];
-       console.log(panel_seleccionado, 'panel')
        this._fvFieldService.setSelectedSolarPanel(panel_seleccionado);
        this.updatePanelSeleccionado(panel_seleccionado);
       })
@@ -130,8 +130,15 @@ export class FvFieldConfigurationComponent implements OnInit {
       /** Filtrar inversor por fabricante seleccionado */
     this.fvFieldForm.get('manufacturer_2').valueChanges.subscribe (
       (name_fabricante: string) => {
-       const inversores_filtrados = this.inversores_filtrado_final.filter(inversor => inversor.fabricante === name_fabricante);
-       this.modelosInversor = distinctOn<Inversor>(inversores_filtrados, 'descripcion');
+       this.inversores_filtrados = this.inversores_filtrado_final.filter(inversor => inversor.fabricante === name_fabricante);
+       this.modelosInversor = distinctOn<Inversor>(this.inversores_filtrados, 'descripcion');
+      })
+
+    /** Filtrar por modelo del inversor seleccionado */
+    this.fvFieldForm.get('solar_panel_model_2').valueChanges.subscribe (
+      (modelo: string) => {
+       const inversor_seleccionado = this.inversores_filtrados.filter(inversor => inversor.descripcion === modelo)[0];
+       this._fvFieldService.setSelectedInversor(inversor_seleccionado);
       })
 
     this.route.params.subscribe( params => {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FvField } from '@app/core/models';
+import { FvField, Inversor } from '@app/core/models';
 import { Observable, Subject } from 'rxjs';
 import { PanelSolar } from '../models';
 
@@ -11,6 +11,7 @@ export class FvFieldService {
   private fvFields$$ = new Subject<FvField[]>();
   private fvFields = new Array<FvField>();
   private selectedSolarPanel: PanelSolar;
+  private selectedInversor: Inversor;
   constructor() {
     this.initFvFields();
   }
@@ -19,6 +20,12 @@ export class FvFieldService {
   }
   public getSelectedSolarPanel(): PanelSolar{
     return this.selectedSolarPanel;
+  }
+  public setSelectedInversor(inversor: Inversor) {
+    this.selectedInversor = inversor;
+  }
+  public getSelectedInversor(): Inversor{
+    return this.selectedInversor;
   }
   public getFvFields() {
     return this.fvFields;
