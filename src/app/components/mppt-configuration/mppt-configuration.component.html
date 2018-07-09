@@ -2,7 +2,7 @@
   <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
     <span>MPPT {{mttp.id}}</span>
   </mat-toolbar>
-  <div class="mppt-configuration" fxLayout="column" fxLayoutAlign="center center">
+  <div [formGroup]="mttpForm" class="mppt-configuration" fxLayout="column" fxLayoutAlign="center center">
 
     <div fxLayout="column" fxLayoutGap="10%">
       <div fxLayout="column" fxLayoutAlign="center left">
@@ -10,14 +10,14 @@
           <span>No. de paneles en serie por cadena</span>
           <span class="spacer"></span>
           <mat-form-field>
-            <input matInput>
+            <input type="number" min="0" formControlName="number_of_panels_in_series_per_chain" matInput>
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
           <span>No. de cadenas en paralelo</span>
           <span class="spacer"></span>
           <mat-form-field>
-            <input matInput>
+            <input  type="number" min="0" formControlName="number_of_chains_in_parallel" matInput>
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
@@ -29,7 +29,7 @@
     </div>
   </div>
   <!-- Nominal data-->
-  <app-nominal-array-data></app-nominal-array-data>
+  <app-nominal-array-data [mttpSpecifications]="mttpSpecifications"></app-nominal-array-data>
   <!-- End of Nominal data-->
   <div fxLayout="row" fxLayoutAlign="center center">
   <button [routerLink]="['/mppt-config/cabling', 'some_id']" mat-button>Configurar cableado</button>

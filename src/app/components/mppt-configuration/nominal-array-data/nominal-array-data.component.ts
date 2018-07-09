@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { MttpSpecifications } from '../../../core/models';
 
 @Component({
   selector: 'app-nominal-array-data',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./nominal-array-data.component.scss']
 })
 export class NominalArrayDataComponent implements OnInit {
-
+  @Input() mttpSpecifications: MttpSpecifications;
   constructor() { }
 
   ngOnInit() {
