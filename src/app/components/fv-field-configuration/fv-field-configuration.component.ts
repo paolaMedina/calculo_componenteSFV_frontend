@@ -25,7 +25,16 @@ export class FvFieldConfigurationComponent implements OnInit {
   fabricantes_paneles:String[];
   fvFieldForm: FormGroup ;
   invesrsors: Inversor[];
+  modelos: String[];
   manufacturesNamesUnique: string[];
+  pmax:string;
+  vmpp:string;
+  impp:string;
+  voc:string;
+  isc:string;
+  eficiencia:string;
+  coeficiente :string;
+
   foods: Food[] = [
     {value: 'steak-0', viewValue: 'Steak'},
     {value: 'pizza-1', viewValue: 'Pizza'},
@@ -37,13 +46,49 @@ export class FvFieldConfigurationComponent implements OnInit {
     private _fvFormBuilder: FvFormBuilder,
     private _baseDataService: BaseDataService,
     private route: ActivatedRoute) {
-      this.fvFieldForm = this._fvFormBuilder.makeForm();
+    this.fvFieldForm = this._fvFormBuilder.makeForm();
      }
   saveChanges() {
     this._fvFieldService.updateField(this.fvField);
   }
 
+  updateModelosPaneles(paneles: PanelSolar[] ) {
+    this.modelos = distinctOn<PanelSolar>(paneles, 'descripcion');
+
+   }
+
+   updatePanelSeleccionado(panel:PanelSolar){
+    this.pmax=String(panel.pmax);
+    this.vmpp=panel.vmpp;
+    this.impp=panel.impp;
+    this.voc=panel.voc;
+    this.isc=panel.isc;
+    this.eficiencia=panel.eficiencia;
+    this.coeficiente=panel.coef_voc;
+    console.log(this.pmax, 'pmax')
+
+   }
+
   ngOnInit() {
+
+    /** Filtrar por panel por fabricante seleccionado */
+    this.fvFieldForm.get('manufacturer_1').valueChanges.subscribe (
+      (name_fabricante: string) => {
+       const paneles_filtrados = this.paneles_solares.filter(panel => panel.fabricante === name_fabricante);
+       this.updateModelosPaneles(paneles_filtrados);
+      }
+    )
+
+    /** Filtrar por panel-modelo seleccionado */
+    this.fvFieldForm.get('solar_panel_model_1').valueChanges.subscribe (
+      (modelo: string) => {
+       const panel_seleccionado = this.paneles_solares.filter(panel => panel.descripcion === modelo)[0];
+       console.log(panel_seleccionado, 'panel')
+       this.updatePanelSeleccionado(panel_seleccionado);
+      }
+    )
+
+
     this._baseDataService.getBaseData()
     .subscribe(
       (baseData:  BaseData) => {
@@ -60,9 +105,8 @@ export class FvFieldConfigurationComponent implements OnInit {
     this._baseDataService.getBaseData()
     .subscribe((base_data: BaseData) => {
       this.paneles_solares = base_data.panelesSolares;
-      console.log(this.paneles_solares, 'paneles solares');
       this.fabricantes_paneles = distinctOn<PanelSolar>(this.paneles_solares, 'fabricante');
-      console.log(this.fabricantes_paneles, 'fabricantes_paneles solares');
+      
     });
 
   }

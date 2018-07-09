@@ -16,7 +16,7 @@
         Seleccione Fabricante de panel solar FV
       </span>
       <mat-form-field *ngIf="fabricantes_paneles">
-        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+        <mat-select formControlName= "manufacturer_1" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
           <mat-option *ngFor="let fabricante of fabricantes_paneles" [value]="fabricante">
             {{fabricante}}
           </mat-option>
@@ -31,10 +31,10 @@
       <span>
         Seleccione el modelo del panel solar FV
       </span>
-      <mat-form-field>
-        <mat-select #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+      <mat-form-field *ngIf="modelos">
+        <mat-select formControlName  = "solar_panel_model_1" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+          <mat-option *ngFor="let modelo of modelos" [value]="modelo">
+            {{modelo}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -57,13 +57,13 @@
             <span>Coeficiente Voc</span>
           </div>
           <div fxLayout="column" fxLayoutGap="15px">
-            <span>255</span>
-            <span>255</span>
-            <span>255</span>
-            <span>255</span>
-            <span>255</span>
-            <span>255</span>
-            <span>255</span>
+            <span>{{pmax}}</span>
+            <span>{{vmpp}}</span>
+            <span>{{impp}}</span>
+            <span>{{voc}}</span>
+            <span>{{isc}}</span>
+            <span>{{eficiencia}}</span>
+            <span>{{coeficiente}}</span>
           </div>
           <div fxLayout="column" fxLayoutGap="15px">
             <span>W</span>
