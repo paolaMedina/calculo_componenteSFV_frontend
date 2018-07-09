@@ -84,6 +84,7 @@ export class FvFieldConfigurationComponent implements OnInit {
       (modelo: string) => {
        const panel_seleccionado = this.paneles_solares.filter(panel => panel.descripcion === modelo)[0];
        console.log(panel_seleccionado, 'panel')
+       this._fvFieldService.setSelectedSolarPanel(panel_seleccionado);
        this.updatePanelSeleccionado(panel_seleccionado);
       }
     )
