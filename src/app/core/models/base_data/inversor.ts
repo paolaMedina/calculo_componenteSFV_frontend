@@ -20,9 +20,9 @@ export class Inversor {
      vin_max: number;
      vop_min: number;
      vop_max: number;
-     vsal_1: number;
+     vsal_1: any;
      vsal_2: any;
-     vsal_3: string;
+     vsal_3: any;
      tipo_conex: string;
      psal_1: number;
      psal_2: any;
