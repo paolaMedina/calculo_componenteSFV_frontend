@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build-github": "ng build --prod --base-href 'https://paolamedina.github.io/calculo_componenteSFV_frontend/'",
     "build": "ng build",
+    "start-c9": "ng serve --host $IP --port $PORT --public-host $C9_HOSTNAME",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
