@@ -155,8 +155,8 @@ export class FvFieldConfigurationComponent implements OnInit {
         this.inversores_filtrado_final = this.updateInversor(inversores_filtrados_servicio);
         this.manufacturesNamesUnique = distinctOn<Inversor>(this.inversores_filtrado_final, 'fabricante');
     /** Trick for already loaded fv field  */
-    if (this.fvFieldForm.get('manufacturer_1').value !== '') {
-      const paneles_filtrados = this.paneles_solares.filter(panel => panel.fabricante === this.fvFieldForm.get('manufacturer_1').value);
+    if (this.fvField.manufacturer_1 !== '') {
+      const paneles_filtrados = this.paneles_solares.filter(panel => panel.fabricante === this.fvField.manufacturer_1);
       this.updateModelosPaneles(paneles_filtrados);
     }
     if( this.fvField.manufacturer_2 &&  this.fvField.manufacturer_2 !== '') {
