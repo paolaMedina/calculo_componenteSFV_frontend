@@ -1,0 +1,25 @@
+<!-- Nominal data-->
+<div class="nominal-data">
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+    <span>Datos nominales del arreglo </span>
+  </mat-toolbar>
+  <div fxLayout="row">
+    <div fxLayout="column">
+      <span>Potencia nominal</span>
+      <span>Tension mpp</span>
+      <span>Corriente mp </span>
+      <span>Tensión máxima</span>
+      <span>Corriente máxima</span>
+    </div>
+    <span class="spacer"></span>
+    <div fxLayout="column">
+      <span>{{mttpSpecifications.potencia_nominal}}W</span>
+      <span>{{mttpSpecifications.tension_Mpp_MPPTn}}V</span>
+      <span>{{mttpSpecifications.corriente_Mpp_MPPTn}}A</span>
+      <span>{{mttpSpecifications.tension_maxima_MPPTn}}V</span>
+      <span>{{mttpSpecifications.corriente_maxima_MPPTn}}A</span>
+    </div>
+  </div>
+
+</div>
+<!-- End of Nominal data-->
