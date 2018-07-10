@@ -158,6 +158,8 @@ export class FvFieldConfigurationComponent implements OnInit {
     if (this.fvField.manufacturer_1 !== '') {
       const paneles_filtrados = this.paneles_solares.filter(panel => panel.fabricante === this.fvField.manufacturer_1);
       this.updateModelosPaneles(paneles_filtrados);
+      const panel_seleccionado = this.paneles_solares.filter(panel => panel.descripcion === this.fvField.solar_panel_model_1)[0];
+      this.updatePanelSeleccionado(panel_seleccionado)
     }
     if( this.fvField.manufacturer_2 &&  this.fvField.manufacturer_2 !== '') {
       this.inversores_filtrados = this.inversores_filtrado_final.filter(inversor => inversor.fabricante ===  this.fvField.manufacturer_2 );
