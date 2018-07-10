@@ -11,7 +11,7 @@ export class FvFieldService {
   private selectedSolarPanel: PanelSolar;
   private selectedInversor: Inversor;
   constructor() {
-    this.initFvFields();
+    this.fvFields = new Array<FvField>();
   }
   public setSelectedSolarPanel(solarPanel: PanelSolar) {
     this.selectedSolarPanel = solarPanel;
@@ -28,28 +28,15 @@ export class FvFieldService {
   public getFvFields() {
     return this.fvFields;
   }
-  public eliminateAllFieldsExceptFirst() {
-    this.fvFields = this.fvFields.slice(0,1);
-  }
 
   public deleteFvField(idFvField: string) {
     this.fvFields = this.fvFields.filter(fvField => fvField.id !== idFvField);
   }
-  /**
-   * Always init with one field
-   *
-   * @memberof FvFieldService
-   */
-  public initFvFields() {
-    let fvField = new FvField();
-    fvField.name = this.getDefaultName(0);
-    this.fvFields.push(fvField);
-  }
 
-  public addDefaultFvField() {
+  public getDefaultFvField(sufix = 0 ) {
     let fvField = new FvField();
-    fvField.name = this.getDefaultName(this.fvFields.length);
-    this.fvFields.push(fvField);
+    fvField.name = this.getDefaultName(sufix);
+    return fvField;
   }
   /**
    * Return the default name for fv field in a list by its index at list
@@ -67,6 +54,9 @@ export class FvFieldService {
   updateField(fvField: FvField) {
     let indexFvField = this.fvFields.findIndex(_fvField => _fvField.id === fvField.id);
     this.fvFields[indexFvField] = fvField;
+  }
+  setFvFields(fvFields: FvField[]) {
+    this.fvFields = fvFields;
   }
   setSelectedField(fvField: FvField) {
     this.selectedFvField = this.fvFields.find(_fvField => _fvField.id === fvField.id);

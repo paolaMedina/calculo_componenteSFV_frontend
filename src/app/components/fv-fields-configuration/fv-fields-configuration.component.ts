@@ -3,19 +3,20 @@ import { FvField, Sfv } from '../../core/models';
 import { FvFieldService, SfvService } from '../../core/services';
 import { Observable } from 'rxjs';
 import { InvestorTypeEnum } from '../../core/enums';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-fv-fields-configuration',
   templateUrl: './fv-fields-configuration.component.html',
   styleUrls: ['./fv-fields-configuration.component.scss']
 })
-export class FvFieldsConfigurationComponent implements OnInit, OnDestroy {
+export class FvFieldsConfigurationComponent implements OnInit {
   fvFields: FvField[]; // should never access it directly 
   sfv: Sfv;
   allow_add_and_delete: boolean;
   constructor(
     private _fvFieldService: FvFieldService,
-    private cd: ChangeDetectorRef,
+    private _router: Router,
     private _sfvService: SfvService
   ) {
     this.fvFields = new Array<FvField>();
@@ -23,21 +24,36 @@ export class FvFieldsConfigurationComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.sfv = this._sfvService.get();
+    /* If fv fields are already registred, get that,  In no fv fields are registred, start with one fv field  */
+    if ( this._fvFieldService.getFvFields().length > 0 ) {
+      this.fvFields = this._fvFieldService.getFvFields();
+    } else {
+      this.fvFields.push(this._fvFieldService.getDefaultFvField()); 
+    }
+
     if ( this.sfv.investor_type === InvestorTypeEnum.MicroInvestor ) {
-      this._fvFieldService.eliminateAllFieldsExceptFirst();
+      this.fvFields.slice(0,1);
       this.allow_add_and_delete = false;
     } else {
       this.allow_add_and_delete = true;
     }
   }
+  saveFvFields(){ 
+    this._fvFieldService.setFvFields(this.fvFields);
+  }
   deleleteFvField( idFvField: string ) {
-    this._fvFieldService.deleteFvField(idFvField);
+    this.fvFields = this.fvFields.filter( fvField => fvField.id !== idFvField);
   }
   addDefaultFvField() {
-    this._fvFieldService.addDefaultFvField();
+    const sufix_for_next_field = this.fvFields.length;
+    this.fvFields.push(this._fvFieldService.getDefaultFvField(sufix_for_next_field));
   }
-  ngOnDestroy() {
-    this.cd.detach(); // try this
-    // for me I was detect changes inside "subscribe" so was enough for me to just unsubscribe;
+  goToFvFieldConfiguration(idFvField: string) {
+    this.saveFvFields();
+    this._router.navigate(['/fv-field-config', idFvField]) ;
+  }
+   return() {
+    this.saveFvFields();
+    this._router.navigate(["/"]);
   }
 }

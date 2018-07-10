@@ -1,7 +1,7 @@
 
 
     <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
-        <button routerLink = "/" class="left-button"  mat-button> Volver </button>
+        <button (click)="return()" class="left-button"  mat-button> Volver </button>
         <span>Configuración de campos FV</span>
       </mat-toolbar> 
 <div fxLayout="column">
@@ -14,7 +14,7 @@
       <span class="spacer"></span>
 
       <button  *ngIf="allow_add_and_delete"  (click)="deleleteFvField(fvField.id)" fxFlexAlign="end" mat-icon-button> <mat-icon>delete</mat-icon></button>
-      <button [routerLink]="['/fv-field-config', fvField.id]" fxFlexAlign="end" mat-icon-button> <mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button (click)="goToFvFieldConfiguration(fvField.id)"fxFlexAlign="end" mat-icon-button> <mat-icon>keyboard_arrow_right</mat-icon></button>
     </div>
   </div>
 
