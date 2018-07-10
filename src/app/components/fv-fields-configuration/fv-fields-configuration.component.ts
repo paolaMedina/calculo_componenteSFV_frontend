@@ -19,11 +19,6 @@ export class FvFieldsConfigurationComponent implements OnInit, OnDestroy {
     private _sfvService: SfvService
   ) {
     this.fvFields = new Array<FvField>();
-    this._fvFieldService.getFvFieldsObservable().subscribe( (fvFields: FvField[]) => {
-      console.log(fvFields);
-      this.fvFields = fvFields;
-    }
-  );
   }
 
   ngOnInit() {
@@ -34,7 +29,6 @@ export class FvFieldsConfigurationComponent implements OnInit, OnDestroy {
     } else {
       this.allow_add_and_delete = true;
     }
-    this._fvFieldService.publishFvFields();
   }
   deleleteFvField( idFvField: string ) {
     this._fvFieldService.deleteFvField(idFvField);

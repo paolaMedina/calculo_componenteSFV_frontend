@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 import { Mttp, FvField, Inversor } from '../../core/models';
 import { isOdd } from '../../core/lib';
-import { FvFieldService } from '../../core/services';
+import { FvFieldService, SfvService } from '../../core/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MpptConfigurationComponent } from '../mppt-configuration/mppt-configuration.component';
 import { MatSnackBar } from '@angular/material';
@@ -31,6 +31,7 @@ export class MpptsConfigurationComponent implements OnInit {
   private _inversor:Inversor;
   constructor(
     private _fvFieldService: FvFieldService,
+    private _sfvService: SfvService,
     private route: ActivatedRoute,
     private router: Router,
     public snackBar: MatSnackBar
@@ -41,7 +42,6 @@ export class MpptsConfigurationComponent implements OnInit {
     this._inversor = this._fvFieldService.getSelectedInversor();
    }
   setNumberOfMttps(newNumber: number) {
-    console.log(newNumber);
     const currentNumberOfMttps = this.mttps.length;
     if ( newNumber < currentNumberOfMttps) {
       this.mttps = this.mttps.slice(0,newNumber);
@@ -93,16 +93,13 @@ export class MpptsConfigurationComponent implements OnInit {
       }
     );
     this.mttps.splice(index_mptt2,1);
-    console.log(id_mptt1, id_mptt2, 'valores del splice')
     /** Create a new mttp combined */
     newCombinedMptt = new Mttp(Mttp.getCombinedName(id_mptt1, id_mptt2));  
     /** Add the new mttp combined at `id_mptt1` position */
     this.mttps.splice(index_mptt1, 0, newCombinedMptt);
     combination.is_combined = true;
-    console.log(this.combinations);
   }
   combineOrDecombineMttps(combination: Combination) {
-    console.log(combination, 'from combine or decombine')
     if ( !combination.is_combined ) {
       this.combineMttps(combination);
     } else {
@@ -114,7 +111,6 @@ export class MpptsConfigurationComponent implements OnInit {
    * @param combination String in format `n-n+1`, `mttps[n]` and `mttps[n+1]` should be combined in one mttp
    */
   separeCombinedMttps(combination: Combination){
-    console.log(combination,"combination to separe")
     let id_mptt_to_delete: string = combination.id;
     let id_mptt1: number;
     let id_mptt2: number;
@@ -210,9 +206,7 @@ export class MpptsConfigurationComponent implements OnInit {
         duration: 2000,
       });
     } else {
-      console.log(this.getMttpsFromChildren(), 'mppts from children')
       this.fvField.mttps = this.getMttpsFromChildren();
-      console.log(this.fvField, 'fv field from mppts configuration save ')
       this._fvFieldService.updateField(this.fvField);
       this.snackBar.open( "Datos almacenados correctamente", "Aceptar", {
         duration: 2000,
@@ -222,9 +216,12 @@ export class MpptsConfigurationComponent implements OnInit {
 
   }
   ngOnInit() {
+    this.max_number_of_mttps=this._inversor.no_mppt;
     this.route.params.subscribe( params => {
       this.fvField = this._fvFieldService.get(params['fv_id']);
-      console.log(this.fvField, 'fvfield from mppts config route params subscribe');
+      /** get mocks */
+      console.log(JSON.stringify(this._sfvService.get()), 'sfv mock');
+      console.log(JSON.stringify(this.fvField), 'fv field mock');
       if ( this.fvField.mttps ) {
         this.mttps = this.fvField.mttps;
       } else {
@@ -232,8 +229,6 @@ export class MpptsConfigurationComponent implements OnInit {
       }
       this.updateArrayCombined(Number(this.max_number_of_mttps));
     });
-    this.max_number_of_mttps=this._inversor.no_mppt;
-    this.initMttps(this.max_number_of_mttps);
     this.updateArrayCombined(Number(this.max_number_of_mttps));
   }
 
