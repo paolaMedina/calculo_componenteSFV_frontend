@@ -22,22 +22,22 @@
     <div fxLayout="column" *ngIf="type_of_wiring.value === types_of_wiring.Canalization || type_of_wiring.value === types_of_wiring.CableTrayChanneling">
       <mat-form-field>
         <mat-select placeholder="Tipo de canalización">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+          <mat-option *ngFor="let tipo of tipoCanalizacion" [value]="tipo">
+            {{tipo}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="Canalización">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+          <mat-option *ngFor="let x of canalizacion" [value]="x">
+            {{x}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="Tamaño de canalización">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+          <mat-option *ngFor="let x of secuencia" [value]="x">
+            {{x}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -47,22 +47,22 @@
     <div fxLayout="column" *ngIf="type_of_wiring.value === types_of_wiring.CableTry || type_of_wiring.value === types_of_wiring.CableTrayChanneling">
       <mat-form-field>
         <mat-select placeholder="Diseño de bandeja">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+          <mat-option *ngFor="let x of disenoBandeja" [value]="x">
+            {{x}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="Material bandeja">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+          <mat-option *ngFor="let x of materialBandeja" [value]="x">
+            {{x}}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <mat-form-field>
         <mat-select placeholder="Tipo de acabado">
-          <mat-option *ngFor="let food of foods" [value]="food.value">
-            {{food.viewValue}}
+          <mat-option *ngFor="let x of acabado" [value]="x">
+            {{x}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -81,30 +81,30 @@
         <div fxLayout="column" fxFlex="50%">
           <mat-form-field>
             <mat-select placeholder="Longitud de tramo (m)">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
+              <mat-option *ngFor="let x of longitud" [value]="x">
+                {{x}}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
             <mat-select placeholder="Ancho (mm)">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
+              <mat-option *ngFor="let x of ancho" [value]="x">
+                {{x}}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
           <mat-form-field>
             <mat-select placeholder="Alto (mm)">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
+              <mat-option *ngFor="let x of alto" [value]="x">
+                {{x}}
               </mat-option>
             </mat-select>
           </mat-form-field>
           <mat-form-field>
             <mat-select placeholder="Tipo de carga">
-              <mat-option *ngFor="let food of foods" [value]="food.value">
-                {{food.viewValue}}
+              <mat-option *ngFor="let x of carga" [value]="x">
+                {{x}}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -115,15 +115,15 @@
   <div fxLayout="column" fxFlex.gt-md="50%"  fxFlex.lt-md="100%">
     <mat-form-field>
       <mat-select placeholder="Tipo de conductor">
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}}
+        <mat-option *ngFor="let x of secuencia" [value]="x">
+          {{x}}
         </mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field>
       <mat-select placeholder="Material del conductor">
-        <mat-option *ngFor="let food of foods" [value]="food.value">
-          {{food.viewValue}}
+        <mat-option *ngFor="let x of materialConductor" [value]="x">
+          {{x}}
         </mat-option>
       </mat-select>
     </mat-form-field>

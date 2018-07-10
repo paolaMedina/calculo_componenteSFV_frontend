@@ -76,6 +76,7 @@ export class SfvComponentsComponent implements OnInit {
     this.sfv = this.sfvService.get();
     this.sfvForm = this.sfvFormBuilder.makeForm(this.sfv);
 
+    
 
     /** Filtrar los tipos de tension */
     this.sfvForm.get('service_type').valueChanges.subscribe (
@@ -98,7 +99,12 @@ export class SfvComponentsComponent implements OnInit {
           this.updateTensiones(this.inversores);
         });
 
-
+        if (this.sfv.service_type !== '') {
+          const inversores_filtrados = this.inversores.filter(inversor => inversor.tipo_conex === this.sfv.service_type);
+          this.updateTensiones(inversores_filtrados);
+        }
+        
+    
 
 
     /** Cuando la opcion Calcular Potencia de planta se modifica, se deben limpiar los campos */
