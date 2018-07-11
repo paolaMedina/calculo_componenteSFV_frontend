@@ -31,7 +31,6 @@ export class RequiredIfDirective implements Validator {
   private _onChange: () => void;
 
   ngOnInit(): void {
-      console.log(this.requiredIf);
       this.requiredIf$.subscribe(value => {
           this.requiredIf = value;
           if (this._onChange) this._onChange();

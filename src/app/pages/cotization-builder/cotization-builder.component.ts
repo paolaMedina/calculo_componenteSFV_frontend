@@ -26,7 +26,6 @@ export class CotizationBuilderComponent implements OnInit {
     });
   }
   printFields(){
-    console.log(this.fvFields);
   }
   ngOnInit() {
     this.sfv = this._sfvService.get();

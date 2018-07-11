@@ -25,14 +25,13 @@ export class MpptConfigurationComponent implements OnInit {
    
    }
    getMttpFromForm(){
-     return this._mttpFormBuilder.extractData(this.mttpForm,  this.mttp.id);
+     return this._mttpFormBuilder.extractData(this.mttpForm,  this.mttp);
    }
 
   ngOnInit() {
     this._sfv = this._sfvService.get();
     /** If not default mttp is injected at input make form from that mttp */
     if(this.mttp.number_of_chains_in_parallel !== -1) {
-      console.log(this.mttp, 'mttp from on init in mppt config comp')
       this.mttpForm = this._mttpFormBuilder.makeForm(this.mttp);
     } else {
       this.mttpForm = this._mttpFormBuilder.makeForm();
@@ -71,13 +70,6 @@ export class MpptConfigurationComponent implements OnInit {
       Number(this._solarPanel.voc), 
       parseFloat(this._solarPanel.coef_voc.substr(0, this._solarPanel.coef_voc.length -1).replace(',','.')), 
       Number(this._sfv.lowest_ambient_temperature_expected) ).toFixed(2)) ;
-      console.log(
-        number_of_panels_in_series_per_chain, 
-        Number(this._solarPanel.voc), 
-        parseFloat(this._solarPanel.coef_voc.substr(0, this._solarPanel.coef_voc.length -1).replace(',','.')), 
-        Number(this._sfv.lowest_ambient_temperature_expected),
-        "tension maxima variables"
-      )
   
     this.mttpSpecifications.tension_Mpp_MPPTn = tension_Mpp_MPPTn(number_of_panels_in_series_per_chain, this._solarPanel.vmpp );
     }

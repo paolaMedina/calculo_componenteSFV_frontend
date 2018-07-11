@@ -16,7 +16,7 @@ export class FvField {
         this.solar_panel_model_1 = "";
         this.solar_panel_model_2 = "";
         this.manufacturer_2 = "";
-        this.mttps  = null;
+        this.mttps  = new Array<Mttp>();
     }
 
 }

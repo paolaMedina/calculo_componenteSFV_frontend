@@ -24,15 +24,14 @@ export class FvFormBuilder {
             const controlErrors: ValidationErrors = form.get(key).errors;
             if (controlErrors != null) {
                   Object.keys(controlErrors).forEach(keyError => {
-                    console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
                   });
                 }
               });
     }
-    extractData(form: FormGroup, initial_id?: string): FvField {
+    extractData(form: FormGroup, initialFvField?: FvField): FvField {
         let fvField = new FvField();
-        if ( initial_id ) {
-            fvField.id = initial_id;
+        if ( initialFvField ) {
+            fvField = initialFvField;
         }
         fvField.name = form.get('name').value;
         fvField.manufacturer_1 = form.get('manufacturer_1').value;

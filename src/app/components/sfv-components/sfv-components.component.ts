@@ -45,16 +45,13 @@ export class SfvComponentsComponent implements OnInit {
   }
 
    saveSfv() {
-     console.log(this.sfvFormBuilder.getAllErrors(this.sfvForm));
      this.sfvForm.markAsTouched();
      this.sfvForm.get('investor_type').markAsTouched();
      this.sfvForm.get('instalation_place').markAsTouched();
     if ( this.sfvForm.valid ) {
-      console.log(this.sfvForm.getError);
       this.sfv = this.sfvFormBuilder.extractData(this.sfvForm);
       this.sfvService.set(this.sfv);
       this.router.navigate(['/fv-fields-config']);
-      console.log(this.sfvService.get());
     } else {
       this.openSnackBar("Se han enontrado algunos errores",  "Aceptar");
     }
@@ -88,7 +85,6 @@ export class SfvComponentsComponent implements OnInit {
     this.baseDataService.getBaseData()
     .subscribe(
       (base_data: BaseData) => {
-        console.log(base_data, 'base data from sfv component')
       }
     );
       /** Iniciar inversores, tensiones y tipos de servicio */
@@ -97,14 +93,11 @@ export class SfvComponentsComponent implements OnInit {
           this.inversores = base_data.inversores;
           this.tipos_de_servicio = distinctOn<Inversor>(this.inversores, 'tipo_conex');
           this.updateTensiones(this.inversores);
+          if (this.sfv.service_type !== '') {
+            const inversores_filtrados = this.inversores.filter(inversor => inversor.tipo_conex === this.sfv.service_type);
+            this.updateTensiones(inversores_filtrados);
+          }
         });
-
-        if (this.sfv.service_type !== '') {
-          const inversores_filtrados = this.inversores.filter(inversor => inversor.tipo_conex === this.sfv.service_type);
-          this.updateTensiones(inversores_filtrados);
-        }
-        
-    
 
 
     /** Cuando la opcion Calcular Potencia de planta se modifica, se deben limpiar los campos */

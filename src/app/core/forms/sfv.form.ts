@@ -32,7 +32,6 @@ export class SfvFormBuilder {
             const controlErrors: ValidationErrors = form.get(key).errors;
             if (controlErrors != null) {
                   Object.keys(controlErrors).forEach(keyError => {
-                    console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
                   });
                 }
               });

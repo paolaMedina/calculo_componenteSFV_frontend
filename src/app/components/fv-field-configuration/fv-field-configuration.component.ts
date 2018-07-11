@@ -63,7 +63,7 @@ export class FvFieldConfigurationComponent implements OnInit {
     this._servicio = this._sfvService.get().service_type;
   }
   saveChanges() {
-    this.fvField = this._fvFormBuilder.extractData(this.fvFieldForm, this.fvField.id);
+    this.fvField = this._fvFormBuilder.extractData(this.fvFieldForm, this.fvField);
     this._fvFieldService.updateField(this.fvField);
   }
   return() {
@@ -200,14 +200,12 @@ export class FvFieldConfigurationComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.fvField = this._fvFieldService.get(params['id']);
       this.fvFieldForm.get('name').setValue(this.fvField.name);
-      console.log(this.fvField, 'fv field from fv field configuration');
     });
     /** Filtrar panel por fabricante seleccionado */
     this.fvFieldForm.get('manufacturer_1').valueChanges.subscribe(
       (name_fabricante: string) => {
         const paneles_filtrados = this.paneles_solares.filter(panel => panel.fabricante === name_fabricante);
         this.modelosPanel = distinctOn<PanelSolar>(paneles_filtrados, 'descripcion');
-        console.log(this.modelosPanel, 'modelos panel ')
       })
   }
 }

@@ -1,0 +1,6 @@
+.width-responsive{
+    width: 50%;
+    @media screen and (max-width: 959px) {
+        width: 100%;
+      }
+}

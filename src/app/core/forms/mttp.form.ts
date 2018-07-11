@@ -20,15 +20,14 @@ export class MttpFormBuilder {
             const controlErrors: ValidationErrors = form.get(key).errors;
             if (controlErrors != null) {
                   Object.keys(controlErrors).forEach(keyError => {
-                    console.log('Key control: ' + key + ', keyError: ' + keyError + ', err value: ', controlErrors[keyError]);
                   });
                 }
               });
     }
-    extractData(form: FormGroup, initialId?: string): Mttp {
+    extractData(form: FormGroup, initialMttp?: Mttp): Mttp {
         let mttp: Mttp;
-        if ( initialId ) {
-            mttp = new Mttp(initialId);    
+        if ( initialMttp ) {
+            mttp = initialMttp;    
         } else {
             mttp = new Mttp('0');
         }
