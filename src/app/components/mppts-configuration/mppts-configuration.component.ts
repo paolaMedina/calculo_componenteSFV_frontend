@@ -70,13 +70,13 @@ export class MpptsConfigurationComponent implements OnInit {
     /** Let indexes from find */
     index_mptt1 = this.mttps.findIndex( 
       (mttp: Mttp) => {
-        return mttp.id === String(name_mppt_1);
+        return mttp.name === String(name_mppt_1);
       }
     );
     this.mttps.splice(index_mptt1,1);
     index_mptt2 = this.mttps.findIndex( 
       (mttp: Mttp) => {
-        return mttp.id === String(name_mppt_2);
+        return mttp.name === String(name_mppt_2);
       }
     );
     this.mttps.splice(index_mptt2,1);
@@ -113,7 +113,7 @@ export class MpptsConfigurationComponent implements OnInit {
     /** Let indexes from find */
     index_mptt_to_delete = this.mttps.findIndex( 
       (mttp: Mttp) => {
-        return mttp.id === String(name_mppt_to_delete);
+        return mttp.name === String(name_mppt_to_delete);
       }
     );
     this.mttps.splice(index_mptt_to_delete,1);
@@ -148,7 +148,7 @@ export class MpptsConfigurationComponent implements OnInit {
         upper_bound = i + 2;
       }
       combination_name  = Mttp.getCombinedName(lower_bound, upper_bound);
-      arrayCombined.push(new Combination(combination_name, this.mttps.find(mttp => mttp.id === combination_name)? true: false));
+      arrayCombined.push(new Combination(combination_name, this.mttps.find(mttp => mttp.name === combination_name)? true: false));
       console.log(arrayCombined, 'array combined from init')
       console.log(this.mttps[i], `mppt ${i}esimo en array combined init`)
     };
