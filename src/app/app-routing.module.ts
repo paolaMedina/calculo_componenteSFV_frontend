@@ -20,12 +20,20 @@ const routes: Routes = [
   },
   {
     path: 'mppts-config/:fv_id',
-    component: MpptsConfigurationComponent
+    component: MpptsConfigurationComponent,
+    children: [
+      {
+        path: '',
+        children: [
+          {
+            path: 'cabling/:mttp_id',
+            component: MpptCablingComponent
+          }
+        ]
+      }
+    ]
   },
-  {
-    path: 'mppt-config/cabling/:fv_id',
-    component: MpptCablingComponent
-  },
+
 ];
 
 @NgModule({

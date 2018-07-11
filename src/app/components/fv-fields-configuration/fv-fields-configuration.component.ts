@@ -1,7 +1,6 @@
-import { Component, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FvField, Sfv } from '../../core/models';
 import { FvFieldService, SfvService } from '../../core/services';
-import { Observable } from 'rxjs';
 import { InvestorTypeEnum } from '../../core/enums';
 import { Router } from '@angular/router';
 
@@ -45,7 +44,7 @@ export class FvFieldsConfigurationComponent implements OnInit {
     this.fvFields = this.fvFields.filter( fvField => fvField.id !== idFvField);
   }
   addDefaultFvField() {
-    const sufix_for_next_field = this.fvFields.length;
+    const sufix_for_next_field = this.fvFields.length + 1;
     this.fvFields.push(this._fvFieldService.getDefaultFvField(sufix_for_next_field));
   }
   goToFvFieldConfiguration(idFvField: string) {

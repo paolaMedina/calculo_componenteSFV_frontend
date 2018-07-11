@@ -28,10 +28,10 @@ export class FvFormBuilder {
                 }
               });
     }
-    extractData(form: FormGroup, initial_id?: string): FvField {
+    extractData(form: FormGroup, initialFvField?: FvField): FvField {
         let fvField = new FvField();
-        if ( initial_id ) {
-            fvField.id = initial_id;
+        if ( initialFvField ) {
+            fvField = initialFvField;
         }
         fvField.name = form.get('name').value;
         fvField.manufacturer_1 = form.get('manufacturer_1').value;

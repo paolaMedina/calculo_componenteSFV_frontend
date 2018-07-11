@@ -1,4 +1,4 @@
-import { InvestorTypeEnum } from "@app/core/enums";
+import { InvestorTypeEnum } from "../../core/enums";
 
 export class Sfv {
     power_of_plant_fv: number;

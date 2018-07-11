@@ -24,10 +24,10 @@ export class MttpFormBuilder {
                 }
               });
     }
-    extractData(form: FormGroup, initialId?: string): Mttp {
+    extractData(form: FormGroup, initialMttp?: Mttp): Mttp {
         let mttp: Mttp;
-        if ( initialId ) {
-            mttp = new Mttp(initialId);    
+        if ( initialMttp ) {
+            mttp = initialMttp;    
         } else {
             mttp = new Mttp('0');
         }

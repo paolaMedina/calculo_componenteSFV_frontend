@@ -25,7 +25,7 @@ export class MpptConfigurationComponent implements OnInit {
    
    }
    getMttpFromForm(){
-     return this._mttpFormBuilder.extractData(this.mttpForm,  this.mttp.id);
+     return this._mttpFormBuilder.extractData(this.mttpForm,  this.mttp);
    }
 
   ngOnInit() {

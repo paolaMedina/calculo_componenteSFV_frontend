@@ -63,7 +63,7 @@ export class FvFieldConfigurationComponent implements OnInit {
     this._servicio = this._sfvService.get().service_type;
   }
   saveChanges() {
-    this.fvField = this._fvFormBuilder.extractData(this.fvFieldForm, this.fvField.id);
+    this.fvField = this._fvFormBuilder.extractData(this.fvFieldForm, this.fvField);
     this._fvFieldService.updateField(this.fvField);
   }
   return() {

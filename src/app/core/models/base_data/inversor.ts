@@ -1,6 +1,5 @@
 
 export class Inversor {
-
      descripcion: string;
      modelo: string;
      fabricante: string;
@@ -11,10 +10,22 @@ export class Inversor {
      imax_in_mppt1: number;
      imax_in_mppt2: any;
      imax_in_mpptCombinado: any;
-     imax_in_mppt3: any;
-     iscmax_mppt1: any;
-     iscmax_mppt2: any;
-     iscmax_mppt3: string;
+     imax_in_mppt3: number;
+     iscmax_mppt1: number;
+     iscmax_mppt2: number;
+     iscmax_mppt3: number;
+     imax_in_mppt4: number;
+     imax_in_mppt5: number;
+     imax_in_mppt6 : number;
+     imax_in_mppt1_2: number;
+     imax_in_mppt3_4: number;
+     imax_in_mppt5_6: number;
+     iscmax_mppt4: number;
+     iscmax_mppt5: number;
+     iscmax_mppt6: number;
+     iscmax_mppt1_2: number;
+     iscmax_mppt3_4: number;
+     iscmax_mppt5_6: number;
      iscmax_mpptCombinado: any;
      vin_min: number;
      vin_max: number;
