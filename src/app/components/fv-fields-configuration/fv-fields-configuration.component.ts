@@ -3,11 +3,12 @@ import { FvField, Sfv } from '../../core/models';
 import { FvFieldService, SfvService } from '../../core/services';
 import { InvestorTypeEnum } from '../../core/enums';
 import { Router } from '@angular/router';
-
+import { routercTransition } from '../../router.animations';
 @Component({
   selector: 'app-fv-fields-configuration',
   templateUrl: './fv-fields-configuration.component.html',
-  styleUrls: ['./fv-fields-configuration.component.scss']
+  styleUrls: ['./fv-fields-configuration.component.scss'],
+  animations: [routercTransition()]
 })
 export class FvFieldsConfigurationComponent implements OnInit {
   fvFields: FvField[]; // should never access it directly 

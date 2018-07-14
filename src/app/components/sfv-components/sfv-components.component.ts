@@ -8,12 +8,13 @@ import { SfvFormBuilder } from '../../core/forms';
 import { SfvService, BaseDataService } from '../../core/services';
 import { plant_fv_power, distinctOn, distinctWithoutZeros } from '../../core/lib';
 import { InvestorTypeEnum } from '../../core/enums';
-
+import { routercTransition } from '../../router.animations';
 
 @Component({
   selector: 'app-sfv-components',
   templateUrl: './sfv-components.component.html',
-  styleUrls: ['./sfv-components.component.scss']
+  styleUrls: ['./sfv-components.component.scss'],
+  animations: [routercTransition()]
 })
 export class SfvComponentsComponent implements OnInit {
   sfv: Sfv;
@@ -104,7 +105,6 @@ export class SfvComponentsComponent implements OnInit {
     this.sfvForm.get('calculate_plant_potential').valueChanges.subscribe(()=>{
       this.sfvForm.get('power_of_plant_fv').setValue('');
       this.sfvForm.get('total_panels_fv').setValue('');
-      this.sfvForm.get('power_of_panel_fv').setValue('');
     });
     /** Cada que el total de paneles fv o el poder de los paneles fv cambien de valor, se debe recalcular el poder de la planta fv  */
     this.sfvForm.get('total_panels_fv').valueChanges.subscribe(() => {

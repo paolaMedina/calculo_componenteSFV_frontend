@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 import { TypeOfWiring } from '../../../core/enums';
@@ -11,7 +11,7 @@ import { SourceFormBuilder } from '../../../core/forms/source.form';
   styleUrls: ['./input-source-circuit.component.scss']
 })
 export class InputSourceCircuitComponent implements OnInit {
-  source: Source;
+  @Input() source: Source;
   sourceForm: FormGroup;
 
 
@@ -32,10 +32,11 @@ export class InputSourceCircuitComponent implements OnInit {
 
 
   constructor( private _sourceFormBuilder: SourceFormBuilder) {
-    this.sourceForm = this._sourceFormBuilder.makeForm();
+    
   }
 
   ngOnInit() {
+    this.sourceForm = this._sourceFormBuilder.makeForm(this.source);
   }
 
 }

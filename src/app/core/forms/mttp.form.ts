@@ -31,10 +31,8 @@ export class MttpFormBuilder {
         } else {
             mttp = new Mttp('0');
         }
-        mttp.id
         mttp.number_of_panels_in_series_per_chain = form.get('number_of_panels_in_series_per_chain').value;
         mttp.number_of_chains_in_parallel = form.get('number_of_chains_in_parallel').value;
-
         return mttp;
     }
 

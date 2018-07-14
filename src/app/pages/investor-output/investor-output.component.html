@@ -1,0 +1,16 @@
+<div [@routerTransition]>
+
+<mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+  <button (click)="saveData()" class="left-button" mat-button> Volver </button>
+  <span> Salida del inversor</span>
+</mat-toolbar>
+
+<mat-tab-group>
+    <mat-tab label="Circuito de fuente FV "> 
+      <app-input-source-circuit [source]="fvField.investor_output.input" #inputSource></app-input-source-circuit>
+    </mat-tab>
+    <mat-tab label=" Circuito de salida FV">
+      <app-input-source-circuit [source]="fvField.investor_output.output" #outputSource></app-input-source-circuit>
+    </mat-tab>
+</mat-tab-group>
+</div>

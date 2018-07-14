@@ -49,6 +49,7 @@ export class SourceFormBuilder {
         if ( initialSource ) {
             source = initialSource;
         }
+        source.tipo_alambrado = form.get('tipo_alambrado').value;
         source.tipo_canalizacion = form.get('tipo_canalizacion').value;
         source.canalizacion = form.get('canalizacion').value;
         source.material_bandeja = form.get('material_bandeja').value;

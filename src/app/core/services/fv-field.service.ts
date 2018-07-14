@@ -12,25 +12,23 @@ export class FvFieldService {
   private selectedSolarPanel: PanelSolar;
   private selectedInversor: Inversor;
   constructor() {
-    this.fvFields = new Array<FvField>();
+    //this.fvFields = new Array<FvField>();
     //load mock 
-    //this.fvFields = [fvField_mock];
-    //this.selectedInversor = inversor_mock;
-    //this.selectedSolarPanel = solar_panel_mock;
+    this.fvFields = [fvField_mock];
+    this.selectedInversor = inversor_mock;
+    this.selectedSolarPanel = solar_panel_mock;
     /** */
   }
   public setSelectedSolarPanel(solarPanel: PanelSolar) {
     this.selectedSolarPanel = solarPanel;
   }
   public getSelectedSolarPanel(): PanelSolar{
-    console.log(JSON.stringify(this.selectedSolarPanel), 'solar panel mock')
     return this.selectedSolarPanel;
   }
   public setSelectedInversor(inversor: Inversor) {
     this.selectedInversor = inversor;
   }
   public getSelectedInversor(): Inversor{
-    console.log(JSON.stringify(this.selectedInversor), 'selected inversor mock')
     return this.selectedInversor;
   }
   public getFvFields() {

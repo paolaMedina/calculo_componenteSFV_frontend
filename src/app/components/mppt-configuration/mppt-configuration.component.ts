@@ -1,9 +1,20 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 import { MttpSpecifications, Mttp,  PanelSolar, Sfv } from '../../core/models';
 import { FvFieldService, SfvService } from '../../core/services';
-import { total_de_paneles, potencia_nominal, corriente_maxima_MPPTn, corriente_Mpp_MPPTn, tension_maxima_MPPTn, tension_Mpp_MPPTn } from '../../core/lib/mttp-functions';
+
+import { 
+  total_de_paneles,
+  potencia_nominal,
+  corriente_maxima_MPPTn,
+  corriente_Mpp_MPPTn,
+  tension_maxima_MPPTn,
+  tension_Mpp_MPPTn 
+} from '../../core/lib/mttp-functions';
+
 import { FormGroup } from '@angular/forms';
 import { MttpFormBuilder } from '../../core/forms/mttp.form';
+import { MatSnackBar } from '@angular/material';
 @Component({
   selector: 'app-mppt-configuration',
   templateUrl: './mppt-configuration.component.html',
@@ -11,15 +22,20 @@ import { MttpFormBuilder } from '../../core/forms/mttp.form';
 })
 export class MpptConfigurationComponent implements OnInit {
   @Input() mttp: Mttp;
+  @Input() fvFieldId: string;
+  @Output() goToCabling = new EventEmitter();
   mttpForm: FormGroup;
   private _solarPanel: PanelSolar;
   private _sfv: Sfv;
   mttpSpecifications: MttpSpecifications;
   constructor(
+    private _router: Router,
+    public snackBar: MatSnackBar,
     private _fvFieldService: FvFieldService,
     private _sfvService: SfvService,
     private _mttpFormBuilder: MttpFormBuilder
   ) {
+    this.mttpForm = null;
     this._solarPanel = this._fvFieldService.getSelectedSolarPanel();
     this.mttpSpecifications = new MttpSpecifications();
    
@@ -27,7 +43,36 @@ export class MpptConfigurationComponent implements OnInit {
    getMttpFromForm(){
      return this._mttpFormBuilder.extractData(this.mttpForm,  this.mttp);
    }
-
+   saveChanges(): boolean {
+     if( this.mttpForm.valid ) {
+       let _fvField = this._fvFieldService.get(this.fvFieldId);
+       this.mttp = this._mttpFormBuilder.extractData(this.mttpForm, this.mttp);
+       
+       /** Si ya existia el mttp en el fv field entonces updatear si no pushear */
+       if ( _fvField.mttps.filter ( mttp => mttp.id === this.mttp.id).length > 0 ){
+        let index_of_mttp_to_update = _fvField.mttps.findIndex(mttp => mttp.id === this.mttp.id);
+        _fvField.mttps[index_of_mttp_to_update] = this.mttp;
+       } else {
+        _fvField.mttps.push(this.mttp);
+      }  
+       this._fvFieldService.updateField(_fvField);
+       return true;
+     }
+     else {
+      this.snackBar.open(`Se han encontrado algunos problemas en el MPPT ${this.mttp.name}`, 'Aceptar', {
+        duration: 2000,
+      });
+      return false;
+     }
+   }
+   goToCablingConfig() {
+     if(this.saveChanges()) {
+       this.goToCabling.emit();
+    this._router.navigate(['/mppt-config/cabling', {fv_id: this.fvFieldId.toString(), mttp_id: this.mttp.id.toString()}]);
+     } else {
+       return;
+     }
+   }
   ngOnInit() {
     this._sfv = this._sfvService.get();
     /** If not default mttp is injected at input make form from that mttp */

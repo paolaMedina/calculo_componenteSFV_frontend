@@ -1,19 +1,17 @@
-import { Directive , Input, SimpleChanges } from '@angular/core';
+import { Directive , Input, OnInit } from '@angular/core';
 import {Validator,AbstractControl} from "@angular/forms";
 import {NG_VALIDATORS} from "@angular/forms";
-import { Observable } from 'rxjs';
 @Directive({
   selector: '[requiredIf]',
    providers: [
         {provide: NG_VALIDATORS,useExisting:RequiredIfDirective, multi: true}
     ]
 })
-export class RequiredIfDirective implements Validator {
+export class RequiredIfDirective implements Validator, OnInit {
 
   constructor() { }
 
   @Input("requiredIf")
-    requiredIf$: Observable<boolean>;
     requiredIf: boolean = true;
     validate(c: AbstractControl) {
   
@@ -31,9 +29,6 @@ export class RequiredIfDirective implements Validator {
   private _onChange: () => void;
 
   ngOnInit(): void {
-      this.requiredIf$.subscribe(value => {
-          this.requiredIf = value;
-          if (this._onChange) this._onChange();
-      });
+    if (this._onChange) this._onChange();
   }
 }
