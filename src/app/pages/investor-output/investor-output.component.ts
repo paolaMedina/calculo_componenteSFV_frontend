@@ -1,35 +1,31 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-
-import { NgxGalleryOptions, INgxGalleryImage, NgxGalleryComponent } from 'ngx-gallery';
-
-
-import { Mttp } from '../../core/models';
-import { InputSourceCircuitComponent } from './input-source-circuit/input-source-circuit.component';
-import { FvFieldService } from '../../core/services';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { ParamMap, ActivatedRoute, Router } from '@angular/router';
 import { SourceFormBuilder } from '../../core/forms/source.form';
+import { MatSnackBar } from '@angular/material';
+import { FvFieldService } from '../../core/services';
+import { FormGroup } from '@angular/forms';
+import { InputSourceCircuitComponent } from '../../components/mppt-cabling/input-source-circuit/input-source-circuit.component';
+import { Mttp, FvField } from '../../core/models';
 import { routercTransition } from '../../router.animations';
+import { NgxGalleryComponent, INgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { galleryOptionsFullScreenOnly } from '../../core/const';
 
-
 @Component({
-  selector: 'app-mppt-cabling',
-  templateUrl: './mppt-cabling.component.html',
-  styleUrls: ['./mppt-cabling.component.scss'],
-  animations: [routercTransition()]
+  selector: 'app-investor-output',
+  templateUrl: './investor-output.component.html',
+  styleUrls: ['./investor-output.component.scss'],
+  animations:[ routercTransition()]
 })
-export class MpptCablingComponent implements OnInit {
-  mttp: Mttp;
+export class InvestorOutputComponent implements OnInit {
+  fvField: FvField;
   galleryImageOptions = galleryOptionsFullScreenOnly;
   helpImages: INgxGalleryImage[] = [{
     big: '/assets/img/cabling-help.png'
   }];
+  @ViewChild('helpImage') onlyPreviewGallery: NgxGalleryComponent;
 
-  fvFieldId: string;
   @ViewChild('inputSource') inputSourceCircuitComponent: InputSourceCircuitComponent;
   @ViewChild('outputSource') outputSourceCircuitComponent: InputSourceCircuitComponent;
-  @ViewChild('helpImage') onlyPreviewGallery: NgxGalleryComponent;
   constructor(
     private _fvFieldService: FvFieldService,
     private _sourceFormBuilder: SourceFormBuilder,
@@ -57,23 +53,19 @@ export class MpptCablingComponent implements OnInit {
       });
       return;
     } else {
-      this.mttp.cabling.input = this._sourceFormBuilder.extractData(inputSourceForm, this.mttp.cabling.input);
-      this.mttp.cabling.output = this._sourceFormBuilder.extractData(outputSourceForm, this.mttp.cabling.output);
-      this._router.navigate(['mppts-config', this.fvFieldId]);
+      this.fvField.investor_output.input = this._sourceFormBuilder.extractData(inputSourceForm, this.fvField.investor_output.input);
+      this.fvField.investor_output.output = this._sourceFormBuilder.extractData(outputSourceForm, this.fvField.investor_output.output);
+      this._fvFieldService.updateField(this.fvField);
+      this._router.navigate(['/fv-field-config', this.fvField.id]);
     }
   }
   ngOnInit() {
-    this.mttp = new Mttp('');
-    this.mttp = new Mttp('');
     this._route.paramMap.subscribe( 
       (params: ParamMap) => {
         let fvFieldId = params.get('fv_id');
-        this.fvFieldId = fvFieldId;
-        let idMttp = params.get('mttp_id');
         let fvField = this._fvFieldService.get(fvFieldId);
         if ( fvField ) {
-          let mttp: Mttp  = this._fvFieldService.get(this.fvFieldId).mttps.find(mttp => mttp.id === idMttp);
-          this.mttp = mttp;
+          this.fvField = this._fvFieldService.get(fvFieldId);
         }
       });
   }

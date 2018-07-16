@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FvField, Inversor } from '../../core/models';
 import { PanelSolar } from '../models';
-import { fvField_mock, inversor_mock, solar_panel_mock } from '../../mocks';
 
 @Injectable({
   providedIn: 'root'
@@ -13,24 +12,17 @@ export class FvFieldService {
   private selectedInversor: Inversor;
   constructor() {
     this.fvFields = new Array<FvField>();
-    //load mock 
-    //this.fvFields = [fvField_mock];
-    //this.selectedInversor = inversor_mock;
-    //this.selectedSolarPanel = solar_panel_mock;
-    /** */
   }
   public setSelectedSolarPanel(solarPanel: PanelSolar) {
     this.selectedSolarPanel = solarPanel;
   }
   public getSelectedSolarPanel(): PanelSolar{
-    console.log(JSON.stringify(this.selectedSolarPanel), 'solar panel mock')
     return this.selectedSolarPanel;
   }
   public setSelectedInversor(inversor: Inversor) {
     this.selectedInversor = inversor;
   }
   public getSelectedInversor(): Inversor{
-    console.log(JSON.stringify(this.selectedInversor), 'selected inversor mock')
     return this.selectedInversor;
   }
   public getFvFields() {
@@ -70,7 +62,6 @@ export class FvFieldService {
     this.selectedFvField = this.fvFields.find(_fvField => _fvField.id === fvField.id);
   }
   get(id: string) {
-    return this.fvFields[0];
-    //return this.fvFields.find(_fvField => _fvField.id === id);
+    return this.fvFields.find(_fvField => _fvField.id === id);
   }
 }

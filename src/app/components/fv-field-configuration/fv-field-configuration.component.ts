@@ -7,6 +7,7 @@ import { FvField, Inversor, BaseData, PanelSolar } from '../../core/models';
 import { FvFieldService, BaseDataService, SfvService } from '../../core/services';
 import { distinctOn } from '../../core/lib';
 import { FvFormBuilder } from '../../core/forms/fv-field.form';
+import { routercTransition } from '../../router.animations';
 export interface Food {
   value: string;
   viewValue: string;
@@ -17,7 +18,8 @@ export interface Food {
 @Component({
   selector: 'app-fv-field-configuration',
   templateUrl: './fv-field-configuration.component.html',
-  styleUrls: ['./fv-field-configuration.component.scss']
+  styleUrls: ['./fv-field-configuration.component.scss'],
+  animations: [routercTransition()]
 
 })
 export class FvFieldConfigurationComponent implements OnInit {
@@ -69,7 +71,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   return() {
 
     this.fvFieldForm.markAsTouched();
-    this.markFormGroupTouched(this.fvFieldForm);
+    this._fvFormBuilder.markFormGroupTouched(this.fvFieldForm);
     if (this.fvFieldForm.valid) {
       this.saveChanges();
       this.router.navigate(['/fv-fields-config']);
@@ -77,19 +79,7 @@ export class FvFieldConfigurationComponent implements OnInit {
       this.openSnackBar("Se han enontrado algunos errores, por favor corrija para continuar", "Aceptar");
     }
   }
-  /**
-* Marks all controls in a form group as touched
-* @param formGroup - The group to caress..hah
-*/
-  private markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
 
-      if (control.controls) {
-        control.controls.forEach(c => this.markFormGroupTouched(c));
-      }
-    });
-  }
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
@@ -121,9 +111,19 @@ export class FvFieldConfigurationComponent implements OnInit {
     }
     return inversor_tension;
   }
+  goToInvestorOutput() {
+    this.fvFieldForm.markAsTouched();
+    this._fvFormBuilder.markFormGroupTouched(this.fvFieldForm);
+    if (this.fvFieldForm.valid) {
+      this.saveChanges();
+      this.router.navigate(['/fv-field-config/investor-output', this.fvField.id])
+    } else {
+      this.openSnackBar("Se han enontrado algunos errores, por favor corrija para continuar", "Aceptar");
+    }
+  }
   goToMpptsConfig() {
     this.fvFieldForm.markAsTouched();
-    this.markFormGroupTouched(this.fvFieldForm);
+    this._fvFormBuilder.markFormGroupTouched(this.fvFieldForm);
     if (this.fvFieldForm.valid) {
       this.saveChanges();
       this.router.navigate(['/mppts-config', this.fvField.id])

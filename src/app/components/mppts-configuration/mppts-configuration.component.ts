@@ -7,6 +7,8 @@ import { FvFieldService, SfvService } from '../../core/services';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MpptConfigurationComponent } from '../mppt-configuration/mppt-configuration.component';
 import { MatSnackBar } from '@angular/material';
+import { routercTransition } from '../../router.animations';
+import { MttpFormBuilder } from '../../core/forms/mttp.form';
 class Combination {
   id: string;
   is_combined: boolean;
@@ -18,7 +20,8 @@ class Combination {
 @Component({
   selector: 'app-mppts-configuration',
   templateUrl: './mppts-configuration.component.html',
-  styleUrls: ['./mppts-configuration.component.scss']
+  styleUrls: ['./mppts-configuration.component.scss'],
+  animations: [routercTransition()]
 })
 export class MpptsConfigurationComponent implements OnInit {
   //@Input() max_number_of_mttps = 5;
@@ -31,7 +34,7 @@ export class MpptsConfigurationComponent implements OnInit {
   private _inversor:Inversor;
   constructor(
     private _fvFieldService: FvFieldService,
-    private _sfvService: SfvService,
+    private _mttpFormBuilder: MttpFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     public snackBar: MatSnackBar
@@ -85,7 +88,6 @@ export class MpptsConfigurationComponent implements OnInit {
     newCombinedMptt.is_combined = true;
     /** Add the new mttp combined at `name_mppt_1` position */
     this.mttps.splice(index_mptt1, 0, newCombinedMptt);
-    console.log(this.mttps, 'mptts with combined')
     combination.is_combined = true;
   }
   combineOrDecombineMttps(combination: Combination) {
@@ -149,31 +151,18 @@ export class MpptsConfigurationComponent implements OnInit {
       }
       combination_name  = Mttp.getCombinedName(lower_bound, upper_bound);
       arrayCombined.push(new Combination(combination_name, this.mttps.find(mttp => mttp.name === combination_name)? true: false));
-      console.log(arrayCombined, 'array combined from init')
-      console.log(this.mttps[i], `mppt ${i}esimo en array combined init`)
+
     };
     if (isOdd(size)) {
       arrayCombined.pop();
     }
     this.combinations =  arrayCombined;
   } 
-    /**
-   * Marks all controls in a form group as touched
-   * @param formGroup - The group to caress..hah
-   */
-  private markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
 
-      if (control.controls) {
-        control.controls.forEach(c => this.markFormGroupTouched(c));
-      }
-    });
-  }
   markAllMpptsFormsAsTouched() {
     this.mpptComponents.forEach(
       (mpptComponent: MpptConfigurationComponent) => {
-        this.markFormGroupTouched(mpptComponent.mttpForm);
+        this._mttpFormBuilder.markFormGroupTouched(mpptComponent.mttpForm);
       }
     );
   }
@@ -193,34 +182,38 @@ export class MpptsConfigurationComponent implements OnInit {
       mpptComponent.getMttpFromForm()
     )
   }
-  saveMttps() {
-    this.markAllMpptsFormsAsTouched();
-
-    if( !this.checkAllMpptsFormsValid() ) {
-      this.snackBar.open( "Se han enncontrado algunos errores", "Aceptar", {
-        duration: 2000,
-      });
-    } else {
+  whenGoesToCablingConfig() {
+    this.saveMttps(false);
+  }
+  saveMttps(validate: boolean): boolean {
+    if ( validate ) {
+      this.markAllMpptsFormsAsTouched();
+      if(!this.checkAllMpptsFormsValid() ) {
+        this.snackBar.open( "Se han enncontrado algunos errores", "Aceptar", {
+          duration: 2000,
+        });
+        return false;
+      }
+    }
       this.fvField.mttps = this.getMttpsFromChildren();
       this._fvFieldService.updateField(this.fvField);
-      console.log(this._fvFieldService.get(this.fvField.id), ' fv field in service after save')
       this.snackBar.open( "Datos almacenados correctamente", "Aceptar", {
         duration: 2000,
       });
-      this.router.navigate(['/fv-field-config', this.fvField.id]);
-    }
+      return true;
 
+  }
+  return() {
+    if (this.saveMttps(true)) {
+    this.router.navigate(['/fv-field-config', this.fvField.id]);
+    } else {
+      return;
+    }
   }
   ngOnInit() {
     this.max_number_of_mttps=this._inversor.no_mppt;
     this.route.params.subscribe( params => {
       this.fvField = this._fvFieldService.get(params['fv_id']);
-      console.log(this.fvField, 'fv field from mppts subscribe ')
-      /** get mocks */
-      //console.log(JSON.stringify(this._sfvService.get()), 'sfv mock');
-      //console.log(JSON.stringify(this.fvField), 'fv field mock');
-      
-      /* */
       if (this.fvField.mttps &&  this.fvField.mttps.length>0 ) {
         this.mttps = this.fvField.mttps;
       } else {

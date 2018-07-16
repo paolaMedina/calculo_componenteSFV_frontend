@@ -1,6 +1,6 @@
 <div class="mppt">
   <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
-    <span>MPPT {{mttp.name}}</span>
+    <span>MPPT {{mttp.name}} </span>
   </mat-toolbar>
   <div [formGroup]="mttpForm" class="mppt-configuration" fxLayout="column" fxLayoutAlign="center center">
 
@@ -32,6 +32,6 @@
   <app-nominal-array-data [mttpSpecifications]="mttpSpecifications"></app-nominal-array-data>
   <!-- End of Nominal data-->
   <div fxLayout="row" fxLayoutAlign="center center">
-  <button [routerLink]="['/mppt-config/cabling', mttp.id]" mat-button>Configurar cableado</button>
+  <button (click)="goToCablingConfig()" mat-button>Configurar cableado</button>
 </div>
 </div>

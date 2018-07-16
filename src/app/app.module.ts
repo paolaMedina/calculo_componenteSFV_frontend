@@ -15,6 +15,8 @@ import { MpptCablingComponent } from './components/mppt-cabling/mppt-cabling.com
 import { OutputSourceCircuitComponent } from './components/mppt-cabling/output-source-circuit/output-source-circuit.component';
 import { InputSourceCircuitComponent } from './components/mppt-cabling/input-source-circuit/input-source-circuit.component';
 import { NominalArrayDataComponent } from './components/mppt-configuration/nominal-array-data/nominal-array-data.component';
+import { InvestorOutputComponent } from './pages/investor-output/investor-output.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -28,12 +30,13 @@ import { NominalArrayDataComponent } from './components/mppt-configuration/nomin
     MpptCablingComponent,
     OutputSourceCircuitComponent,
     InputSourceCircuitComponent,
-    NominalArrayDataComponent
+    NominalArrayDataComponent,
+    InvestorOutputComponent
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule, 
     AppRoutingModule,
-
     CoreModule,
     SharedModule
   ],

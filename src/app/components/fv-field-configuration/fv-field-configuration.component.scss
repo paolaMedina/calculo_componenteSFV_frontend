@@ -1,11 +1,21 @@
-
-
 .panel-fv-specifications {
     border-style: solid;
     border-width: 3px;
 }
-
+.left-button {
+    margin-right: auto;
+}
 .mppts-distribution {
     border-style: solid;
     border-width: 2px;
+}
+.config-image{
+    cursor: pointer;
+}
+.mat-form-field {
+    width: 50%;
+    @media screen and (max-width: 959px) {
+        width: 100%;
+      }
+   
 }
