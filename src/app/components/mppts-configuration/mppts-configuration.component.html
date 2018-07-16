@@ -36,7 +36,7 @@
             </div>
         </div>
     </div>
-    <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap="20px">
+    <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap.gt-sm="20px">
 
             <app-mppt-configuration #mppts *ngFor="let mttp of mttps" (goToCabling)="whenGoesToCablingConfig()" [fvFieldId]="fvField.id" [mttp]="mttp"></app-mppt-configuration>
     </div>

@@ -7,6 +7,8 @@ import { FormGroup } from '@angular/forms';
 import { InputSourceCircuitComponent } from '../../components/mppt-cabling/input-source-circuit/input-source-circuit.component';
 import { Mttp, FvField } from '../../core/models';
 import { routercTransition } from '../../router.animations';
+import { NgxGalleryComponent, INgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
+import { galleryOptionsFullScreenOnly } from '../../core/const';
 
 @Component({
   selector: 'app-investor-output',
@@ -16,6 +18,12 @@ import { routercTransition } from '../../router.animations';
 })
 export class InvestorOutputComponent implements OnInit {
   fvField: FvField;
+  galleryImageOptions = galleryOptionsFullScreenOnly;
+  helpImages: INgxGalleryImage[] = [{
+    big: '/assets/img/cabling-help.png'
+  }];
+  @ViewChild('helpImage') onlyPreviewGallery: NgxGalleryComponent;
+
   @ViewChild('inputSource') inputSourceCircuitComponent: InputSourceCircuitComponent;
   @ViewChild('outputSource') outputSourceCircuitComponent: InputSourceCircuitComponent;
   constructor(
@@ -26,20 +34,14 @@ export class InvestorOutputComponent implements OnInit {
     private _router: Router
   ) {
   }
-  private markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
-
-      if (control.controls) {
-        control.controls.forEach(c => this.markFormGroupTouched(c));
-      }
-    });
+  openHelpImage() {
+    this.onlyPreviewGallery.openPreview(0);
   }
   saveData() {
     let inputSourceForm = this.inputSourceCircuitComponent.sourceForm;
     let outputSourceForm = this.outputSourceCircuitComponent.sourceForm;
-    this.markFormGroupTouched(inputSourceForm);
-    this.markFormGroupTouched(outputSourceForm);
+    this._sourceFormBuilder.markFormGroupTouched(inputSourceForm);
+    this._sourceFormBuilder.markFormGroupTouched(outputSourceForm);
     if ( !inputSourceForm.valid ) {
       this._snackBar.open("Se han enontrado algunos errores, en el circuito fuente", "Aceptar", {
         duration: 3000,

@@ -1,14 +1,16 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
 
-import { Sfv, ManualSwitch, BaseData, Inversor } from '../../core/models';
+import { Sfv, BaseData, Inversor } from '../../core/models';
 import { SfvFormBuilder } from '../../core/forms';
 import { SfvService, BaseDataService } from '../../core/services';
 import { plant_fv_power, distinctOn, distinctWithoutZeros } from '../../core/lib';
 import { InvestorTypeEnum } from '../../core/enums';
 import { routercTransition } from '../../router.animations';
+import { galleryOptionsFullScreenOnly } from '@app/core/const';
+import { INgxGalleryImage, NgxGalleryComponent } from 'ngx-gallery';
 
 @Component({
   selector: 'app-sfv-components',
@@ -18,6 +20,22 @@ import { routercTransition } from '../../router.animations';
 })
 export class SfvComponentsComponent implements OnInit {
   sfv: Sfv;
+  galleryImageOptions = galleryOptionsFullScreenOnly;
+
+  helpImages: Array<INgxGalleryImage> = [
+    {
+    big: '/assets/img/helpers/instalation_places_helpers/caseA_helper.png'
+    },
+    {
+      big: '/assets/img/helpers/instalation_places_helpers/caseB_helper.png'
+    },
+    {
+      big: '/assets/img/helpers/instalation_places_helpers/caseC_helper.png'
+    }
+    
+];
+@ViewChild('helpImagesGallery') onlyPreviewGallery: NgxGalleryComponent;
+
   sfvForm: FormGroup;
   INVESTOR_TYPE_ENUM: InvestorTypeEnum;
   inversores: Inversor[];
@@ -39,6 +57,18 @@ export class SfvComponentsComponent implements OnInit {
     this.sfvForm = this.sfvFormBuilder.makeForm();
 
    }
+
+   /* Open images for cases of instalation places helpers, see `https://github.com/lukasz-galka/ngx-gallery` openPreview section */
+   openCaseAHelper(){
+    this.onlyPreviewGallery.openPreview(0);
+   }
+   openCaseBHelper(){
+    this.onlyPreviewGallery.openPreview(1);
+   }
+   openCaseCHelper(){
+    this.onlyPreviewGallery.openPreview(2);
+   }
+   
    openSnackBar(message: string, action: string) {
     this.snackBar.open( message, action, {
       duration: 2000,
@@ -46,9 +76,7 @@ export class SfvComponentsComponent implements OnInit {
   }
 
    saveSfv() {
-     this.sfvForm.markAsTouched();
-     this.sfvForm.get('investor_type').markAsTouched();
-     this.sfvForm.get('instalation_place').markAsTouched();
+    this.sfvFormBuilder.markFormGroupTouched(this.sfvForm);
     if ( this.sfvForm.valid ) {
       this.sfv = this.sfvFormBuilder.extractData(this.sfvForm);
       this.sfvService.set(this.sfv);

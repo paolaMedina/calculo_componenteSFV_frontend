@@ -15,9 +15,9 @@ export class SfvService {
     this.sfv = sfv;
   }
   constructor() {
-    //this.sfv = new Sfv();
+    this.sfv = new Sfv();
     // load mock 
-    this.sfv = sfv_mock;
+    //this.sfv = sfv_mock;
    }
 
 }

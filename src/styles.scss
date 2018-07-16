@@ -3,7 +3,14 @@
 @import '~bootstrap/dist/css/bootstrap.min.css';
 .spacer {
     flex: 1 1 auto;
-  }
-  .left-button {
+}
+
+.left-button {
     margin-right: auto;
+}
+
+.main-content {
+    margin-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px; 
 }

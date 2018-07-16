@@ -8,6 +8,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MpptConfigurationComponent } from '../mppt-configuration/mppt-configuration.component';
 import { MatSnackBar } from '@angular/material';
 import { routercTransition } from '../../router.animations';
+import { MttpFormBuilder } from '../../core/forms/mttp.form';
 class Combination {
   id: string;
   is_combined: boolean;
@@ -33,6 +34,7 @@ export class MpptsConfigurationComponent implements OnInit {
   private _inversor:Inversor;
   constructor(
     private _fvFieldService: FvFieldService,
+    private _mttpFormBuilder: MttpFormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     public snackBar: MatSnackBar
@@ -156,23 +158,11 @@ export class MpptsConfigurationComponent implements OnInit {
     }
     this.combinations =  arrayCombined;
   } 
-    /**
-   * Marks all controls in a form group as touched
-   * @param formGroup - The group to caress..hah
-   */
-  private markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
 
-      if (control.controls) {
-        control.controls.forEach(c => this.markFormGroupTouched(c));
-      }
-    });
-  }
   markAllMpptsFormsAsTouched() {
     this.mpptComponents.forEach(
       (mpptComponent: MpptConfigurationComponent) => {
-        this.markFormGroupTouched(mpptComponent.mttpForm);
+        this._mttpFormBuilder.markFormGroupTouched(mpptComponent.mttpForm);
       }
     );
   }

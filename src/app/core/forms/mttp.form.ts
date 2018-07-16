@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ValidationErrors } from '@angular/forms';
 import { FvField, Mttp } from '../models';
 import { CustomValidators } from './validators';
+import { BaseFormBuilder } from './base.form';
 
 @Injectable()
-export class MttpFormBuilder {
+export class MttpFormBuilder extends BaseFormBuilder{
 
-    constructor(private fb: FormBuilder) {}
+    constructor(private fb: FormBuilder) {
+        super();
+    }
     makeForm(mttp?: Mttp): FormGroup {
         let fvFieldForm: FormGroup;
         fvFieldForm = this.fb.group({

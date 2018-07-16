@@ -71,7 +71,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   return() {
 
     this.fvFieldForm.markAsTouched();
-    this.markFormGroupTouched(this.fvFieldForm);
+    this._fvFormBuilder.markFormGroupTouched(this.fvFieldForm);
     if (this.fvFieldForm.valid) {
       this.saveChanges();
       this.router.navigate(['/fv-fields-config']);
@@ -79,19 +79,7 @@ export class FvFieldConfigurationComponent implements OnInit {
       this.openSnackBar("Se han enontrado algunos errores, por favor corrija para continuar", "Aceptar");
     }
   }
-  /**
-* Marks all controls in a form group as touched
-* @param formGroup - The group to caress..hah
-*/
-  private markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
 
-      if (control.controls) {
-        control.controls.forEach(c => this.markFormGroupTouched(c));
-      }
-    });
-  }
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
@@ -125,7 +113,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   }
   goToInvestorOutput() {
     this.fvFieldForm.markAsTouched();
-    this.markFormGroupTouched(this.fvFieldForm);
+    this._fvFormBuilder.markFormGroupTouched(this.fvFieldForm);
     if (this.fvFieldForm.valid) {
       this.saveChanges();
       this.router.navigate(['/fv-field-config/investor-output', this.fvField.id])
@@ -135,7 +123,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   }
   goToMpptsConfig() {
     this.fvFieldForm.markAsTouched();
-    this.markFormGroupTouched(this.fvFieldForm);
+    this._fvFormBuilder.markFormGroupTouched(this.fvFieldForm);
     if (this.fvFieldForm.valid) {
       this.saveChanges();
       this.router.navigate(['/mppts-config', this.fvField.id])

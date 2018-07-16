@@ -44,6 +44,7 @@ export class MpptConfigurationComponent implements OnInit {
      return this._mttpFormBuilder.extractData(this.mttpForm,  this.mttp);
    }
    saveChanges(): boolean {
+     this._mttpFormBuilder.markFormGroupTouched(this.mttpForm);
      if( this.mttpForm.valid ) {
        let _fvField = this._fvFieldService.get(this.fvFieldId);
        this.mttp = this._mttpFormBuilder.extractData(this.mttpForm, this.mttp);
@@ -78,6 +79,7 @@ export class MpptConfigurationComponent implements OnInit {
     /** If not default mttp is injected at input make form from that mttp */
     if(this.mttp.number_of_chains_in_parallel !== -1) {
       this.mttpForm = this._mttpFormBuilder.makeForm(this.mttp);
+      this.updateMttpSpecifications(this.mttp.number_of_panels_in_series_per_chain, this.mttp.number_of_chains_in_parallel);
     } else {
       this.mttpForm = this._mttpFormBuilder.makeForm();
     }
