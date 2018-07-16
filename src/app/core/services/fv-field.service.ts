@@ -35,11 +35,11 @@ export class FvFieldService {
 
   public getDefaultFvField(sufix = 1 ) {
     let fvField = new FvField();
-    fvField.name = this.getDefaultName(sufix);
+    fvField.nombre = this.getDefaultName(sufix);
     return fvField;
   }
   /**
-   * Return the default name for fv field in a list by its index at list
+   * Return the default nombre for fv field in a list by its index at list
    *
    * @param {number} fieldNumber
    * @returns {string}

@@ -14,18 +14,18 @@ export class SfvFormBuilder extends BaseFormBuilder{
     makeForm(sfv?: Sfv): FormGroup {
         let sfvForm: FormGroup;
         sfvForm = this.fb.group({
-            power_of_plant_fv: [sfv? sfv.power_of_plant_fv:'',  Validators.compose([Validators.required, CustomValidators.number])],
-            power_of_panel_fv: [sfv? sfv.power_of_panel_fv: 0, CustomValidators.number],
-            total_panels_fv: [sfv? sfv.total_panels_fv:0, CustomValidators.number],
-            calculate_plant_potential: [sfv? sfv.calculate_plant_potential: ''],
-            number_of_fields_fv: [sfv? sfv.number_of_fields_fv:'', CustomValidators.number],
-            instalation_place_ceiling_option: [sfv? sfv.instalation_place_ceiling_option: ''],
-            ambient_temperature: [sfv? sfv.ambient_temperature:'', Validators.compose([Validators.required, CustomValidators.celsius])],
-            lowest_ambient_temperature_expected: [sfv? sfv.lowest_ambient_temperature_expected:'', Validators.compose([Validators.required, CustomValidators.celsius])],
-            investor_type: [sfv? sfv.investor_type:'', Validators.required],
-            service_type: [sfv? sfv.service_type:'', Validators.required],
-            service_voltage: [sfv? sfv.service_voltage:'', Validators.required],
-            instalation_place: [sfv? sfv.instalation_place:'', Validators.required]
+            potencia_de_planta_fv: [sfv? sfv.potencia_de_planta_fv:'',  Validators.compose([Validators.required, CustomValidators.number])],
+            potencial_de_panel_fv: [sfv? sfv.potencial_de_panel_fv: 0, CustomValidators.number],
+            total_paneles_fv: [sfv? sfv.total_paneles_fv:0, CustomValidators.number],
+            calcular_potencial_de_planta: [sfv? sfv.calcular_potencial_de_planta: ''],
+            numero_de_campos_fv: [sfv? sfv.numero_de_campos_fv:'', CustomValidators.number],
+            lugar_instalacion__opcion_techo_cubierta: [sfv? sfv.lugar_instalacion__opcion_techo_cubierta: ''],
+            temperatura_ambiente: [sfv? sfv.temperatura_ambiente:'', Validators.compose([Validators.required, CustomValidators.celsius])],
+            minima_temperatura_ambiente_esperada: [sfv? sfv.minima_temperatura_ambiente_esperada:'', Validators.compose([Validators.required, CustomValidators.celsius])],
+            tipo_de_inversor: [sfv? sfv.tipo_de_inversor:'', Validators.required],
+            tipo_servicio: [sfv? sfv.tipo_servicio:'', Validators.required],
+            voltage_servicio: [sfv? sfv.voltage_servicio:'', Validators.required],
+            lugar_instalacion: [sfv? sfv.lugar_instalacion:'', Validators.required]
         });
         return sfvForm;
     }
@@ -40,18 +40,18 @@ export class SfvFormBuilder extends BaseFormBuilder{
     }
     extractData(form: FormGroup): Sfv {
         let sfv = new Sfv();
-        sfv.power_of_plant_fv = form.get('power_of_plant_fv').value;
-        sfv.ambient_temperature = form.get('ambient_temperature').value;
-        sfv.instalation_place = form.get('instalation_place').value;
-        sfv.calculate_plant_potential = form.get('calculate_plant_potential').value;
-        sfv.number_of_fields_fv = form.get('number_of_fields_fv').value;
-        sfv.investor_type = form.get('investor_type').value;
-        sfv.lowest_ambient_temperature_expected = form.get('lowest_ambient_temperature_expected').value;
-        sfv.power_of_panel_fv = form.get('power_of_panel_fv').value;
-        sfv.total_panels_fv = form.get('total_panels_fv').value;
-        sfv.service_type = form.get('service_type').value;
-        sfv.service_voltage = form.get('service_voltage').value;
-        sfv.instalation_place_ceiling_option = form.get('instalation_place_ceiling_option').value;
+        sfv.potencia_de_planta_fv = form.get('potencia_de_planta_fv').value;
+        sfv.temperatura_ambiente = form.get('temperatura_ambiente').value;
+        sfv.lugar_instalacion = form.get('lugar_instalacion').value;
+        sfv.calcular_potencial_de_planta = form.get('calcular_potencial_de_planta').value;
+        sfv.numero_de_campos_fv = form.get('numero_de_campos_fv').value;
+        sfv.tipo_de_inversor = form.get('tipo_de_inversor').value;
+        sfv.minima_temperatura_ambiente_esperada = form.get('minima_temperatura_ambiente_esperada').value;
+        sfv.potencial_de_panel_fv = form.get('potencial_de_panel_fv').value;
+        sfv.total_paneles_fv = form.get('total_paneles_fv').value;
+        sfv.tipo_servicio = form.get('tipo_servicio').value;
+        sfv.voltage_servicio = form.get('voltage_servicio').value;
+        sfv.lugar_instalacion__opcion_techo_cubierta = form.get('lugar_instalacion__opcion_techo_cubierta').value;
         return sfv;
     }
 

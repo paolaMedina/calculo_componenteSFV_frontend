@@ -11,10 +11,10 @@ import { routercTransition } from '../../router.animations';
 import { MttpFormBuilder } from '../../core/forms/mttp.form';
 class Combination {
   id: string;
-  is_combined: boolean;
-  constructor(id: string, is_combined: boolean) {
+  es_combinado: boolean;
+  constructor(id: string, es_combinado: boolean) {
     this.id = id;
-    this.is_combined = is_combined;
+    this.es_combinado = es_combinado;
   }
 }
 @Component({
@@ -73,25 +73,25 @@ export class MpptsConfigurationComponent implements OnInit {
     /** Let indexes from find */
     index_mptt1 = this.mttps.findIndex( 
       (mttp: Mttp) => {
-        return mttp.name === String(name_mppt_1);
+        return mttp.nombre === String(name_mppt_1);
       }
     );
     this.mttps.splice(index_mptt1,1);
     index_mptt2 = this.mttps.findIndex( 
       (mttp: Mttp) => {
-        return mttp.name === String(name_mppt_2);
+        return mttp.nombre === String(name_mppt_2);
       }
     );
     this.mttps.splice(index_mptt2,1);
     /** Create a new mttp combined */
     newCombinedMptt = new Mttp(Mttp.getCombinedName(name_mppt_1, name_mppt_2));  
-    newCombinedMptt.is_combined = true;
+    newCombinedMptt.es_combinado = true;
     /** Add the new mttp combined at `name_mppt_1` position */
     this.mttps.splice(index_mptt1, 0, newCombinedMptt);
-    combination.is_combined = true;
+    combination.es_combinado = true;
   }
   combineOrDecombineMttps(combination: Combination) {
-    if ( !combination.is_combined ) {
+    if ( !combination.es_combinado ) {
       this.combineMttps(combination);
     } else {
       this.separeCombinedMttps(combination);
@@ -115,19 +115,19 @@ export class MpptsConfigurationComponent implements OnInit {
     /** Let indexes from find */
     index_mptt_to_delete = this.mttps.findIndex( 
       (mttp: Mttp) => {
-        return mttp.name === String(name_mppt_to_delete);
+        return mttp.nombre === String(name_mppt_to_delete);
       }
     );
     this.mttps.splice(index_mptt_to_delete,1);
     /** Create a new mttp combined */
     newCombinedMptt1 = new Mttp(String(name_mppt_1));  
     newCombinedMptt2 = new Mttp(String(name_mppt_2));  
-    newCombinedMptt1.is_combined = false;
-    newCombinedMptt2.is_combined = false;
+    newCombinedMptt1.es_combinado = false;
+    newCombinedMptt2.es_combinado = false;
     /** Add the new mttp combined at `name_mppt_1` position */
     this.mttps.splice(index_mptt_to_delete, 0, newCombinedMptt1);
     this.mttps.splice(index_mptt_to_delete+1, 0, newCombinedMptt2);
-    combination.is_combined = false;
+    combination.es_combinado = false;
   }
   /**
    * Return a combined array in duples by given size, only return duples, in inpair sizes 
@@ -150,7 +150,7 @@ export class MpptsConfigurationComponent implements OnInit {
         upper_bound = i + 2;
       }
       combination_name  = Mttp.getCombinedName(lower_bound, upper_bound);
-      arrayCombined.push(new Combination(combination_name, this.mttps.find(mttp => mttp.name === combination_name)? true: false));
+      arrayCombined.push(new Combination(combination_name, this.mttps.find(mttp => mttp.nombre === combination_name)? true: false));
 
     };
     if (isOdd(size)) {

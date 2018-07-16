@@ -23,7 +23,7 @@ export class MpptCablingComponent implements OnInit {
   mttp: Mttp;
   galleryImageOptions = galleryOptionsFullScreenOnly;
   helpImages: INgxGalleryImage[] = [{
-    big: '/assets/img/cabling-help.png'
+    big: '/assets/img/cableado-help.png'
   }];
 
   fvFieldId: string;
@@ -57,8 +57,8 @@ export class MpptCablingComponent implements OnInit {
       });
       return;
     } else {
-      this.mttp.cabling.input = this._sourceFormBuilder.extractData(inputSourceForm, this.mttp.cabling.input);
-      this.mttp.cabling.output = this._sourceFormBuilder.extractData(outputSourceForm, this.mttp.cabling.output);
+      this.mttp.cableado.input = this._sourceFormBuilder.extractData(inputSourceForm, this.mttp.cableado.input);
+      this.mttp.cableado.output = this._sourceFormBuilder.extractData(outputSourceForm, this.mttp.cableado.output);
       this._router.navigate(['mppts-config', this.fvFieldId]);
     }
   }

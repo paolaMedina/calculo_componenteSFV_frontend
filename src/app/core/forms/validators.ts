@@ -14,13 +14,13 @@ export  class CustomValidators {
         return null;
     }
     static number_of_panels_fv( formGroup: FormGroup ):  ValidationErrors | null {
-        if ( formGroup.get('calculate_plant_potential').value ) {
-            const number_of_fields_fv_control = formGroup.get('number_of_fields_fv');
+        if ( formGroup.get('calcular_potencial_de_planta').value ) {
+            const number_of_fields_fv_control = formGroup.get('numero_de_campos_fv');
             if ( number_of_fields_fv_control.valid ) {
                 return null;
             } else {
                 return {
-                    'number_of_fields_fv': 'Ingrese un número de campos fv válido'
+                    'numero_de_campos_fv': 'Ingrese un número de campos fv válido'
                 };
             }
 

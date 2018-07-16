@@ -13,8 +13,8 @@ export class MttpFormBuilder extends BaseFormBuilder{
     makeForm(mttp?: Mttp): FormGroup {
         let fvFieldForm: FormGroup;
         fvFieldForm = this.fb.group({
-            number_of_panels_in_series_per_chain: [mttp? mttp.number_of_panels_in_series_per_chain:'',  Validators.compose([Validators.required, CustomValidators.number])],
-            number_of_chains_in_parallel: [mttp? mttp.number_of_chains_in_parallel:'',  Validators.compose([Validators.required, CustomValidators.number])]
+            numero_de_paneles_en_serie_por_cadena: [mttp? mttp.numero_de_paneles_en_serie_por_cadena:'',  Validators.compose([Validators.required, CustomValidators.number])],
+            numero_de_cadenas_en_paralelo: [mttp? mttp.numero_de_cadenas_en_paralelo:'',  Validators.compose([Validators.required, CustomValidators.number])]
         });
         return fvFieldForm;
     }
@@ -34,8 +34,8 @@ export class MttpFormBuilder extends BaseFormBuilder{
         } else {
             mttp = new Mttp('0');
         }
-        mttp.number_of_panels_in_series_per_chain = form.get('number_of_panels_in_series_per_chain').value;
-        mttp.number_of_chains_in_parallel = form.get('number_of_chains_in_parallel').value;
+        mttp.numero_de_paneles_en_serie_por_cadena = form.get('numero_de_paneles_en_serie_por_cadena').value;
+        mttp.numero_de_cadenas_en_paralelo = form.get('numero_de_cadenas_en_paralelo').value;
         return mttp;
     }
 
