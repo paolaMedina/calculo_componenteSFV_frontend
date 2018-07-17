@@ -27,12 +27,12 @@
         </div>
         <div fxLayout="row" fxLayoutGap="20px">
             <div fxLayout="column">
-                <span>Potencia FV total:</span>
-                <span>Cargabilidad inversor:</span>
+                <span>Potencia FV total: </span>
+                <span>Cargabilidad inversor: </span>
             </div>
             <div fxLayout="column">
-                <span>0W</span>
-                <span>0%</span>
+                <span>{{functPotenciaFvTotal(mttps, selectedPanel.pmax)}}W</span>
+                <span>{{functCargabilidadInversor(functPotenciaFvTotal(mttps, selectedPanel.pmax), selectedInversor.pot_nom) | number: '1.1-1'}}%</span>
             </div>
         </div>
     </div>

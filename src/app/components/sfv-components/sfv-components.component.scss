@@ -1,3 +1,4 @@
+
 .field-fv-potency {
     width: 50%;
 }
@@ -15,4 +16,9 @@
 }
 .boton-configurar-campos-fv {
     margin-top: 10px;
+}
+
+
+/deep/ .mat-simple-snackbar-action .mat-button{
+    color: #26b99a!important;
 }

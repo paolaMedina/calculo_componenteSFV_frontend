@@ -15,10 +15,10 @@ export class SfvFormBuilder extends BaseFormBuilder{
         let sfvForm: FormGroup;
         sfvForm = this.fb.group({
             potencia_de_planta_fv: [sfv? sfv.potencia_de_planta_fv:'',  Validators.compose([Validators.required, CustomValidators.number])],
+            nombre_proyecto: [sfv? sfv.nombre_proyecto: '', Validators.required],
             potencial_de_panel_fv: [sfv? sfv.potencial_de_panel_fv: 0, CustomValidators.number],
             total_paneles_fv: [sfv? sfv.total_paneles_fv:0, CustomValidators.number],
             calcular_potencial_de_planta: [sfv? sfv.calcular_potencial_de_planta: ''],
-            numero_de_campos_fv: [sfv? sfv.numero_de_campos_fv:'', CustomValidators.number],
             lugar_instalacion__opcion_techo_cubierta: [sfv? sfv.lugar_instalacion__opcion_techo_cubierta: ''],
             temperatura_ambiente: [sfv? sfv.temperatura_ambiente:'', Validators.compose([Validators.required, CustomValidators.celsius])],
             minima_temperatura_ambiente_esperada: [sfv? sfv.minima_temperatura_ambiente_esperada:'', Validators.compose([Validators.required, CustomValidators.celsius])],
@@ -41,10 +41,10 @@ export class SfvFormBuilder extends BaseFormBuilder{
     extractData(form: FormGroup): Sfv {
         let sfv = new Sfv();
         sfv.potencia_de_planta_fv = form.get('potencia_de_planta_fv').value;
+        sfv.nombre_proyecto = form.get('nombre_proyecto').value;
         sfv.temperatura_ambiente = form.get('temperatura_ambiente').value;
         sfv.lugar_instalacion = form.get('lugar_instalacion').value;
         sfv.calcular_potencial_de_planta = form.get('calcular_potencial_de_planta').value;
-        sfv.numero_de_campos_fv = form.get('numero_de_campos_fv').value;
         sfv.tipo_de_inversor = form.get('tipo_de_inversor').value;
         sfv.minima_temperatura_ambiente_esperada = form.get('minima_temperatura_ambiente_esperada').value;
         sfv.potencial_de_panel_fv = form.get('potencial_de_panel_fv').value;

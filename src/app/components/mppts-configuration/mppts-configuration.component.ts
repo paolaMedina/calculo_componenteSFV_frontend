@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
-import { Mttp, FvField, Inversor } from '../../core/models';
+import { Mttp, FvField, Inversor, PanelSolar } from '../../core/models';
 import { isOdd } from '../../core/lib';
 import { FvFieldService, SfvService } from '../../core/services';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { MpptConfigurationComponent } from '../mppt-configuration/mppt-configura
 import { MatSnackBar } from '@angular/material';
 import { routercTransition } from '../../router.animations';
 import { MttpFormBuilder } from '../../core/forms/mttp.form';
+import { potencia_fv_total, cargabilidad_inversor } from '@app/core/lib/mttp-functions';
 class Combination {
   id: string;
   es_combinado: boolean;
@@ -26,11 +27,15 @@ class Combination {
 export class MpptsConfigurationComponent implements OnInit {
   //@Input() max_number_of_mttps = 5;
   max_number_of_mttps:number;
+  functPotenciaFvTotal = potencia_fv_total;
+  functCargabilidadInversor = cargabilidad_inversor;
   @ViewChildren('mppts') mpptComponents: QueryList<MpptConfigurationComponent>;
   fvField: FvField;
   mttpsNumberControl: FormControl;
   combinations: Array<Combination>;
   mttps: Mttp[];
+  selectedPanel: PanelSolar;
+  selectedInversor: Inversor;
   private _inversor:Inversor;
   constructor(
     private _fvFieldService: FvFieldService,
@@ -40,6 +45,8 @@ export class MpptsConfigurationComponent implements OnInit {
     public snackBar: MatSnackBar
   ) {
     this.mttps = new Array<Mttp>();
+    this.selectedPanel = this._fvFieldService.getSelectedSolarPanel();
+    this.selectedInversor = this._fvFieldService.getSelectedInversor();
     this.combinations = new  Array<Combination>();
     this.mttpsNumberControl = new FormControl();
     this._inversor = this._fvFieldService.getSelectedInversor();

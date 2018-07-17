@@ -20,6 +20,7 @@ export class SourceFormBuilder extends BaseFormBuilder {
             tipo_canalizacion: [source? source.tipo_canalizacion:''],
             canalizacion: [source? source.canalizacion:''],
             tamanio_canalizacion: [source? source.tamanio_canalizacion:''],
+            maximo_numero_de_conductores: [source? source.maximo_numero_de_conductores: ''],
             disenio_bandeja: [source? source.disenio_bandeja:''],
             material_bandeja:[source? source.material_bandeja:''],
             tipo_acabado: [source? source.tipo_acabado:''],
@@ -54,6 +55,7 @@ export class SourceFormBuilder extends BaseFormBuilder {
         source.tipo_alambrado = form.get('tipo_alambrado').value;
         source.tipo_canalizacion = form.get('tipo_canalizacion').value;
         source.canalizacion = form.get('canalizacion').value;
+        source.maximo_numero_de_conductores = form.get('maximo_numero_de_conductores').value;
         source.material_bandeja = form.get('material_bandeja').value;
         source.tamanio_canalizacion = form.get('tamanio_canalizacion').value;
         source.tipo_acabado = form.get('tipo_acabado').value;

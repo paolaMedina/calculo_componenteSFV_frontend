@@ -21,6 +21,7 @@ export class Source {
     perfiles_separadores: boolean;
     longitud_tramo: boolean;
     ancho_mm: number;
+    maximo_numero_de_conductores: number;
     alto_mm: number
     tipo_carga: string;
     constructor() {

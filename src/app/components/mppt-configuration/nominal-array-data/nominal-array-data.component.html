@@ -3,7 +3,7 @@
   <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
     <span>Datos nominales del arreglo </span>
   </mat-toolbar>
-  <div fxLayout="row">
+  <div fxLayout="row" class="specifications">
     <div fxLayout="column">
       <span>Potencia nominal</span>
       <span>Tension mpp</span>
@@ -12,13 +12,20 @@
       <span>Corriente máxima</span>
     </div>
     <span class="spacer"></span>
-    <div fxLayout="column">
+    <div fxLayout="column" >
       <span>{{mttpSpecifications.potencia_nominal}}W</span>
       <span>{{mttpSpecifications.tension_Mpp_MPPTn}}V</span>
-      <span>{{mttpSpecifications.corriente_Mpp_MPPTn | number: '1.1-1' }}A</span>
-      <span>{{mttpSpecifications.tension_maxima_MPPTn | number: '1.1-1' }}V</span>
-      <span>{{mttpSpecifications.corriente_maxima_MPPTn | number: '1.1-1' }}A</span>
+      <span>{{mttpSpecifications.corriente_Mpp_MPPTn | number: '1.1-2' }}A</span>
+      <span>{{mttpSpecifications.tension_maxima_MPPTn | number: '1.1-2' }}V</span>
+      <span>{{mttpSpecifications.corriente_maxima_MPPTn | number: '1.1-2' }}A</span>
     </div>
+    <div fxLayout="column" >
+      <mat-icon>warning</mat-icon>
+      <mat-icon>warning</mat-icon>
+      <mat-icon>done</mat-icon>
+      <mat-icon>clear</mat-icon>
+      <mat-icon>ckear</mat-icon>
+      </div>
   </div>
 
 </div>

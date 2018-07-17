@@ -86,7 +86,8 @@ export class MpptConfigurationComponent implements OnInit {
     /** Calculate and update mttpspecification after number of panels changes or number of chains change and only if both have values */
     this.mttpForm.get('numero_de_cadenas_en_paralelo')
     .valueChanges.subscribe(
-      () => {
+      (value) => {
+        this.mttp.numero_de_cadenas_en_paralelo = value;
         if (this.mttpForm.get('numero_de_paneles_en_serie_por_cadena').value !== '') {
           this.updateMttpSpecifications(
             Number(this.mttpForm.get('numero_de_paneles_en_serie_por_cadena').value),
@@ -97,7 +98,8 @@ export class MpptConfigurationComponent implements OnInit {
     );
     this.mttpForm.get('numero_de_paneles_en_serie_por_cadena')
     .valueChanges.subscribe(
-      () => {
+      (value) => {
+        this.mttp.numero_de_paneles_en_serie_por_cadena = value;
         if (this.mttpForm.get('numero_de_cadenas_en_paralelo').value !== '') {
           this.updateMttpSpecifications(
             Number(this.mttpForm.get('numero_de_paneles_en_serie_por_cadena').value),

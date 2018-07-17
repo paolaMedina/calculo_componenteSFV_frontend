@@ -3,8 +3,18 @@
 </mat-toolbar>
 <div [formGroup]="sfvForm" fxLayout="column" class="main-content" [@routerTransition]>
   <div fxLayout="row wrap">
-    <div fxLayout="column" fxFlex.lg="49%" fxFlex.lt-lg="100%" fxLayoutGap="20px">
-      <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+
+    <div fxLayout="column" fxFlex.gt-sm="49%"  fxLayoutGap.gt-md="20px">
+      <div  fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+        <span>Nombre de el proyecto</span>
+        <mat-form-field class="field-fv-potency">
+          <input min="0" formControlName="nombre_proyecto" matInput placeholder="Ingrese el nombre de el proyecto">
+          <!--mat-error *ngIf="!sfvForm.get('potencia_de_planta_fv').valid">
+                Por favor ingrese una potencia de planta valida
+              </mat-error-->
+        </mat-form-field>
+      </div>
+      <div  fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
         <span>Potencia de planta FV</span>
         <mat-form-field class="field-fv-potency">
           <input type="number" min="0" formControlName="potencia_de_planta_fv" matInput placeholder="Ingrese la potencia de planta FV">
@@ -19,13 +29,13 @@
 
         <mat-slide-toggle formControlName="calcular_potencial_de_planta"> </mat-slide-toggle>
       </div>
-      <div [hidden]="!sfvForm.get('calcular_potencial_de_planta').value">
+      <div  [hidden]="!sfvForm.get('calcular_potencial_de_planta').value">
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
           <span>
             Cantidad total de paneles FV
           </span>
           <mat-form-field class="field-fv-potency">
-            <input type="number" min="0" [requiredIf]="sfvForm.get('calcular_potencial_de_planta').value" formControlName="total_paneles_fv"
+            <input type="number" min="0" [required]="sfvForm.get('calcular_potencial_de_planta').value" formControlName="total_paneles_fv"
               matInput placeholder="Ingrese la cantidad de paneles">
           </mat-form-field>
         </div>
@@ -34,7 +44,7 @@
             Potencia de panel FV
           </span>
           <mat-form-field class="field-fv-potency">
-            <input type="number" min="0" [requiredIf]="sfvForm.get('calcular_potencial_de_planta').value" formControlName="potencial_de_panel_fv"
+            <input type="number" min="0" [required]="sfvForm.get('calcular_potencial_de_planta').value" formControlName="potencial_de_panel_fv"
               matInput placeholder="Ingrese la potencia del panel">
           </mat-form-field>
           <span>W</span>
@@ -64,12 +74,12 @@
       </div>
     </div>
     <mat-divider [vertical]="true"></mat-divider>
-    <div fxLayout="column" fxFlex.lg="49%" fxFlex.lt-lg="100%">
+    <div fxLayout="column" fxFlex.lg="49%" fxFlex.lt-md="100%">
       <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
         <span>Seleccione el tipo de inversores</span>
         <mat-radio-group formControlName="tipo_de_inversor" [ngClass]="{'error': !sfvForm.get('tipo_de_inversor').valid && sfvForm.get('tipo_de_inversor').touched } "
           fxLayout="column">
-          <mat-radio-button  value="Microinversores">Microinversores</mat-radio-button>
+          <mat-radio-button value="Microinversores">Microinversores</mat-radio-button>
           <mat-radio-button #macro_inversors_radio value="Inversores de cadena">Inversores de cadena</mat-radio-button>
         </mat-radio-group>
       </div>
@@ -101,51 +111,51 @@
         <span>Indique el lugar de la instalacion</span>
         <div class="div-radio-group" [ngClass]="{'error': !sfvForm.get('lugar_instalacion').valid && sfvForm.get('lugar_instalacion').touched } ">
           <mat-radio-group formControlName="lugar_instalacion" fxLayout="column">
-            <mat-radio-button  value="Suelo">Suelo</mat-radio-button>
+            <mat-radio-button value="Suelo">Suelo</mat-radio-button>
             <mat-radio-button value="Techo/Cubierta">Techo/Cubierta</mat-radio-button>
           </mat-radio-group>
         </div>
       </div>
       <div fxLayout="column" [hidden]="!(sfvForm.get('lugar_instalacion').value === 'Techo/Cubierta')" fxLayoutGap="20px" fxLayoutAlign="center center">
         <div class="div-radio-group" [ngClass]="{'error': !sfvForm.get('lugar_instalacion__opcion_techo_cubierta').valid && sfvForm.get('lugar_instalacion__opcion_techo_cubierta').touched } ">
-        <mat-radio-group  
-          [required]="sfvForm.get('lugar_instalacion').value === 'Techo/Cubierta'"
-          formControlName="lugar_instalacion__opcion_techo_cubierta" fxLayout="column">
-          <div fxLayout="row" fxLayoutAlign.lt-md="center center" fxLayoutGap="10px">
-            <mat-radio-button value="Caso A">Caso A </mat-radio-button>
-            <p>Construcción sin sistema de protección contra rayos (LPS) externo</p>
-            <span class="spacer"></span>
-            <button (click)="openCaseAHelper()" mat-icon-button>
-              <mat-icon>info</mat-icon>
-            </button>
-          </div>
-          <div fxLayout="row" fxLayoutAlign.lt-md="center center" fxLayoutGap="10px">
-            <mat-radio-button value="Caso B">Caso B</mat-radio-button>
-            <p>Construcción con LPS externo separado del montaje FV (s suficiente)</p>
-            <span class="spacer"></span>
-            <button (click)="openCaseBHelper()" mat-icon-button>
-              <mat-icon>info</mat-icon>
-            </button>
-          </div>
-          <div fxLayout="row" fxLayoutAlign.lt-md="center center" fxLayoutGap="10px">
-            <mat-radio-button value="Caso C">Caso C</mat-radio-button>
-            <p>Construcción con LPS externo conectado al montaje FV (s insuficiente)</p>
-            <span class="spacer"></span>
-            <button (click)="openCaseCHelper()" mat-icon-button>
-              <mat-icon>info</mat-icon>
-            </button>
-          </div>
-        </mat-radio-group>
-      </div>
+          <mat-radio-group [required]="sfvForm.get('lugar_instalacion').value === 'Techo/Cubierta'" formControlName="lugar_instalacion__opcion_techo_cubierta"
+            fxLayout="column">
+            <div fxLayout="row" fxLayoutAlign.lt-md="center center" fxLayoutGap="10px">
+              <mat-radio-button value="Caso A">Caso A </mat-radio-button>
+              <p>Construcción sin sistema de protección contra rayos (LPS) externo</p>
+              <span class="spacer"></span>
+              <button (click)="openCaseAHelper()" mat-icon-button>
+                <mat-icon>info</mat-icon>
+              </button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign.lt-md="center center" fxLayoutGap="10px">
+              <mat-radio-button value="Caso B">Caso B</mat-radio-button>
+              <p>Construcción con LPS externo separado del montaje FV (s suficiente)</p>
+              <span class="spacer"></span>
+              <button (click)="openCaseBHelper()" mat-icon-button>
+                <mat-icon>info</mat-icon>
+              </button>
+            </div>
+            <div fxLayout="row" fxLayoutAlign.lt-md="center center" fxLayoutGap="10px">
+              <mat-radio-button value="Caso C">Caso C</mat-radio-button>
+              <p>Construcción con LPS externo conectado al montaje FV (s insuficiente)</p>
+              <span class="spacer"></span>
+              <button (click)="openCaseCHelper()" mat-icon-button>
+                <mat-icon>info</mat-icon>
+              </button>
+            </div>
+          </mat-radio-group>
+        </div>
       </div>
     </div>
   </div>
   <mat-divider></mat-divider>
 
-  <button class="boton-configurar-campos-fv" fxFlexAlign="center start" fxFlex="20%" (click)="saveSfv()" type="submit" mat-button> Configurar campos FV</button>
+  <button class="boton-configurar-campos-fv" fxFlexAlign="center start" fxFlex="20%" (click)="saveSfv()" type="submit" mat-button>
+  Configurar campos FV</button>
 
 </div>
-  <!-- Helpers images-->
-  <ngx-gallery #helpImagesGallery [options]="galleryImageOptions" [images]="helpImages">
-    </ngx-gallery>
-    <!-- End of helpers images component-->
+<!-- Helpers images-->
+<ngx-gallery #helpImagesGallery [options]="galleryImageOptions" [images]="helpImages">
+</ngx-gallery>
+<!-- End of helpers images component-->

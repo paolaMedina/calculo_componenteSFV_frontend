@@ -47,7 +47,7 @@ export class MpptCablingComponent implements OnInit {
     this._sourceFormBuilder.markFormGroupTouched(inputSourceForm);
     this._sourceFormBuilder.markFormGroupTouched(outputSourceForm);
     if ( !inputSourceForm.valid ) {
-      this._snackBar.open("Se han enontrado algunos errores, en el circuito fuente", "Aceptar", {
+      this._snackBar.open("Se han enontrado algunos errores en el circuito fuente", "Aceptar", {
         duration: 3000,
       });
       return;
