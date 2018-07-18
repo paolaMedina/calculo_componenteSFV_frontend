@@ -1,3 +1,3 @@
 import { Sfv } from "../core/models";
 
-export const sfv_mock: Sfv = JSON.parse('{"power_of_plant_fv":45,"ambient_temperature":4,"instalation_place":"Suelo","number_of_fields_fv":null,"investor_type":"Inversores de cadena","lowest_ambient_temperature_expected":4,"power_of_panel_fv":null,"service_type":"Trifásica","service_voltage":"220","total_panels_fv":null}');
+export const sfv_mock: Sfv = JSON.parse('{"potencia_de_planta_fv":45,"temperatura_ambiente":4,"lugar_instalacion":"Suelo","numero_de_campos_fv":null,"tipo_de_inversor":"Inversores de cadena","minima_temperatura_ambiente_esperada":4,"potencial_de_panel_fv":null,"tipo_servicio":"Trifásica","voltage_servicio":"220","total_paneles_fv":null}');

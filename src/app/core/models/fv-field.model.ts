@@ -3,24 +3,24 @@ import { Mttp } from './mttp.model';
 import { Source } from './source.model';
 export class FvField {
 
-    name: string;
+    nombre: string;
     private _id: string;
-    manufacturer_1: string;
-    solar_panel_model_1: string;
-    manufacturer_2: string;
-    solar_panel_model_2: string;
+    fabricante_1: string;
+    model_panel_solar_1: string;
+    fabricante_2: string;
+    modelo_panel_solar_2: string;
     mttps: Mttp[];
     /* Salida del inversor */
-    investor_output: {input: Source, output: Source};
+    salida_inversor: {input: Source, output: Source};
     constructor() {
         this._id = uuid();
-        this.name = "";
-        this.manufacturer_1 = "";
-        this.solar_panel_model_1 = "";
-        this.solar_panel_model_2 = "";
-        this.manufacturer_2 = "";
+        this.nombre = "";
+        this.fabricante_1 = "";
+        this.model_panel_solar_1 = "";
+        this.modelo_panel_solar_2 = "";
+        this.fabricante_2 = "";
         this.mttps  = new Array<Mttp>();
-        this.investor_output = {input: new Source(), output: new Source()};
+        this.salida_inversor = {input: new Source(), output: new Source()};
     }
     get id() {
         return this._id;

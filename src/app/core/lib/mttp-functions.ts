@@ -22,12 +22,21 @@ export function corriente_maxima_MPPTn(no_cadenas_paralelo: number, isc_panel: n
     return no_cadenas_paralelo * isc_panel * 1.25;
 }
 export function total_de_paneles(no_paneles_en_serie_por_cadena: number, no_cadenas_en_paralelo: number): number {
+    if ( no_paneles_en_serie_por_cadena === -1 || no_cadenas_en_paralelo === -1 ) {
+        return 0;
+    } else {
     return no_cadenas_en_paralelo * no_paneles_en_serie_por_cadena;
+    }
 }
 export function potencia_fv_total(panelesMttp: Mttp[], pnom_panel: number): number {
+
     let _total_de_paneles = 0;
     for (let panelMttp of panelesMttp ){
-        _total_de_paneles = _total_de_paneles + total_de_paneles(panelMttp.number_of_chains_in_parallel, panelMttp.number_of_panels_in_series_per_chain);
+        _total_de_paneles = _total_de_paneles + total_de_paneles(panelMttp.numero_de_cadenas_en_paralelo, panelMttp.numero_de_paneles_en_serie_por_cadena);
     }
         return  _total_de_paneles * pnom_panel;
+}
+export function cargabilidad_inversor(potencia_fv_total: number,  pnom_inv): number {
+    return (potencia_fv_total / pnom_inv) * 100;
+
 }

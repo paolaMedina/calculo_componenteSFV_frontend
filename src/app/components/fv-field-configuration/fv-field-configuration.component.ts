@@ -61,8 +61,8 @@ export class FvFieldConfigurationComponent implements OnInit {
     this.fvFieldForm = this._fvFormBuilder.makeForm();
 
     /* valor Tension y tipo de servicio  seleccionada*/
-    this._tension = String(this._sfvService.get().service_voltage);
-    this._servicio = this._sfvService.get().service_type;
+    this._tension = String(this._sfvService.get().voltage_servicio);
+    this._servicio = this._sfvService.get().tipo_servicio;
   }
   saveChanges() {
     this.fvField = this._fvFormBuilder.extractData(this.fvFieldForm, this.fvField);
@@ -155,20 +155,20 @@ export class FvFieldConfigurationComponent implements OnInit {
         this.inversores_filtrado_final = this.updateInversor(inversores_filtrados_servicio);
         this.manufacturesNamesUnique = distinctOn<Inversor>(this.inversores_filtrado_final, 'fabricante');
     /** Trick for already loaded fv field  */
-    if (this.fvField.manufacturer_1 !== '') {
-      const paneles_filtrados = this.paneles_solares.filter(panel => panel.fabricante === this.fvField.manufacturer_1);
+    if (this.fvField.fabricante_1 !== '') {
+      const paneles_filtrados = this.paneles_solares.filter(panel => panel.fabricante === this.fvField.fabricante_1);
       this.updateModelosPaneles(paneles_filtrados);
-      const panel_seleccionado = this.paneles_solares.filter(panel => panel.descripcion === this.fvField.solar_panel_model_1)[0];
+      const panel_seleccionado = this.paneles_solares.filter(panel => panel.descripcion === this.fvField.model_panel_solar_1)[0];
       this.updatePanelSeleccionado(panel_seleccionado)
     }
-    if( this.fvField.manufacturer_2 &&  this.fvField.manufacturer_2 !== '') {
-      this.inversores_filtrados = this.inversores_filtrado_final.filter(inversor => inversor.fabricante ===  this.fvField.manufacturer_2 );
+    if( this.fvField.fabricante_2 &&  this.fvField.fabricante_2 !== '') {
+      this.inversores_filtrados = this.inversores_filtrado_final.filter(inversor => inversor.fabricante ===  this.fvField.fabricante_2 );
       this.modelosInversor = distinctOn<Inversor>(this.inversores_filtrados, 'descripcion');
     }
 
       });
     /** Filtrar por panel por fabricante seleccionado */
-    this.fvFieldForm.get('manufacturer_1').valueChanges.subscribe(
+    this.fvFieldForm.get('fabricante_1').valueChanges.subscribe(
       (name_fabricante: string) => {
         const paneles_filtrados = this.paneles_solares.filter(panel => panel.fabricante === name_fabricante);
         this.updateModelosPaneles(paneles_filtrados);
@@ -176,7 +176,7 @@ export class FvFieldConfigurationComponent implements OnInit {
     )
 
     /** Filtrar por panel-modelo seleccionado */
-    this.fvFieldForm.get('solar_panel_model_1').valueChanges.subscribe(
+    this.fvFieldForm.get('model_panel_solar_1').valueChanges.subscribe(
       (modelo: string) => {
         const panel_seleccionado = this.paneles_solares.filter(panel => panel.descripcion === modelo)[0];
         this._fvFieldService.setSelectedSolarPanel(panel_seleccionado);
@@ -184,14 +184,14 @@ export class FvFieldConfigurationComponent implements OnInit {
       })
 
     /** Filtrar inversor por fabricante seleccionado */
-    this.fvFieldForm.get('manufacturer_2').valueChanges.subscribe(
+    this.fvFieldForm.get('fabricante_2').valueChanges.subscribe(
       (name_fabricante: string) => {
         this.inversores_filtrados = this.inversores_filtrado_final.filter(inversor => inversor.fabricante === name_fabricante);
         this.modelosInversor = distinctOn<Inversor>(this.inversores_filtrados, 'descripcion');
       })
 
     /** Filtrar por modelo del inversor seleccionado */
-    this.fvFieldForm.get('solar_panel_model_2').valueChanges.subscribe(
+    this.fvFieldForm.get('modelo_panel_solar_2').valueChanges.subscribe(
       (modelo: string) => {
         const inversor_seleccionado = this.inversores_filtrados.filter(inversor => inversor.descripcion === modelo)[0];
         this._fvFieldService.setSelectedInversor(inversor_seleccionado);
@@ -199,10 +199,10 @@ export class FvFieldConfigurationComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.fvField = this._fvFieldService.get(params['id']);
-      this.fvFieldForm.get('name').setValue(this.fvField.name);
+      this.fvFieldForm.get('nombre').setValue(this.fvField.nombre);
     });
     /** Filtrar panel por fabricante seleccionado */
-    this.fvFieldForm.get('manufacturer_1').valueChanges.subscribe(
+    this.fvFieldForm.get('fabricante_1').valueChanges.subscribe(
       (name_fabricante: string) => {
         const paneles_filtrados = this.paneles_solares.filter(panel => panel.fabricante === name_fabricante);
         this.modelosPanel = distinctOn<PanelSolar>(paneles_filtrados, 'descripcion');

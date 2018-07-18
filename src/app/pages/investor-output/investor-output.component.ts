@@ -20,7 +20,7 @@ export class InvestorOutputComponent implements OnInit {
   fvField: FvField;
   galleryImageOptions = galleryOptionsFullScreenOnly;
   helpImages: INgxGalleryImage[] = [{
-    big: '/assets/img/cabling-help.png'
+    big: '/assets/img/cableado-help.png'
   }];
   @ViewChild('helpImage') onlyPreviewGallery: NgxGalleryComponent;
 
@@ -53,8 +53,8 @@ export class InvestorOutputComponent implements OnInit {
       });
       return;
     } else {
-      this.fvField.investor_output.input = this._sourceFormBuilder.extractData(inputSourceForm, this.fvField.investor_output.input);
-      this.fvField.investor_output.output = this._sourceFormBuilder.extractData(outputSourceForm, this.fvField.investor_output.output);
+      this.fvField.salida_inversor.input = this._sourceFormBuilder.extractData(inputSourceForm, this.fvField.salida_inversor.input);
+      this.fvField.salida_inversor.output = this._sourceFormBuilder.extractData(outputSourceForm, this.fvField.salida_inversor.output);
       this._fvFieldService.updateField(this.fvField);
       this._router.navigate(['/fv-field-config', this.fvField.id]);
     }

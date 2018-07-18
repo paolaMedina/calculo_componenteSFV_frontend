@@ -13,11 +13,11 @@ export class FvFormBuilder extends BaseFormBuilder{
     makeForm(fvField?: FvField): FormGroup {
         let fvFieldForm: FormGroup;
         fvFieldForm = this.fb.group({
-            name: [fvField? fvField.name:'',  Validators.required],
-            manufacturer_1: [fvField? fvField.manufacturer_1:'', Validators.required],
-            solar_panel_model_1: [fvField? fvField.solar_panel_model_1:'', Validators.required],
-            manufacturer_2: [fvField? fvField.manufacturer_2:'', Validators.required],
-            solar_panel_model_2: [fvField? fvField.solar_panel_model_2:'', Validators.required],
+            nombre: [fvField? fvField.nombre:'',  Validators.required],
+            fabricante_1: [fvField? fvField.fabricante_1:'', Validators.required],
+            model_panel_solar_1: [fvField? fvField.model_panel_solar_1:'', Validators.required],
+            fabricante_2: [fvField? fvField.fabricante_2:'', Validators.required],
+            modelo_panel_solar_2: [fvField? fvField.modelo_panel_solar_2:'', Validators.required],
         });
         return fvFieldForm;
     }
@@ -35,11 +35,11 @@ export class FvFormBuilder extends BaseFormBuilder{
         if ( initialFvField ) {
             fvField = initialFvField;
         }
-        fvField.name = form.get('name').value;
-        fvField.manufacturer_1 = form.get('manufacturer_1').value;
-        fvField.solar_panel_model_1 = form.get('solar_panel_model_1').value;
-        fvField.manufacturer_2 = form.get('manufacturer_2').value;
-        fvField.solar_panel_model_2 = form.get('solar_panel_model_2').value;
+        fvField.nombre = form.get('nombre').value;
+        fvField.fabricante_1 = form.get('fabricante_1').value;
+        fvField.model_panel_solar_1 = form.get('model_panel_solar_1').value;
+        fvField.fabricante_2 = form.get('fabricante_2').value;
+        fvField.modelo_panel_solar_2 = form.get('modelo_panel_solar_2').value;
         return fvField;
     }
 
