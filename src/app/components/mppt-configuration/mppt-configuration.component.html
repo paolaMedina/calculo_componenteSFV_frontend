@@ -1,6 +1,6 @@
 <div class="mppt">
   <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
-    <span>MPPT {{mttp.name}} </span>
+    <span>MPPT {{mttp.nombre}} </span>
   </mat-toolbar>
   <div [formGroup]="mttpForm" class="mppt-configuration" fxLayout="column" fxLayoutAlign="center center">
 
@@ -10,14 +10,14 @@
           <span>No. de paneles en serie por cadena</span>
           <span class="spacer"></span>
           <mat-form-field>
-            <input type="number" min="0" formControlName="number_of_panels_in_series_per_chain" matInput>
+            <input type="number" min="0" formControlName="numero_de_paneles_en_serie_por_cadena" matInput>
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">
           <span>No. de cadenas en paralelo</span>
           <span class="spacer"></span>
           <mat-form-field>
-            <input  type="number" min="0" formControlName="number_of_chains_in_parallel" matInput>
+            <input  type="number" min="0" formControlName="numero_de_cadenas_en_paralelo" matInput>
           </mat-form-field>
         </div>
         <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="left center">

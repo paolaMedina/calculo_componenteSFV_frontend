@@ -10,7 +10,7 @@
   <h1> No se han registrado campos FV</h1>
 </div>
     <div  *ngFor="let fvField of fvFields" fxLayout="row" fxLayoutAlign="left center">
-      <h5>{{fvField.name}}</h5>
+      <h5>{{fvField.nombre}}</h5>
       <span class="spacer"></span>
 
       <button  *ngIf="allow_add_and_delete"  (click)="deleleteFvField(fvField.id)" fxFlexAlign="end" mat-icon-button> <mat-icon>delete</mat-icon></button>

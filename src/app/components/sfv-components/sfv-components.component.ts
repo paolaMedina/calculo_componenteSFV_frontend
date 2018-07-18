@@ -86,9 +86,9 @@ export class SfvComponentsComponent implements OnInit {
     }
    }
    recalculatePlantPower() {
-    if (this.sfvForm.get('power_of_panel_fv').valid && this.sfvForm.get('total_panels_fv').valid) {
-      this.sfvForm.get('power_of_plant_fv').setValue(plant_fv_power(
-        this.sfvForm.get('power_of_panel_fv').value, this.sfvForm.get('total_panels_fv').value));
+    if (this.sfvForm.get('potencial_de_panel_fv').valid && this.sfvForm.get('total_paneles_fv').valid) {
+      this.sfvForm.get('potencia_de_planta_fv').setValue(plant_fv_power(
+        this.sfvForm.get('potencial_de_panel_fv').value, this.sfvForm.get('total_paneles_fv').value));
     }
    }
    updateTensiones(inversores: Inversor[] ) {
@@ -105,7 +105,7 @@ export class SfvComponentsComponent implements OnInit {
     
 
     /** Filtrar los tipos de tension */
-    this.sfvForm.get('service_type').valueChanges.subscribe (
+    this.sfvForm.get('tipo_servicio').valueChanges.subscribe (
       (tipo_servicio: string) => {
        const inversores_filtrados = this.inversores.filter(inversor => inversor.tipo_conex === tipo_servicio);
        this.updateTensiones(inversores_filtrados);
@@ -122,24 +122,24 @@ export class SfvComponentsComponent implements OnInit {
           this.inversores = base_data.inversores;
           this.tipos_de_servicio = distinctOn<Inversor>(this.inversores, 'tipo_conex');
           this.updateTensiones(this.inversores);
-          if (this.sfv.service_type !== '') {
-            const inversores_filtrados = this.inversores.filter(inversor => inversor.tipo_conex === this.sfv.service_type);
+          if (this.sfv.tipo_servicio !== '') {
+            const inversores_filtrados = this.inversores.filter(inversor => inversor.tipo_conex === this.sfv.tipo_servicio);
             this.updateTensiones(inversores_filtrados);
           }
         });
 
 
     /** Cuando la opcion Calcular Potencia de planta se modifica, se deben limpiar los campos */
-    this.sfvForm.get('calculate_plant_potential').valueChanges.subscribe(()=>{
-      this.sfvForm.get('power_of_plant_fv').setValue('');
-      this.sfvForm.get('total_panels_fv').setValue('');
+    this.sfvForm.get('calcular_potencial_de_planta').valueChanges.subscribe(()=>{
+      this.sfvForm.get('potencia_de_planta_fv').setValue('');
+      this.sfvForm.get('total_paneles_fv').setValue('');
     });
     /** Cada que el total de paneles fv o el poder de los paneles fv cambien de valor, se debe recalcular el poder de la planta fv  */
-    this.sfvForm.get('total_panels_fv').valueChanges.subscribe(() => {
+    this.sfvForm.get('total_paneles_fv').valueChanges.subscribe(() => {
     this.recalculatePlantPower();
       }
     );
-    this.sfvForm.get('power_of_panel_fv').valueChanges.subscribe(() => {
+    this.sfvForm.get('potencial_de_panel_fv').valueChanges.subscribe(() => {
       this.recalculatePlantPower();
     });
 

@@ -1,5 +1,5 @@
-<div [formGroup]="sourceForm" fxLayout.lt-md="column"  fxLayout.gt-sm="row" fxLayoutGap="5%">
-  <div fxLayout="column" fxFlex.lt-lg="100%" fxFlex.gt-md="50%"  fxFlexLayoutGap="14px" fxFlexAlign="center center" fxFlex.lt-md="100%">
+<div [formGroup]="sourceForm" fxLayout.lt-md="column" fxLayout.gt-sm="row" fxLayoutGap="5%">
+  <div fxLayout="column" fxFlex.lt-lg="100%" fxFlex.gt-md="50%" fxFlexLayoutGap="14px" fxFlexAlign="center center" fxFlex.lt-md="100%">
     <small>Nota: No contar en estos datos los conductores propios de los paneles para conexiones entre si</small>
 
     <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
@@ -22,14 +22,22 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
 
+      <span>Distancia del conductor mas largo</span>
+      <mat-form-field>
+
+        <input type="number" min="0" formControlName="maximo_numero_de_conductores" required matInput>
+      </mat-form-field>
+    </div>
 
     <div fxLayout="column" [hidden]="!(sourceForm.get('tipo_alambrado').value === types_of_wiring.Canalization || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling)">
-    <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
+      <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
         <span>Tipo de canalización</span>
         <span class="spacer"></span>
         <mat-form-field>
-          <mat-select [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.Canalization || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling" formControlName="tipo_canalizacion">
+          <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.Canalization || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+            formControlName="tipo_canalizacion">
             <mat-option *ngFor="let tipo of tipoCanalizacion" [value]="tipo">
               {{tipo}}
             </mat-option>
@@ -37,22 +45,24 @@
         </mat-form-field>
       </div>
 
-    <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
+      <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
         <span>Canalización</span>
         <span class="spacer"></span>
         <mat-form-field>
-          <mat-select [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.Canalization || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling" formControlName="canalizacion">
+          <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.Canalization || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+            formControlName="canalizacion">
             <mat-option *ngFor="let x of canalizacion" [value]="x">
               {{x}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-    <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
+      <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
         <span>Tamaño de canalización</span>
         <span class="spacer"></span>
         <mat-form-field>
-          <mat-select [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.Canalization || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling" formControlName="tamanio_canalizacion">
+          <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.Canalization || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+            formControlName="tamanio_canalizacion">
             <mat-option *ngFor="let x of secuencia" [value]="x">
               {{x}}
             </mat-option>
@@ -62,33 +72,36 @@
     </div>
 
     <div fxLayout="column" [hidden]="!(sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling)">
-    <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
+      <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
         <span>Diseño de bandeja</span>
         <span class="spacer"></span>
         <mat-form-field>
-          <mat-select [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling" formControlName= "disenio_bandeja">
+          <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+            formControlName="disenio_bandeja">
             <mat-option *ngFor="let x of disenoBandeja" [value]="x">
               {{x}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-    <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
+      <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
         <span>Material bandeja</span>
         <span class="spacer"></span>
         <mat-form-field>
-          <mat-select [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"  formControlName="material_bandeja">
+          <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+            formControlName="material_bandeja">
             <mat-option *ngFor="let x of materialBandeja" [value]="x">
               {{x}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div>
-    <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
+      <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
         <span>Tipo de acabado</span>
         <span class="spacer"></span>
         <mat-form-field>
-          <mat-select  [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"  formControlName="tipo_acabado">
+          <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+            formControlName="tipo_acabado">
             <mat-option *ngFor="let x of acabado" [value]="x">
               {{x}}
             </mat-option>
@@ -97,37 +110,41 @@
       </div>
       <!-- End of Cable tray config first part -->
       <!-- Cable tray config second part -->
-      <div fxLayout.md ="row" fxLayout.xs ="column" fxLayout.sm ="row"  fxLayout.lg="row" fxLayoutAlign.lt-lg="left start" fxLayoutAlign.gt-md="left end">
-          <div fxLayout="column" fxFlex.lt-lg="100%" fxFlex.gt-md="50%"  fxFlexLayoutGap="14px" fxFlexAlign="center center" fxFlex.lt-md="100%">
-          <mat-checkbox  formControlName="tapa_superior_bandeja_portacable">Tapa superior para bandeja portacable</mat-checkbox>
+      <div fxLayoutGap="2%" fxLayout.md="row" fxLayout.xs="column" fxLayout.sm="row" fxLayout.lg="row" fxLayoutAlign.lt-lg="left start" fxLayoutAlign.gt-md="left end">
+        <div fxLayout="column" fxFlex.lt-lg="100%" fxFlex.gt-md="49%" fxFlexLayoutGap="14px" fxFlexAlign="center center" fxFlex.lt-md="100%">
+          <mat-checkbox formControlName="tapa_superior_bandeja_portacable">Tapa superior para bandeja portacable</mat-checkbox>
           <mat-checkbox formControlName="tapa_inferior_bandeja_portacable">Tapa inferior para bandeja portacable</mat-checkbox>
           <mat-checkbox formControlName="perfiles_separadores">Perfiles separadores</mat-checkbox>
         </div>
-        <div fxLayout="column" fxFlex.lt-lg="100%" fxFlex.gt-md="50%"  fxFlexLayoutGap="14px" fxFlexAlign="center center" fxFlex.lt-md="100%">
+        <div fxLayout="column" fxFlex.lt-lg="100%" fxFlex.gt-md="49%" fxFlexLayoutGap="14px" fxFlexAlign="center center" fxFlex.lt-md="100%">
           <mat-form-field>
-            <mat-select [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"  formControlName="longitud_tramo" placeholder="Longitud de tramo (m)">
+            <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+              formControlName="longitud_tramo" placeholder="Longitud de tramo (m)">
               <mat-option *ngFor="let x of longitud" [value]="x">
                 {{x}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field  >
-            <mat-select  [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"  formControlName="ancho_mm" placeholder="Ancho (mm)">
+          <mat-form-field>
+            <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+              formControlName="ancho_mm" placeholder="Ancho (mm)">
               <mat-option *ngFor="let x of ancho" [value]="x">
                 {{x}}
               </mat-option>
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field  >
-            <mat-select [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"  formControlName="alto_mm" placeholder="Alto (mm)">
+          <mat-form-field>
+            <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+              formControlName="alto_mm" placeholder="Alto (mm)">
               <mat-option *ngFor="let x of alto" [value]="x">
                 {{x}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field >
-            <mat-select [requiredIf]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"  formControlName="tipo_carga"placeholder="Tipo de carga">
+          <mat-form-field>
+            <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTry || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
+              formControlName="tipo_carga" placeholder="Tipo de carga">
               <mat-option *ngFor="let x of carga" [value]="x">
                 {{x}}
               </mat-option>
@@ -138,12 +155,12 @@
     </div>
   </div>
   <div fxLayout="column" fxFlex.lt-lg="100%" fxFlex.gt-md="50%" fxFlex.lt-md="100%">
-      <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
+    <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
 
       <span> Tipo de conductor</span>
       <mat-form-field>
         <mat-select formControlName="tipo_conductor">
-          <mat-option  *ngFor="let x of secuencia" [value]="x">
+          <mat-option *ngFor="let x of secuencia" [value]="x">
             {{x}}
           </mat-option>
         </mat-select>
@@ -155,7 +172,7 @@
       <mat-form-field>
 
         <mat-select formControlName="material_conductor">
-          <mat-option  *ngFor="let x of materialConductor" [value]="x">
+          <mat-option *ngFor="let x of materialConductor" [value]="x">
             {{x}}
           </mat-option>
         </mat-select>

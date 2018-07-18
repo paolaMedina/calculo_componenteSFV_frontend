@@ -24,7 +24,7 @@ const routes: Routes = [
     component: MpptsConfigurationComponent,
   },
   {
-    path: 'mppt-config/cabling',
+    path: 'mppt-config/cableado',
     component: MpptCablingComponent
   },
   {

@@ -14,3 +14,18 @@
     padding-left: 20px;
     padding-right: 20px; 
 }
+/* Theme */
+@import '~@angular/material/theming';
+@include mat-core();
+
+  $primary: mat-palette($mat-teal,500);
+  $accent: mat-palette($mat-blue-gray,800);
+
+  $theme: mat-light-theme($primary, $accent);
+
+@include angular-material-theme($theme);
+
+// Mat snackbar color 
+:host /deep/ .mat-simple-snackbar-action .mat-button{
+    color: #26b99a!important;
+}

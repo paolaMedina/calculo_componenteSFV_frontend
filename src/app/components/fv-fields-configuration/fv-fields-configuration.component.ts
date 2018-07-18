@@ -31,7 +31,7 @@ export class FvFieldsConfigurationComponent implements OnInit {
       this.fvFields.push(this._fvFieldService.getDefaultFvField()); 
     }
 
-    if ( this.sfv.investor_type === InvestorTypeEnum.MicroInvestor ) {
+    if ( this.sfv.tipo_de_inversor === InvestorTypeEnum.MicroInvestor ) {
       this.fvFields.slice(0,1);
       this.allow_add_and_delete = false;
     } else {

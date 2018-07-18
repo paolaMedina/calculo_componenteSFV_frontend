@@ -9,7 +9,7 @@
 
             <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
                     <span> Número de MTTPs</span>
-                    <mat-button-toggle-group    #mttps_number="matButtonToggleGroup" name="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle-group    #mttps_number="matButtonToggleGroup" nombre="fontStyle" aria-label="Font Style">
                         <mat-button-toggle >{{max_number_of_mttps}}</mat-button-toggle>
                     </mat-button-toggle-group>
                 </div>
@@ -20,19 +20,19 @@
                 <button  
                 *ngFor="let combination of combinations" 
                 mat-raised-button class="combination-button" 
-                [matTooltip]="combination.is_combined? 'Separar MTTPs': 'Combinar MTTPs'"
-                [color]="combination.is_combined? 'warn': 'primary'"
+                [matTooltip]="combination.es_combinado? 'Separar MTTPs': 'Combinar MTTPs'"
+                [color]="combination.es_combinado? 'warn': 'primary'"
                 (click)="combineOrDecombineMttps(combination)"  [value]="combination" >{{combination.id}}</button>
             </div>
         </div>
         <div fxLayout="row" fxLayoutGap="20px">
             <div fxLayout="column">
-                <span>Potencia FV total:</span>
-                <span>Cargabilidad inversor:</span>
+                <span>Potencia FV total: </span>
+                <span>Cargabilidad inversor: </span>
             </div>
             <div fxLayout="column">
-                <span>0W</span>
-                <span>0%</span>
+                <span>{{functPotenciaFvTotal(mttps, selectedPanel.pmax)}}W</span>
+                <span>{{functCargabilidadInversor(functPotenciaFvTotal(mttps, selectedPanel.pmax), selectedInversor.pot_nom) | number: '1.1-1'}}%</span>
             </div>
         </div>
     </div>

@@ -60,7 +60,7 @@ export class MpptConfigurationComponent implements OnInit {
        return true;
      }
      else {
-      this.snackBar.open(`Se han encontrado algunos problemas en el MPPT ${this.mttp.name}`, 'Aceptar', {
+      this.snackBar.open(`Se han encontrado algunos problemas en el MPPT ${this.mttp.nombre}`, 'Aceptar', {
         duration: 2000,
       });
       return false;
@@ -69,7 +69,7 @@ export class MpptConfigurationComponent implements OnInit {
    goToCablingConfig() {
      if(this.saveChanges()) {
        this.goToCabling.emit();
-    this._router.navigate(['/mppt-config/cabling', {fv_id: this.fvFieldId.toString(), mttp_id: this.mttp.id.toString()}]);
+    this._router.navigate(['/mppt-config/cableado', {fv_id: this.fvFieldId.toString(), mttp_id: this.mttp.id.toString()}]);
      } else {
        return;
      }
@@ -77,47 +77,49 @@ export class MpptConfigurationComponent implements OnInit {
   ngOnInit() {
     this._sfv = this._sfvService.get();
     /** If not default mttp is injected at input make form from that mttp */
-    if(this.mttp.number_of_chains_in_parallel !== -1) {
+    if(this.mttp.numero_de_cadenas_en_paralelo !== -1) {
       this.mttpForm = this._mttpFormBuilder.makeForm(this.mttp);
-      this.updateMttpSpecifications(this.mttp.number_of_panels_in_series_per_chain, this.mttp.number_of_chains_in_parallel);
+      this.updateMttpSpecifications(this.mttp.numero_de_paneles_en_serie_por_cadena, this.mttp.numero_de_cadenas_en_paralelo);
     } else {
       this.mttpForm = this._mttpFormBuilder.makeForm();
     }
     /** Calculate and update mttpspecification after number of panels changes or number of chains change and only if both have values */
-    this.mttpForm.get('number_of_chains_in_parallel')
+    this.mttpForm.get('numero_de_cadenas_en_paralelo')
     .valueChanges.subscribe(
-      () => {
-        if (this.mttpForm.get('number_of_panels_in_series_per_chain').value !== '') {
+      (value) => {
+        this.mttp.numero_de_cadenas_en_paralelo = value;
+        if (this.mttpForm.get('numero_de_paneles_en_serie_por_cadena').value !== '') {
           this.updateMttpSpecifications(
-            Number(this.mttpForm.get('number_of_panels_in_series_per_chain').value),
-            Number(this.mttpForm.get('number_of_chains_in_parallel').value)
+            Number(this.mttpForm.get('numero_de_paneles_en_serie_por_cadena').value),
+            Number(this.mttpForm.get('numero_de_cadenas_en_paralelo').value)
           );
         }
       }
     );
-    this.mttpForm.get('number_of_panels_in_series_per_chain')
+    this.mttpForm.get('numero_de_paneles_en_serie_por_cadena')
     .valueChanges.subscribe(
-      () => {
-        if (this.mttpForm.get('number_of_chains_in_parallel').value !== '') {
+      (value) => {
+        this.mttp.numero_de_paneles_en_serie_por_cadena = value;
+        if (this.mttpForm.get('numero_de_cadenas_en_paralelo').value !== '') {
           this.updateMttpSpecifications(
-            Number(this.mttpForm.get('number_of_panels_in_series_per_chain').value),
-            Number(this.mttpForm.get('number_of_chains_in_parallel').value) 
+            Number(this.mttpForm.get('numero_de_paneles_en_serie_por_cadena').value),
+            Number(this.mttpForm.get('numero_de_cadenas_en_paralelo').value) 
           );
         }
       }
     );
    }
-  updateMttpSpecifications(number_of_panels_in_series_per_chain: number, number_of_chains_in_parallel: number) {
-    this.mttpSpecifications.total_de_paneles = total_de_paneles(number_of_chains_in_parallel, number_of_panels_in_series_per_chain);
+  updateMttpSpecifications(numero_de_paneles_en_serie_por_cadena: number, numero_de_cadenas_en_paralelo: number) {
+    this.mttpSpecifications.total_de_paneles = total_de_paneles(numero_de_cadenas_en_paralelo, numero_de_paneles_en_serie_por_cadena);
     this.mttpSpecifications.potencia_nominal = potencia_nominal(this.mttpSpecifications.total_de_paneles, this._solarPanel.pmax);
-    this.mttpSpecifications.corriente_maxima_MPPTn = corriente_maxima_MPPTn(number_of_chains_in_parallel, Number(this._solarPanel.isc));
-    this.mttpSpecifications.corriente_Mpp_MPPTn = corriente_Mpp_MPPTn(number_of_chains_in_parallel, Number(this._solarPanel.impp));
+    this.mttpSpecifications.corriente_maxima_MPPTn = corriente_maxima_MPPTn(numero_de_cadenas_en_paralelo, Number(this._solarPanel.isc));
+    this.mttpSpecifications.corriente_Mpp_MPPTn = corriente_Mpp_MPPTn(numero_de_cadenas_en_paralelo, Number(this._solarPanel.impp));
     this.mttpSpecifications.tension_maxima_MPPTn = Number(tension_maxima_MPPTn(
-      number_of_panels_in_series_per_chain, 
+      numero_de_paneles_en_serie_por_cadena, 
       Number(this._solarPanel.voc), 
       parseFloat(this._solarPanel.coef_voc.substr(0, this._solarPanel.coef_voc.length -1).replace(',','.')), 
-      Number(this._sfv.lowest_ambient_temperature_expected) ).toFixed(2)) ;
+      Number(this._sfv.minima_temperatura_ambiente_esperada) ).toFixed(2)) ;
   
-    this.mttpSpecifications.tension_Mpp_MPPTn = tension_Mpp_MPPTn(number_of_panels_in_series_per_chain, this._solarPanel.vmpp );
+    this.mttpSpecifications.tension_Mpp_MPPTn = tension_Mpp_MPPTn(numero_de_paneles_en_serie_por_cadena, this._solarPanel.vmpp );
     }
 }

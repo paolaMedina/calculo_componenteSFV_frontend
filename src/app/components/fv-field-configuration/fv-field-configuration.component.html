@@ -12,7 +12,7 @@
           fxLayoutGap.gt-sm="20px" fxLayoutAlign.lt-md="left start" fxLayoutAlign.gt-sm="left center">
           <span>Indique nombre de campo FV</span>
           <mat-form-field>
-            <input matInput *ngIf="fvField" formControlName="name">
+            <input matInput *ngIf="fvField" formControlName="nombre">
           </mat-form-field>
         </div>
 
@@ -22,7 +22,7 @@
             Seleccione Fabricante de panel solar FV
           </span>
           <mat-form-field *ngIf="fabricantes_paneles">
-            <mat-select formControlName="manufacturer_1" #service_type_select [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+            <mat-select formControlName="fabricante_1" #service_type_select [placeholder]="!tipo_servicio.value? 'Seleccione un tipo': ''">
               <mat-option *ngFor="let fabricante of fabricantes_paneles" [value]="fabricante">
                 {{fabricante}}
               </mat-option>
@@ -36,8 +36,8 @@
             Seleccione el modelo del panel solar FV
           </span>
           <mat-form-field>
-            <mat-select formControlName="solar_panel_model_1" [matTooltip]="(fvFieldForm.get('manufacturer_1').value === '')? 'Seleccione primero un fabricante': ''"
-              [placeholder]="fvFieldForm.get('manufacturer_1').value===''? 'Seleccione primero un fabricante': ''">
+            <mat-select formControlName="model_panel_solar_1" [matTooltip]="(fvFieldForm.get('fabricante_1').value === '')? 'Seleccione primero un fabricante': ''"
+              [placeholder]="fvFieldForm.get('fabricante_1').value===''? 'Seleccione primero un fabricante': ''">
               <ng-container>
                 <mat-option *ngFor="let modelo of modelosPanel" [value]="modelo">
                   {{modelo}}
@@ -55,7 +55,7 @@
             Seleccione Fabricante de inversor FV
           </span>
           <mat-form-field>
-            <mat-select formControlName="manufacturer_2" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+            <mat-select formControlName="fabricante_2" #tipo_servicio [placeholder]="!tipo_servicio.value? 'Seleccione un tipo': ''">
               <ng-container *ngIf="manufacturesNamesUnique">
                 <mat-option *ngFor="let manufacturNameUnique of manufacturesNamesUnique" [value]="manufacturNameUnique">
                   {{manufacturNameUnique}}
@@ -71,7 +71,7 @@
             Seleccione el modelo del panel solar FV
           </span>
           <mat-form-field>
-            <mat-select formControlName="solar_panel_model_2" #service_type [placeholder]="!service_type.value? 'Seleccione un tipo': ''">
+            <mat-select formControlName="modelo_panel_solar_2" #tipo_servicio [placeholder]="!tipo_servicio.value? 'Seleccione un tipo': ''">
               <ng-container>
                 <mat-option *ngFor="let modelo of modelosInversor" [value]="modelo">
                   {{modelo}}
@@ -123,8 +123,8 @@
       </div>
       <div fxLayout="column" fxLayoutGap="2%" fxFlex.lt-md="100%" fxFlex.gt-sm="49%">
         <!--    MPPTs Distribution    -->
-        <div class="container">
-          <div fxLayout="column" class=" mppts-distribution">
+        <div fxLayout="row" class=" mppts-distribution">
+          <div fxLayout="column" >
             <h4>Distribución MPPTs</h4>
             <span>MPPT 1: X</span>
             <span>MPPT 2: X</span>
@@ -132,12 +132,14 @@
             <span>Potencia FV: 0W</span>
             <span>Carga Inversor: %</span>
           </div>
+          <span class="spacer"></span>
+          <div fxLayout="row" fxFlexAlign="center" fxLayoutAlign="end center" fxLayoutGap="20px">
+              <span>Configurar MTTPs </span>
+              <img class="config-image" (click)="goToMpptsConfig()" width="65" height="65" src="/assets/img/configuration.png">
+            </div>
         </div>
         <!--    end of MPPTs Distribution    -->
-        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
-          <span>Configurar MTTPs </span>
-          <img class="config-image" (click)="goToMpptsConfig()" width="65" height="65" src="/assets/img/configuration.png">
-        </div>
+
         <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
           <span>Salida del inversor </span>
           <img class="config-image" (click)="goToInvestorOutput()" width="65" height="65" src="/assets/img/configuration.png">
