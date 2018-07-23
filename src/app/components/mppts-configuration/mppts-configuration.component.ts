@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, ViewChildren, QueryList, OnChanges } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 
 import { Mttp, FvField, Inversor, PanelSolar } from '../../core/models';
@@ -10,6 +10,8 @@ import { MatSnackBar } from '@angular/material';
 import { routercTransition } from '../../router.animations';
 import { MttpFormBuilder } from '../../core/forms/mttp.form';
 import { potencia_fv_total, cargabilidad_inversor } from '@app/core/lib/mttp-functions';
+import { validar_potencia_fv, ValidacionConMensajeInterface } from '@app/core/lib/mttp-validations';
+import { ResultadoValidacion } from '@app/core/enums';
 class Combination {
   id: string;
   es_combinado: boolean;
@@ -27,8 +29,11 @@ class Combination {
 export class MpptsConfigurationComponent implements OnInit {
   //@Input() max_number_of_mttps = 5;
   max_number_of_mttps:number;
-  functPotenciaFvTotal = potencia_fv_total;
-  functCargabilidadInversor = cargabilidad_inversor;
+  
+  potencia_fv_total: number = 0;
+  cargabilidad_inversor: number = 0;
+  resultadoValidacionesEnum = ResultadoValidacion;
+
   @ViewChildren('mppts') mpptComponents: QueryList<MpptConfigurationComponent>;
   fvField: FvField;
   mttpsNumberControl: FormControl;
@@ -55,6 +60,22 @@ export class MpptsConfigurationComponent implements OnInit {
   getArray(size: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)): null;
+  }
+  functPotenciaFvTotal() {
+    this.potencia_fv_total = potencia_fv_total(this.mttps, this.selectedPanel.pmax);
+    return this.potencia_fv_total;
+  }
+  functCargabilidadInversor() {
+    this.cargabilidad_inversor = cargabilidad_inversor(this.potencia_fv_total, this.selectedInversor.pot_nom) 
+    return this.cargabilidad_inversor;
+  } 
+  functValidarPotenciaFvTotal(): boolean {
+    console.log(this.potencia_fv_total, 'valor de potencia fv total')
+    console.log(validar_potencia_fv(this._inversor, this.potencia_fv_total), 'resultado validacion en mppts de potencial total')
+    if (  validar_potencia_fv(this._inversor, this.potencia_fv_total).resultadoValidacion === this.resultadoValidacionesEnum.ERROR) {
+      return true;
+    }
+    return false;
   }
 
   initMttps(numberOfMttps: number) {

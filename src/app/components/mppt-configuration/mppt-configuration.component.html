@@ -29,7 +29,7 @@
     </div>
   </div>
   <!-- Nominal data-->
-  <app-nominal-array-data [mttpSpecifications]="mttpSpecifications"></app-nominal-array-data>
+  <app-nominal-array-data #nominal_array_data [mttp]="mttp" [mttpSpecifications]="mttpSpecifications"></app-nominal-array-data>
   <!-- End of Nominal data-->
   <div fxLayout="row" fxLayoutAlign="center center">
   <button (click)="goToCablingConfig()" mat-button>Configurar cableado</button>

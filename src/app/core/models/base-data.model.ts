@@ -6,7 +6,8 @@ import {
     InterruptorManual,
     Inversor,
     MicroInversor,
-    PanelSolar
+    PanelSolar,
+    InversorInterface
 } from "./base_data";
 
 export class BaseData {
@@ -15,7 +16,7 @@ export class BaseData {
     fusibles: Fusible[];
     interruptoresAutomaticos: InteruptorAutomatico[];
     interruptoresManuales: InterruptorManual[];
-    inversores: Inversor[];
+    inversores: InversorInterface[];
     microInversores: MicroInversor[];
     panelesSolares: PanelSolar[];  
 }

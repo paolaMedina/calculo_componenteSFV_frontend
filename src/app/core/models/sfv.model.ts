@@ -1,4 +1,5 @@
 import { InvestorTypeEnum } from "../../core/enums";
+import { FvField } from "@app/core/models/fv-field.model";
 
 export class Sfv {
     potencia_de_planta_fv: number;
@@ -12,5 +13,6 @@ export class Sfv {
     lugar_instalacion__opcion_techo_cubierta: string;
     tipo_servicio: string;
     voltage_servicio: number;
+    fvs: FvField[];
     lugar_instalacion: string;
 }

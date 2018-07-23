@@ -8,6 +8,7 @@ import { FvFieldService, BaseDataService, SfvService } from '../../core/services
 import { distinctOn } from '../../core/lib';
 import { FvFormBuilder } from '../../core/forms/fv-field.form';
 import { routercTransition } from '../../router.animations';
+import { cargabilidad_inversor, potencia_fv_total } from '@app/core/lib/mttp-functions';
 export interface Food {
   value: string;
   viewValue: string;
@@ -42,8 +43,10 @@ export class FvFieldConfigurationComponent implements OnInit {
   inversores_filtrados: Inversor[];
   inversores_filtrado_final: Inversor[];
   modelosInversor: string[];
-
-
+  panelSeleccionado: PanelSolar;
+  potencia_fv: number;
+  carga_inversor: number;
+  inversorSeleccionado: Inversor;
   foods: Food[] = [
     { value: 'steak-0', viewValue: 'Steak' },
     { value: 'pizza-1', viewValue: 'Pizza' },
@@ -59,7 +62,8 @@ export class FvFieldConfigurationComponent implements OnInit {
     public snackBar: MatSnackBar,
     private route: ActivatedRoute) {
     this.fvFieldForm = this._fvFormBuilder.makeForm();
-
+      this.panelSeleccionado = this._fvFieldService.getSelectedSolarPanel();
+      this.inversorSeleccionado = this._fvFieldService.getSelectedInversor();
     /* valor Tension y tipo de servicio  seleccionada*/
     this._tension = String(this._sfvService.get().voltage_servicio);
     this._servicio = this._sfvService.get().tipo_servicio;
@@ -99,13 +103,13 @@ export class FvFieldConfigurationComponent implements OnInit {
     let inversor_tension = [];
 
     for (let inversor of inversores) {
-      if (inversor.vsal_1 == this._tension) {
+      if (inversor.vsal_1 == Number(this._tension)) {
         inversor_tension.push(inversor)
       }
-      else if (inversor.vsal_2 == this._tension) {
+      else if (inversor.vsal_2 == Number(this._tension)) {
         inversor_tension.push(inversor)
       }
-      else if (inversor.vsal_3 == this._tension) {
+      else if (inversor.vsal_3 == Number(this._tension)) {
         inversor_tension.push(inversor)
       }
     }
@@ -199,6 +203,10 @@ export class FvFieldConfigurationComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.fvField = this._fvFieldService.get(params['id']);
+      if ( this.fvField.mttps.length > 0 ) {
+       this.potencia_fv = potencia_fv_total(this.fvField.mttps, this.panelSeleccionado.pmax);
+       this.carga_inversor = cargabilidad_inversor(this.potencia_fv, this.inversorSeleccionado.pot_nom);
+      }
       this.fvFieldForm.get('nombre').setValue(this.fvField.nombre);
     });
     /** Filtrar panel por fabricante seleccionado */

@@ -21,7 +21,10 @@ export class FvFieldsConfigurationComponent implements OnInit {
   ) {
     this.fvFields = new Array<FvField>();
   }
-
+  sendData() {
+    this.sfv.fvs = this._fvFieldService.getFvFields();
+    this._sfvService.send(this.sfv);
+  }
   ngOnInit() {
     this.sfv = this._sfvService.get();
     /* If fv fields are already registred, get that,  In no fv fields are registred, start with one fv field  */

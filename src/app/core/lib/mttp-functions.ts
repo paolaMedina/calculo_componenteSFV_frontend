@@ -37,6 +37,6 @@ export function potencia_fv_total(panelesMttp: Mttp[], pnom_panel: number): numb
         return  _total_de_paneles * pnom_panel;
 }
 export function cargabilidad_inversor(potencia_fv_total: number,  pnom_inv): number {
-    return (potencia_fv_total / pnom_inv) * 100;
+    return (potencia_fv_total / Number(pnom_inv)) / 10;
 
 }

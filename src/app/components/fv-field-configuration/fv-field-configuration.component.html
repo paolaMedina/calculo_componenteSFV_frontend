@@ -124,19 +124,20 @@
       <div fxLayout="column" fxLayoutGap="2%" fxFlex.lt-md="100%" fxFlex.gt-sm="49%">
         <!--    MPPTs Distribution    -->
         <div fxLayout="row" class=" mppts-distribution">
-          <div fxLayout="column" >
+          <div fxLayout="column">
             <h4>Distribución MPPTs</h4>
-            <span>MPPT 1: X</span>
-            <span>MPPT 2: X</span>
-            <span>MPPT 3: NA</span>
-            <span>Potencia FV: 0W</span>
-            <span>Carga Inversor: %</span>
+            <ng-container *ngIf= "fvField.mttps.length > 0; else no_mttps">
+              <span *ngFor="let mttp of fvField.mttps ">MPPT {{mttp.nombre}}: {{' ' + mttp.numero_de_paneles_en_serie_por_cadena + 'X' + mttp.numero_de_cadenas_en_paralelo}}</span>
+              <span>Potencia FV: {{potencia_fv}}W</span>
+              <span>Carga Inversor: {{carga_inversor}}%</span>
+            </ng-container>
+            <ng-template #no_mttps> <span >No se han registrado mttps</span></ng-template>
           </div>
           <span class="spacer"></span>
           <div fxLayout="row" fxFlexAlign="center" fxLayoutAlign="end center" fxLayoutGap="20px">
-              <span>Configurar MTTPs </span>
-              <img class="config-image" (click)="goToMpptsConfig()" width="65" height="65" src="/assets/img/configuration.png">
-            </div>
+            <span>Configurar MTTPs </span>
+            <img class="config-image" (click)="goToMpptsConfig()" width="65" height="65" src="/assets/img/configuration.png">
+          </div>
         </div>
         <!--    end of MPPTs Distribution    -->
 
