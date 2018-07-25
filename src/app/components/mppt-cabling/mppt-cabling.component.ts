@@ -72,7 +72,7 @@ export class MpptCablingComponent implements OnInit {
         let idMttp = params.get('mttp_id');
         let fvField = this._fvFieldService.get(fvFieldId);
         if ( fvField ) {
-          let mttp: Mttp  = this._fvFieldService.get(this.fvFieldId).mttps.find(mttp => mttp.id === idMttp);
+          let mttp: Mttp  = this._fvFieldService.get(this.fvFieldId).mttps.find(mttp => mttp._id === idMttp);
           this.mttp = mttp;
         }
       });

@@ -16,7 +16,7 @@ const routes: Routes = [
     component: FvFieldsConfigurationComponent
   },
   {
-    path: 'fv-field-config/:id',
+    path: 'fv-field-config/:_id',
     component: FvFieldConfigurationComponent
   },
   {

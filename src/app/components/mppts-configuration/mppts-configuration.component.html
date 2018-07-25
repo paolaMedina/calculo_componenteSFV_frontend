@@ -1,4 +1,4 @@
-<!-- [routerLink]="['/fv-field-config', fvField.id]" -->
+<!-- [routerLink]="['/fv-field-config', fvField._id]" -->
 <div fxLayout="column" fxLayoutGap="3%" [@routerTransition]>
     <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
         <button (click)="return()" class="left-button" mat-button> Volver </button>
@@ -19,7 +19,7 @@
             <span> Combinar/Separar MTTPs</span>
             <div fxLayout="row">
                 <button *ngFor="let combination of combinations" mat-raised-button class="combination-button" [matTooltip]="combination.es_combinado? 'Separar MTTPs': 'Combinar MTTPs'"
-                    [color]="combination.es_combinado? 'primary': ''" (click)="combineOrDecombineMttps(combination)" [value]="combination">{{combination.id}}</button>
+                    [color]="combination.es_combinado? 'primary': ''" (click)="combineOrDecombineMttps(combination)" [value]="combination">{{combination._id}}</button>
             </div>
         </div>
         <div fxLayout="row" fxLayoutGap="20px">
@@ -32,13 +32,13 @@
                     <span>{{functPotenciaFvTotal()}}W</span>
                     <mat-icon [hidden]="!functValidarPotenciaFvTotal()">clear</mat-icon>
                 </div>
-                <span>{{functCargabilidadInversor()}}%</span>
+                <span>{{functCargabilidadInversor() |  number: '1.1-2'}}%</span>
             </div>
         </div>
     </div>
     <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap.gt-sm="20px">
 
-        <app-mppt-configuration #mppts *ngFor="let mttp of mttps" (goToCabling)="whenGoesToCablingConfig()" [fvFieldId]="fvField.id"
+        <app-mppt-configuration #mppts *ngFor="let mttp of mttps" (goToCabling)="whenGoesToCablingConfig()" [fvFieldId]="fvField._id"
             [mttp]="mttp"></app-mppt-configuration>
     </div>
 

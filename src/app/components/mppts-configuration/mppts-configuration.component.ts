@@ -13,10 +13,10 @@ import { potencia_fv_total, cargabilidad_inversor } from '@app/core/lib/mttp-fun
 import { validar_potencia_fv, ValidacionConMensajeInterface } from '@app/core/lib/mttp-validations';
 import { ResultadoValidacion } from '@app/core/enums';
 class Combination {
-  id: string;
+  _id: string;
   es_combinado: boolean;
-  constructor(id: string, es_combinado: boolean) {
-    this.id = id;
+  constructor(_id: string, es_combinado: boolean) {
+    this._id = _id;
     this.es_combinado = es_combinado;
   }
 }
@@ -94,7 +94,7 @@ export class MpptsConfigurationComponent implements OnInit {
     let index_mptt2: number;
     let newCombinedMptt: Mttp;
     /** Extract ids of mptts from combination, example [5,6] */
-    let ids_mttps = combination.id.split('-');
+    let ids_mttps = combination._id.split('-');
     /** Init ids of mptts from ids array */
     name_mppt_1 = Number(ids_mttps[0]);
     name_mppt_2 = Number(ids_mttps[1]);
@@ -130,13 +130,13 @@ export class MpptsConfigurationComponent implements OnInit {
    * @param combination String in format `n-n+1`, `mttps[n]` and `mttps[n+1]` should be combined in one mttp
    */
   separeCombinedMttps(combination: Combination){
-    let name_mppt_to_delete: string = combination.id;
+    let name_mppt_to_delete: string = combination._id;
     let name_mppt_1: number;
     let name_mppt_2: number;
     let index_mptt_to_delete: number;
     let newCombinedMptt1, newCombinedMptt2: Mttp;
     /** Extract ids of mptts from combination, example [5,6] */
-    let ids_mttps = combination.id.split('-');
+    let ids_mttps = combination._id.split('-');
     /** Init ids of mptts from ids array */
     name_mppt_1 = Number(ids_mttps[0]);
     name_mppt_2 = Number(ids_mttps[1]);

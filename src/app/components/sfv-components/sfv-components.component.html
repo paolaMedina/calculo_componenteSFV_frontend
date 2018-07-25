@@ -9,18 +9,13 @@
         <span>Nombre de el proyecto</span>
         <mat-form-field class="field-fv-potency">
           <input min="0" formControlName="nombre_proyecto" matInput placeholder="Ingrese el nombre de el proyecto">
-          <!--mat-error *ngIf="!sfvForm.get('potencia_de_planta_fv').valid">
-                Por favor ingrese una potencia de planta valida
-              </mat-error-->
         </mat-form-field>
       </div>
       <div  fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
         <span>Potencia de planta FV</span>
         <mat-form-field class="field-fv-potency">
           <input type="number" min="0" formControlName="potencia_de_planta_fv" matInput placeholder="Ingrese la potencia de planta FV">
-          <!--mat-error *ngIf="!sfvForm.get('potencia_de_planta_fv').valid">
-            Por favor ingrese una potencia de planta valida
-          </mat-error-->
+
         </mat-form-field>
         <span>kW</span>
       </div>
@@ -101,7 +96,7 @@
         </span>
         <mat-form-field *ngIf="tensiones">
           <mat-select formControlName="voltage_servicio" #tipo_servicio [placeholder]="!tipo_servicio.value? 'Seleccione la tensión': ''">
-            <mat-option *ngFor="let tension of tensiones" [value]="tension">
+            <mat-option *ngFor="let tension of tensiones "  [value]="tension">
               {{tension}}
             </mat-option>
           </mat-select>

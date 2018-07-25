@@ -101,13 +101,13 @@
               <span>Coeficiente Voc</span>
             </div>
             <div fxLayout="column" fxLayoutGap="15px">
-              <span>{{pmax}}</span>
-              <span>{{vmpp}}</span>
-              <span>{{impp}}</span>
-              <span>{{voc}}</span>
-              <span>{{isc}}</span>
-              <span>{{eficiencia}}</span>
-              <span>{{coeficiente}}</span>
+              <span>{{pmax | number: '1.1-2' }}</span>
+              <span>{{vmpp | number: '1.1-2'}}</span>
+              <span>{{impp | number: '1.1-2'}}</span>
+              <span>{{voc | number: '1.1-2'}}</span>
+              <span>{{isc | number: '1.1-2'}}</span>
+              <span>{{eficiencia | number: '1.1-2'}}</span>
+              <span>{{coeficiente | number: '1.1-2'}}</span>
             </div>
             <div fxLayout="column" fxLayoutGap="15px">
               <span>W</span>
@@ -129,7 +129,7 @@
             <ng-container *ngIf= "fvField.mttps.length > 0; else no_mttps">
               <span *ngFor="let mttp of fvField.mttps ">MPPT {{mttp.nombre}}: {{' ' + mttp.numero_de_paneles_en_serie_por_cadena + 'X' + mttp.numero_de_cadenas_en_paralelo}}</span>
               <span>Potencia FV: {{potencia_fv}}W</span>
-              <span>Carga Inversor: {{carga_inversor}}%</span>
+              <span>Carga Inversor: {{carga_inversor | number: '1.1-1'}}%</span>
             </ng-container>
             <ng-template #no_mttps> <span >No se han registrado mttps</span></ng-template>
           </div>
