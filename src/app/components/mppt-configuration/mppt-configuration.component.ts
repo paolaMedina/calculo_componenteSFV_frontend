@@ -53,8 +53,8 @@ export class MpptConfigurationComponent implements OnInit {
       this.mttp = this._mttpFormBuilder.extractData(this.mttpForm, this.mttp);
 
       /** Si ya existia el mttp en el fv field entonces updatear si no pushear */
-      if (_fvField.mttps.filter(mttp => mttp.id === this.mttp.id).length > 0) {
-        let index_of_mttp_to_update = _fvField.mttps.findIndex(mttp => mttp.id === this.mttp.id);
+      if (_fvField.mttps.filter(mttp => mttp._id === this.mttp._id).length > 0) {
+        let index_of_mttp_to_update = _fvField.mttps.findIndex(mttp => mttp._id === this.mttp._id);
         _fvField.mttps[index_of_mttp_to_update] = this.mttp;
       } else {
         _fvField.mttps.push(this.mttp);
@@ -72,7 +72,7 @@ export class MpptConfigurationComponent implements OnInit {
   goToCablingConfig() {
     if (this.saveChanges()) {
       this.goToCabling.emit();
-      this._router.navigate(['/mppt-config/cableado', { fv_id: this.fvFieldId.toString(), mttp_id: this.mttp.id.toString() }]);
+      this._router.navigate(['/mppt-config/cableado', { fv_id: this.fvFieldId.toString(), mttp_id: this.mttp._id.toString() }]);
     } else {
       return;
     }

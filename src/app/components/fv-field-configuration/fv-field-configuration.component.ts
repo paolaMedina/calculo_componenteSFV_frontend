@@ -143,7 +143,7 @@ export class FvFieldConfigurationComponent implements OnInit {
 
     /** Init fv form and fv field from persistant data storage at services */
     this.route.params.subscribe(params => {
-      this.fvField = this._fvFieldService.get(params['id']);
+      this.fvField = this._fvFieldService.get(params['_id']);
       this.fvFieldForm = this._fvFormBuilder.makeForm(this.fvField);
     });
     /** Filtrar por modelo del panel seleccionado */
@@ -202,7 +202,7 @@ export class FvFieldConfigurationComponent implements OnInit {
       })
 
     this.route.params.subscribe(params => {
-      this.fvField = this._fvFieldService.get(params['id']);
+      this.fvField = this._fvFieldService.get(params['_id']);
       if ( this.fvField.mttps.length > 0 ) {
        this.potencia_fv = potencia_fv_total(this.fvField.mttps, this.panelSeleccionado.pmax);
        this.carga_inversor = cargabilidad_inversor(this.potencia_fv, this.inversorSeleccionado.pot_nom);

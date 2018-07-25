@@ -97,6 +97,7 @@ export class SfvComponentsComponent implements OnInit {
     this.vsal3 = distinctOn<Inversor>(inversores, 'vsal_3');
     const _tensiones =this.vsal2.concat(this.vsal1,this.vsal3);
     this.tensiones=<Array<String>>distinctWithoutZeros(_tensiones);
+    this.tensiones.sort();
    }
   ngOnInit() {
     this.sfv = this.sfvService.get();

@@ -2,8 +2,8 @@ import { Source } from "./source.model";
 import { v4 as uuid } from 'uuid';
 
 export class Mttp {
-    id: string;
-    /** nombre, can be number `1...n` or if Mttp is combined id can be `1-2` or `3-4` or `n-n+1`  */
+    _id: string;
+    /** nombre, can be number `1...n` or if Mttp is combined _id can be `1-2` or `3-4` or `n-n+1`  */
     nombre: string;
     /** Número de paneles en serie por cadena */
     numero_de_paneles_en_serie_por_cadena: number;
@@ -14,7 +14,7 @@ export class Mttp {
     cableado: {input: Source, output: Source};
 
     constructor(nombre: string) {
-        this.id = uuid();
+        this._id = uuid();
         this.nombre = nombre;
         this.numero_de_cadenas_en_paralelo = -1;
         this.numero_de_paneles_en_serie_por_cadena = -1;

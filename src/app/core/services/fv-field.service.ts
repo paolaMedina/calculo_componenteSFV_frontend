@@ -70,9 +70,9 @@ export class FvFieldService {
   setSelectedField(fvField: FvField) {
     this.selectedFvField = this.fvFields.find(_fvField => _fvField.id === fvField.id);
   }
-  get(id: string) {
+  get(_id: string) {
     /** mock  */
     //return this.fvFields[0];
-    return this.fvFields.find(_fvField => _fvField.id === id);
+    return this.fvFields.find(_fvField => _fvField.id === _id);
   }
 }

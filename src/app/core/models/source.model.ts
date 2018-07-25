@@ -1,7 +1,7 @@
 import { v4 as uuid } from 'uuid';
 
 export class Source {
-    id: string;
+    _id: string;
     tipo_alambrado: string;
     tipo_conductor: string;
     distancia_del_conductor_mas_largo: number;
@@ -25,6 +25,6 @@ export class Source {
     alto_mm: number
     tipo_carga: string;
     constructor() {
-        this.id = uuid();
+        this._id = uuid();
     }
 }
