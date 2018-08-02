@@ -41,5 +41,10 @@ export class NominalArrayDataComponent implements OnInit {
       this.validateMttpSpecification();
     }
   }
+  ngOnChanges() {
+    if (this.mttp.numero_de_cadenas_en_paralelo && this.mttp.numero_de_paneles_en_serie_por_cadena  ) {
+      this.validateMttpSpecification();
+    }
+  }
 
 }
