@@ -5,7 +5,7 @@ export class Source {
     tipo_alambrado: string;
     tipo_conductor: string;
     distancia_del_conductor_mas_largo: number;
-    caida_de_tension_de_diseño: number;
+    caida_de_tension_de_diseno: number;
     /** Canalización */
     tipo_canalizacion: string;
     canalizacion: string;

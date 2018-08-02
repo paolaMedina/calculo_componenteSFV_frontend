@@ -15,7 +15,6 @@ export class SfvService {
     this.sfv = sfv;
   }
   send(sfv: Sfv) {
-    console.log(JSON.stringify(sfv), 'complete sfv');
     this.apiService.post('postData', sfv);
   }
   constructor(private apiService: ApiService) {

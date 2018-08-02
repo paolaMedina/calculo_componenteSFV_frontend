@@ -24,7 +24,6 @@ export class BaseDataService {
             (base_data: BaseData) => {
               this._baseData = base_data;
               this._baseData.inversores = this.inversorFactory.makeMultiple(base_data.inversores)
-              console.log(this._baseData.inversores)
             }
           )
         );

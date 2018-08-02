@@ -112,8 +112,8 @@
         </div>
       </div>
       <div fxLayout="column" [hidden]="!(sfvForm.get('lugar_instalacion').value === 'Techo/Cubierta')" fxLayoutGap="20px" fxLayoutAlign="center center">
-        <div class="div-radio-group" [ngClass]="{'error': !sfvForm.get('lugar_instalacion__opcion_techo_cubierta').valid && sfvForm.get('lugar_instalacion__opcion_techo_cubierta').touched } ">
-          <mat-radio-group [required]="sfvForm.get('lugar_instalacion').value === 'Techo/Cubierta'" formControlName="lugar_instalacion__opcion_techo_cubierta"
+        <div class="div-radio-group" [ngClass]="{'error': !sfvForm.get('lugar_instalacion_opcion_techo_cubierta').valid && sfvForm.get('lugar_instalacion_opcion_techo_cubierta').touched } ">
+          <mat-radio-group [required]="sfvForm.get('lugar_instalacion').value === 'Techo/Cubierta'" formControlName="lugar_instalacion_opcion_techo_cubierta"
             fxLayout="column">
             <div fxLayout="row" fxLayoutAlign.lt-md="center center" fxLayoutGap="10px">
               <mat-radio-button value="Caso A">Caso A </mat-radio-button>
