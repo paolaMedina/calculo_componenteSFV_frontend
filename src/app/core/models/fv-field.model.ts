@@ -19,7 +19,7 @@ export class FvField {
         this.model_panel_solar_1 = "";
         this.modelo_panel_solar_2 = "";
         this.fabricante_2 = "";
-        this.mttps  = new Array<Mttp>();
+        this.mttps  = undefined;
         this.salida_inversor = {input: new Source(), output: new Source()};
     }
     get id() {

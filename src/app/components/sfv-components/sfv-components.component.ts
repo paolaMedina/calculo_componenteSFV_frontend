@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { Router } from '@angular/router';
@@ -11,6 +11,7 @@ import { InvestorTypeEnum } from '../../core/enums';
 import { routercTransition } from '../../router.animations';
 import { galleryOptionsFullScreenOnly } from '@app/core/const';
 import { INgxGalleryImage, NgxGalleryComponent } from 'ngx-gallery';
+import { APP_BASE_HREF } from "@angular/common";
 
 @Component({
   selector: 'app-sfv-components',
@@ -24,18 +25,17 @@ export class SfvComponentsComponent implements OnInit {
 
   helpImages: Array<INgxGalleryImage> = [
     {
-    big: '/assets/img/helpers/instalation_places_helpers/caseA_helper.png'
+    big: `${this.baseHref}assets/img/helpers/instalation_places_helpers/caseA_helper.png`
     },
     {
-      big: '/assets/img/helpers/instalation_places_helpers/caseB_helper.png'
+      big: `${this.baseHref}assets/img/helpers/instalation_places_helpers/caseB_helper.png`
     },
     {
-      big: '/assets/img/helpers/instalation_places_helpers/caseC_helper.png'
+      big: `${this.baseHref}assets/img/helpers/instalation_places_helpers/caseC_helper.png`
     }
     
 ];
 @ViewChild('helpImagesGallery') onlyPreviewGallery: NgxGalleryComponent;
-
   sfvForm: FormGroup;
   INVESTOR_TYPE_ENUM: InvestorTypeEnum;
   inversores: Inversor[];
@@ -47,12 +47,14 @@ export class SfvComponentsComponent implements OnInit {
  
   
   constructor(
+    @Inject(APP_BASE_HREF) private baseHref: string,
     private sfvFormBuilder: SfvFormBuilder,
     private sfvService: SfvService,
     private baseDataService: BaseDataService,
     private router: Router,
     public snackBar: MatSnackBar
   ) {
+    console.log(this.baseHref);
     this.sfv = this.sfvService.get();
     this.sfvForm = this.sfvFormBuilder.makeForm();
 

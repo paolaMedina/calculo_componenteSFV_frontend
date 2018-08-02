@@ -21,29 +21,29 @@
     </div>
     <div fxLayout="column" >
       <ng-container *ngIf= "mttpSepcifications_Validation.potencia_nominal" [ngSwitch]="mttpSepcifications_Validation.potencia_nominal.resultadoValidacion">
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.potencia_nominal.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.potencia_nominal.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.potencia_nominal.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+          <mat-icon class = "green-icon"[matTooltip]="mttpSepcifications_Validation.potencia_nominal.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon class = "yellow-icon" [matTooltip]="mttpSepcifications_Validation.potencia_nominal.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon class = "red-icon"[matTooltip]="mttpSepcifications_Validation.potencia_nominal.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
       </ng-container>
       <ng-container *ngIf= "mttpSepcifications_Validation.tension_Mpp_MPPTn" [ngSwitch]="mttpSepcifications_Validation.tension_Mpp_MPPTn.resultadoValidacion">
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+          <mat-icon class = "green-icon" [matTooltip]="mttpSepcifications_Validation.tension_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon class = "yellow-icon" [matTooltip]="mttpSepcifications_Validation.tension_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon class = "red-icon" [matTooltip]="mttpSepcifications_Validation.tension_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
       </ng-container>
       <ng-container *ngIf= "mttpSepcifications_Validation.corriente_Mpp_MPPTn" [ngSwitch]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.resultadoValidacion">
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+          <mat-icon class = "green-icon" [matTooltip]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon class = "yellow-icon" [matTooltip]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon class = "red-icon" [matTooltip]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
       </ng-container>
       <ng-container *ngIf= "mttpSepcifications_Validation.tension_maxima_MPPTn" [ngSwitch]="mttpSepcifications_Validation.tension_maxima_MPPTn.resultadoValidacion">
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+          <mat-icon class = "green-icon" [matTooltip]="mttpSepcifications_Validation.tension_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon class = "yellow-icon"[matTooltip]="mttpSepcifications_Validation.tension_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon class = "red-icon" [matTooltip]="mttpSepcifications_Validation.tension_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
       </ng-container>
       <ng-container *ngIf= "mttpSepcifications_Validation.corriente_maxima_MPPTn" [ngSwitch]="mttpSepcifications_Validation.corriente_maxima_MPPTn.resultadoValidacion">
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
-          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+          <mat-icon class = "green-icon" [matTooltip]="mttpSepcifications_Validation.corriente_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon class = "yellow-icon"  [matTooltip]="mttpSepcifications_Validation.corriente_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon class = "red-icon" [matTooltip]="mttpSepcifications_Validation.corriente_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
       </ng-container>
 
       </div>
