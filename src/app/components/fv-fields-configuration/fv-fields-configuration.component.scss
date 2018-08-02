@@ -1,0 +1,13 @@
+.left-button {
+    margin-right: auto;
+}
+
+.add-button {
+    position: absolute;
+    right: 20px;
+    bottom: 20px; 
+}
+
+/deep/ .mat-simple-snackbar-action .mat-button{
+    color: #26b99a!important;
+}

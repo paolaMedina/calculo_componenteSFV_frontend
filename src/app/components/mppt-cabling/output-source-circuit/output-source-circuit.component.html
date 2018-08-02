@@ -1,0 +1,32 @@
+<div fxLayout="column" fxFlex.gt-md="50%" fxFlex.lt-md="100%">
+  <mat-form-field>
+    <mat-select placeholder="Tipo de Alambrado">
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Tipo de canalización">
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Material del conductor">
+      <mat-option *ngFor="let food of foods" [value]="food.value">
+        {{food.viewValue}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-form-field>
+      <input matInput placeholder="Distancia del conductor positivo">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Distancia del conductor negativo">
+      </mat-form-field>
+      <mat-form-field>
+          <input matInput placeholder="Caida de tension de diseño">
+        </mat-form-field>
+</div>

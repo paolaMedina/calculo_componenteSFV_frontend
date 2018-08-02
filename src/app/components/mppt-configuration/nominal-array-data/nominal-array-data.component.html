@@ -1,0 +1,53 @@
+<!-- Nominal data-->
+<div class="nominal-data">
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+    <span>Datos nominales del arreglo </span>
+  </mat-toolbar>
+  <div fxLayout="row" class="specifications">
+    <div fxLayout="column">
+      <span>Potencia nominal</span>
+      <span>Tension mpp</span>
+      <span>Corriente mpp </span>
+      <span>Tensión máxima</span>
+      <span>Corriente máxima</span>
+    </div>
+    <span class="spacer"></span>
+    <div fxLayout="column" >
+      <span>{{mttpSpecifications.potencia_nominal}}W</span>
+      <span>{{mttpSpecifications.tension_Mpp_MPPTn}}V</span>
+      <span>{{mttpSpecifications.corriente_Mpp_MPPTn | number: '1.1-2' }}A</span>
+      <span>{{mttpSpecifications.tension_maxima_MPPTn | number: '1.1-2' }}V</span>
+      <span>{{mttpSpecifications.corriente_maxima_MPPTn | number: '1.1-2' }}A</span>
+    </div>
+    <div fxLayout="column" >
+      <ng-container *ngIf= "mttpSepcifications_Validation.potencia_nominal" [ngSwitch]="mttpSepcifications_Validation.potencia_nominal.resultadoValidacion">
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.potencia_nominal.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.potencia_nominal.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.potencia_nominal.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+      </ng-container>
+      <ng-container *ngIf= "mttpSepcifications_Validation.tension_Mpp_MPPTn" [ngSwitch]="mttpSepcifications_Validation.tension_Mpp_MPPTn.resultadoValidacion">
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+      </ng-container>
+      <ng-container *ngIf= "mttpSepcifications_Validation.corriente_Mpp_MPPTn" [ngSwitch]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.resultadoValidacion">
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_Mpp_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+      </ng-container>
+      <ng-container *ngIf= "mttpSepcifications_Validation.tension_maxima_MPPTn" [ngSwitch]="mttpSepcifications_Validation.tension_maxima_MPPTn.resultadoValidacion">
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.tension_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+      </ng-container>
+      <ng-container *ngIf= "mttpSepcifications_Validation.corriente_maxima_MPPTn" [ngSwitch]="mttpSepcifications_Validation.corriente_maxima_MPPTn.resultadoValidacion">
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.CORRECTO">done</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ADVERTENCIA">warning</mat-icon>
+          <mat-icon [matTooltip]="mttpSepcifications_Validation.corriente_maxima_MPPTn.mensajeError" *ngSwitchCase ="validationResultEnum.ERROR">clear</mat-icon>
+      </ng-container>
+
+      </div>
+  </div>
+
+</div>
+<!-- End of Nominal data-->

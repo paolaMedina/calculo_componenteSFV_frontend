@@ -1,0 +1,31 @@
+<button mat-raised-button (click)="isLinear = !isLinear" _id="toggle-linear">
+    {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
+  </button>
+  <button (click) = "printFields()">
+    print fields
+  </button>
+  <mat-horizontal-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+          <ng-template matStepLabel>Cálculo componentes del SFV</ng-template>
+          <app-sfv-components ></app-sfv-components>
+          <div>
+              <button mat-button matStepperNext>Siguiente</button>
+            </div>
+    </mat-step>
+    <mat-step [stepControl]="secondFormGroup">
+        <ng-template matStepLabel>Fill out your address</ng-template>
+        <app-fv-fields-configuration ></app-fv-fields-configuration>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Done</ng-template>
+      You are now done.
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-horizontal-stepper>

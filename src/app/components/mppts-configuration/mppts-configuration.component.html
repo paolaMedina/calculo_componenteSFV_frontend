@@ -1,0 +1,45 @@
+<!-- [routerLink]="['/fv-field-config', fvField._id]" -->
+<div fxLayout="column" fxLayoutGap="3%" [@routerTransition]>
+    <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+        <button (click)="return()" class="left-button" mat-button> Volver </button>
+        <span>Configuracion MPPTs </span>
+    </mat-toolbar>
+    <div fxLayout.gt-lg="row wrap" fxLayoutGap.lg="5%" fxLayoutGap.gt-lg="5%" fxLayout.lt-lg="column wrap" fxLayoutGap.lt-lg="2%"
+        fxLayoutAlign="center center">
+        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+
+            <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+                <span> Número de MTTPs</span>
+                <mat-button-toggle-group #mttps_number="matButtonToggleGroup" nombre="fontStyle" aria-label="Font Style">
+                    <mat-button-toggle>{{max_number_of_mttps}}</mat-button-toggle>
+                </mat-button-toggle-group>
+            </div>
+        </div>
+        <div *ngIf="max_number_of_mttps>1 && combinations.length > 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
+            <span> Combinar/Separar MTTPs</span>
+            <div fxLayout="row">
+                <button  *ngFor="let combination of combinations" [disabled]="!combination.puede_combinar" mat-raised-button class="combination-button" [matTooltip]="combination.es_combinado? 'Separar MTTPs': 'Combinar MTTPs'"
+                    [color]="combination.es_combinado? 'primary': ''" (click)="combineOrDecombineMttps(combination)" [value]="combination">{{combination._id}}</button>
+            </div>
+        </div>
+        <div fxLayout="row" fxLayoutGap="20px">
+            <div fxLayout="column">
+                <span>Potencia FV total: </span>
+                <span>Cargabilidad inversor: </span>
+            </div>
+            <div fxLayout="column">
+                <div fxLayout="row">
+                    <span>{{functPotenciaFvTotal()}}W</span>
+                    <mat-icon [hidden]="!functValidarPotenciaFvTotal()">clear</mat-icon>
+                </div>
+                <span>{{functCargabilidadInversor() |  number: '1.1-2'}}%</span>
+            </div>
+        </div>
+    </div>
+    <div fxLayout="row wrap" fxLayoutAlign="center" fxLayoutGap.gt-sm="20px">
+
+        <app-mppt-configuration #mppts *ngFor="let mttp of mttps" (goToCabling)="whenGoesToCablingConfig()" [fvFieldId]="fvField._id"
+            [mttp]="mttp"></app-mppt-configuration>
+    </div>
+
+</div>

@@ -1,0 +1,151 @@
+<div [@routerTransition]>
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+    <button (click)="return()" class="left-button" mat-button> Volver </button>
+    <span>Configuración del campo FV</span>
+  </mat-toolbar>
+  <div class="main-content">
+    <div [formGroup]="fvFieldForm" fxLayout="row wrap" fxLayoutGap.gt-sm="2%">
+
+      <div fxLayout.gt-md="column" fxLayout.lt-lg="row wrap" fxFlex.lt-md="100%" fxFlex.gt-md="49%" fxLayoutGap.xs="3%" fxLayoutGap.sm="3%"
+        fxLayoutGap.gt-md="10px">
+        <div fxFlex.gt-md="100%" fxFlex.md="100%" fxFlex.sm="47%" fxFlex.xs="100%" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px"
+          fxLayoutGap.gt-sm="20px" fxLayoutAlign.lt-md="left start" fxLayoutAlign.gt-sm="left center">
+          <span>Indique nombre de campo FV</span>
+          <mat-form-field>
+            <input matInput *ngIf="fvField" formControlName="nombre">
+          </mat-form-field>
+        </div>
+
+        <div fxFlex.gt-md="100%" fxFlex.md="100%" fxFlex.sm="47%" fxFlex.xs="100%" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px"
+          fxLayoutGap.gt-sm="20px" fxLayoutAlign.lt-md="left start" fxLayoutAlign.gt-sm="left center">
+          <span>
+            Seleccione Fabricante de panel solar FV
+          </span>
+          <mat-form-field *ngIf="fabricantes_paneles">
+            <mat-select formControlName="fabricante_1" #service_type_select [placeholder]="!tipo_servicio.value? 'Seleccione un tipo': ''">
+              <mat-option *ngFor="let fabricante of fabricantes_paneles" [value]="fabricante">
+                {{fabricante}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex.gt-md="100%" fxFlex.md="100%" fxFlex.sm="100%" fxFlex.xs="100%" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px"
+          fxLayoutGap.gt-sm="20px" fxLayoutAlign.lt-md="left start" fxLayoutAlign.gt-sm="left center">
+          <span>
+            Seleccione el modelo del panel solar FV
+          </span>
+          <mat-form-field>
+            <mat-select formControlName="model_panel_solar_1" [matTooltip]="(fvFieldForm.get('fabricante_1').value === '')? 'Seleccione primero un fabricante': ''"
+              [placeholder]="fvFieldForm.get('fabricante_1').value===''? 'Seleccione primero un fabricante': ''">
+              <ng-container>
+                <mat-option *ngFor="let modelo of modelosPanel" [value]="modelo">
+                  {{modelo}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- End Fv panel specifications-->
+      <div fxLayout.gt-sm="column" fxLayout.lt-md="row wrap" fxFlex.lt-md="100%" fxFlex.gt-sm="49%" fxLayoutGap="10px">
+        <div fxFlex.gt-md="100%" fxFlex.md="100%" fxFlex.sm="47%" fxFlex.xs="100%" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px"
+          fxLayoutGap.gt-sm="20px" fxLayoutAlign.lt-md="left start" fxLayoutAlign.gt-sm="left center">
+          <span>
+            Seleccione Fabricante de inversor FV
+          </span>
+          <mat-form-field>
+            <mat-select formControlName="fabricante_2" #tipo_servicio [placeholder]="!tipo_servicio.value? 'Seleccione un tipo': ''">
+              <ng-container *ngIf="manufacturesNamesUnique">
+                <mat-option *ngFor="let manufacturNameUnique of manufacturesNamesUnique" [value]="manufacturNameUnique">
+                  {{manufacturNameUnique}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div fxFlex.gt-md="100%" fxFlex.md="100%" fxFlex.sm="47%" fxFlex.xs="100%" fxLayout.lt-md="column" fxLayoutGap.lt-md="10px"
+          fxLayoutGap.gt-sm="20px" fxLayoutAlign.lt-md="left start" fxLayoutAlign.gt-sm="left center">
+          <span>
+            Seleccione el modelo del panel solar FV
+          </span>
+          <mat-form-field>
+            <mat-select formControlName="modelo_panel_solar_2" #tipo_servicio [placeholder]="!tipo_servicio.value? 'Seleccione un tipo': ''">
+              <ng-container>
+                <mat-option *ngFor="let modelo of modelosInversor" [value]="modelo">
+                  {{modelo}}
+                </mat-option>
+              </ng-container>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+
+    </div>
+    <div fxLayout.gt-sm="row" fxLayout.lt-md="column" fxLayoutGap="2%">
+      <!-- Fv panel specifications-->
+      <div fxLayout="column" fxFlex.lt-md="100%" fxFlex.gt-sm="49%">
+        <div class="panel-fv-specifications">
+          <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+            <span>Especificaciones panel FV </span>
+          </mat-toolbar>
+          <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="40px">
+            <div fxLayout="column" fxLayoutGap="15px">
+              <span>Potencia nominal (Pmax)</span>
+              <span>Tension a Pmax (VMPP)</span>
+              <span>Corriente a Pmax (IMPP)</span>
+              <span>Tension cto abierto (VOC) </span>
+              <span>Corriente cortocircuito (ISC)</span>
+              <span>Eficiencia de módulo</span>
+              <span>Coeficiente Voc</span>
+            </div>
+            <div fxLayout="column" fxLayoutGap="15px">
+              <span>{{pmax | number: '1.1-2' }}</span>
+              <span>{{vmpp | number: '1.1-2'}}</span>
+              <span>{{impp | number: '1.1-2'}}</span>
+              <span>{{voc | number: '1.1-2'}}</span>
+              <span>{{isc | number: '1.1-2'}}</span>
+              <span>{{eficiencia }}</span>
+              <span>{{coeficiente }}</span>
+            </div>
+            <div fxLayout="column" fxLayoutGap="15px">
+              <span>W</span>
+              <span>V DC</span>
+              <span>I DC</span>
+              <span>V DC</span>
+              <span>I DC</span>
+              <span>%</span>
+              <span>%/°C</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div fxLayout="column" fxLayoutGap="2%" fxFlex.lt-md="100%" fxFlex.gt-sm="49%">
+        <!--    MPPTs Distribution    -->
+        <div fxLayout="row" class=" mppts-distribution">
+          <div fxLayout="column">
+            <h4>Distribución MPPTs</h4>
+            <ng-container *ngIf= "fvField.mttps.length > 0; else no_mttps">
+              <span *ngFor="let mttp of fvField.mttps ">MPPT {{mttp.nombre}}: {{' ' + mttp.numero_de_paneles_en_serie_por_cadena + 'X' + mttp.numero_de_cadenas_en_paralelo}}</span>
+              <span>Potencia FV: {{potencia_fv}}W</span>
+              <span>Carga Inversor: {{carga_inversor | number: '1.1-1'}}%</span>
+            </ng-container>
+            <ng-template #no_mttps> <span >No se han registrado mttps</span></ng-template>
+          </div>
+          <span class="spacer"></span>
+          <div fxLayout="row" fxFlexAlign="center" fxLayoutAlign="end center" fxLayoutGap="20px">
+            <span>Configurar MTTPs </span>
+            <img class="config-image" (click)="goToMpptsConfig()" width="65" height="65" src="/assets/img/configuration.png">
+          </div>
+        </div>
+        <!--    end of MPPTs Distribution    -->
+
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+          <span>Salida del inversor </span>
+          <img class="config-image" (click)="goToInvestorOutput()" width="65" height="65" src="/assets/img/configuration.png">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

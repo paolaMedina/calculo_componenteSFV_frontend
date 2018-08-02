@@ -1,0 +1,29 @@
+<div [@routerTransition]>
+  <mat-toolbar color="primary" fxLayout="row" fxLayoutAlign="center center">
+    <button (click)="saveData()" class="left-button" mat-button> Volver </button>
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="10px">
+      <span>Cableado MPPT {{mttp.nombre}} </span>
+      <button (click)="openHelpImage()" mat-icon-button>
+        <mat-icon>help</mat-icon>
+      </button>
+    </div>
+  </mat-toolbar>
+
+  <mat-tab-group>
+    <mat-tab label="Circuito de fuente FV ">
+      <div class="main-content">
+        <app-input-source-circuit [source]="mttp.cableado.input" #inputSource></app-input-source-circuit>
+      </div>
+    </mat-tab>
+
+    <mat-tab label=" Circuito de salida FV">
+      <div class="main-content">
+        <app-input-source-circuit [source]="mttp.cableado.output" #outputSource></app-input-source-circuit>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+  <!-- Help image-->
+  <ngx-gallery #helpImage [options]="galleryImageOptions" [images]="helpImages">
+  </ngx-gallery>
+  <!-- End of help image component-->
+</div>
