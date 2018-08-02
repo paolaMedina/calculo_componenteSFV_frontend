@@ -19,7 +19,7 @@ export class SfvFormBuilder extends BaseFormBuilder{
             potencial_de_panel_fv: [sfv? sfv.potencial_de_panel_fv: 0, CustomValidators.number],
             total_paneles_fv: [sfv? sfv.total_paneles_fv:0, CustomValidators.number],
             calcular_potencial_de_planta: [sfv? sfv.calcular_potencial_de_planta: ''],
-            lugar_instalacion__opcion_techo_cubierta: [sfv? sfv.lugar_instalacion__opcion_techo_cubierta: ''],
+            lugar_instalacion_opcion_techo_cubierta: [sfv? sfv.lugar_instalacion_opcion_techo_cubierta: ''],
             temperatura_ambiente: [sfv? sfv.temperatura_ambiente:'', Validators.compose([Validators.required, CustomValidators.celsius])],
             minima_temperatura_ambiente_esperada: [sfv? sfv.minima_temperatura_ambiente_esperada:'', Validators.compose([Validators.required, CustomValidators.celsius])],
             tipo_de_inversor: [sfv? sfv.tipo_de_inversor:'', Validators.required],
@@ -51,7 +51,7 @@ export class SfvFormBuilder extends BaseFormBuilder{
         sfv.total_paneles_fv = form.get('total_paneles_fv').value;
         sfv.tipo_servicio = form.get('tipo_servicio').value;
         sfv.voltage_servicio = form.get('voltage_servicio').value;
-        sfv.lugar_instalacion__opcion_techo_cubierta = form.get('lugar_instalacion__opcion_techo_cubierta').value;
+        sfv.lugar_instalacion_opcion_techo_cubierta = form.get('lugar_instalacion_opcion_techo_cubierta').value;
         return sfv;
     }
 

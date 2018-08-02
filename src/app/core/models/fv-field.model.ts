@@ -4,7 +4,7 @@ import { Source } from './source.model';
 export class FvField {
 
     nombre: string;
-    private _id: string;
+    _id: string;
     fabricante_1: string;
     model_panel_solar_1: string;
     fabricante_2: string;

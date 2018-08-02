@@ -18,7 +18,7 @@
         <div *ngIf="max_number_of_mttps>1 && combinations.length > 0" fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="center center">
             <span> Combinar/Separar MTTPs</span>
             <div fxLayout="row">
-                <button *ngFor="let combination of combinations" mat-raised-button class="combination-button" [matTooltip]="combination.es_combinado? 'Separar MTTPs': 'Combinar MTTPs'"
+                <button  *ngFor="let combination of combinations" [disabled]="!combination.puede_combinar" mat-raised-button class="combination-button" [matTooltip]="combination.es_combinado? 'Separar MTTPs': 'Combinar MTTPs'"
                     [color]="combination.es_combinado? 'primary': ''" (click)="combineOrDecombineMttps(combination)" [value]="combination">{{combination._id}}</button>
             </div>
         </div>

@@ -10,7 +10,7 @@ export class Sfv {
     temperatura_ambiente: number;
     minima_temperatura_ambiente_esperada: number;
     tipo_de_inversor: InvestorTypeEnum;
-    lugar_instalacion__opcion_techo_cubierta: string;
+    lugar_instalacion_opcion_techo_cubierta: string;
     tipo_servicio: string;
     voltage_servicio: number;
     fvs: FvField[];

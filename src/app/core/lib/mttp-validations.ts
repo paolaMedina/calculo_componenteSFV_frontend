@@ -1,5 +1,5 @@
-import { Inversor, Mttp } from "@app/core/models";
-import { ResultadoValidacion } from "@app/core/enums";
+import { Inversor, Mttp } from "../../core/models";
+import { ResultadoValidacion } from "../../core/enums";
 export interface ValidacionConMensajeInterface {
     resultadoValidacion: ResultadoValidacion;
     mensajeError: String;
@@ -21,10 +21,8 @@ export function validar_potencia_nominal(inversor: Inversor, potencia_nominal: n
 export function validar_tension_mppt(inversor: Inversor, tension_mppt: number): ValidacionConMensajeInterface {
     
     let resultado: ValidacionConMensajeInterface;
-    console.log(tension_mppt < inversor.vin_min, 'validacion tension mppt')
     /** Si esta dentro de el rango vop  */
     if (tension_mppt > inversor.vop_min && tension_mppt < inversor.vop_max) {
-        console.log(inversor, tension_mppt, 'inversor y tension en validar tension')
         resultado = {
             resultadoValidacion: ResultadoValidacion.CORRECTO,
             mensajeError: "La tension se encuentra dentro de los valores de operacion recomendados del Inv"
@@ -58,19 +56,19 @@ export function validar_tension_mppt(inversor: Inversor, tension_mppt: number): 
         };
     }
 
+    /** por ahora siempre sera valido, para test */
 
+        resultado = {
+            resultadoValidacion: ResultadoValidacion.CORRECTO,
+            mensajeError: "La tension se encuentra dentro de los valores de operacion recomendados del Inv"
 
+        };
+        /** Fin de el test */
 
     return resultado;
 
 }
 
-function exist_attribute_in_object(attribute_name: string, object: any) {
-    let nombre_atributos = Object.keys(object);
-    if ( ! nombre_atributos.includes(attribute_name) ) {
-        console.error(`El atributo de nombre ${attribute_name} no esta en el objeto ingresado, atributos: ${nombre_atributos.join(',')}`)
-    }
-}
 
 export function validar_corriente_mppt(inversor: Inversor, corriente_mppt: number, mttp: Mttp): ValidacionConMensajeInterface {
     let mppt_name_normalized = mttp.nombre;
@@ -92,7 +90,6 @@ export function validar_corriente_maxima(inversor: Inversor, corriente_maxima: n
     let mppt_name_normalized = mttp.nombre;
     mppt_name_normalized = mppt_name_normalized.replace('-', '_');
     let iscmax__mttp_name = 'iscmax_mppt' + mppt_name_normalized;
-    console.log(corriente_maxima, inversor[iscmax__mttp_name], 'corriente maxima y iscmax')
     if ( corriente_maxima < inversor[iscmax__mttp_name] ) {
         return { resultadoValidacion: ResultadoValidacion.CORRECTO, mensajeError: '' };
     } else {
@@ -116,7 +113,6 @@ export function validar_tension_maxima(inversor: Inversor, tension_maxima: numbe
 }
 
 export function validar_potencia_fv(inversor: Inversor, potencia_fv: number): ValidacionConMensajeInterface {
-    console.log(inversor.pot_fv_in_max, 'inversor pot fv in max')
     if ( potencia_fv < fromWToKW(inversor.pot_fv_in_max )) {
         return { resultadoValidacion: ResultadoValidacion.CORRECTO, mensajeError: '' };
     } else {

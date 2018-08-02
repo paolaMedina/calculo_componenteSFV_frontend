@@ -1,4 +1,5 @@
-import { ValidacionConMensajeInterface } from "@app/core/lib/mttp-validations";
+import { ValidacionConMensajeInterface } from "../../core/lib/mttp-validations";
+import { ResultadoValidacion } from "../enums";
 
 export class MttpSpecifications_Validation {
     potencia_nominal: ValidacionConMensajeInterface | undefined;
@@ -16,5 +17,19 @@ export class MttpSpecifications_Validation {
       this.total_de_paneles = undefined;
       this.potencia_fv_total = undefined;
       this.corriente_maxima_MPPTn = undefined;
+    }
+    valid(): boolean {
+      if (
+        (this.potencia_nominal.resultadoValidacion && this.potencia_nominal.resultadoValidacion !== ResultadoValidacion.ERROR) && 
+        (this.corriente_maxima_MPPTn.resultadoValidacion && this.corriente_maxima_MPPTn.resultadoValidacion !== ResultadoValidacion.ERROR) && 
+        (this.corriente_Mpp_MPPTn.resultadoValidacion && this.corriente_Mpp_MPPTn.resultadoValidacion !== ResultadoValidacion.ERROR) && 
+        (this.potencia_fv_total.resultadoValidacion && this.potencia_fv_total.resultadoValidacion !== ResultadoValidacion.ERROR) && 
+        (this.tension_maxima_MPPTn.resultadoValidacion && this.tension_maxima_MPPTn.resultadoValidacion !== ResultadoValidacion.ERROR) && 
+        (this.tension_Mpp_MPPTn.resultadoValidacion && this.tension_Mpp_MPPTn.resultadoValidacion !== ResultadoValidacion.ERROR)
+      ) {
+        return true;
+      } else {
+        return false;
+      }
     }
 }

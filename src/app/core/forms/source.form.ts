@@ -27,7 +27,7 @@ export class SourceFormBuilder extends BaseFormBuilder {
             tipo_conductor: [source? source.tipo_conductor:'',  Validators.compose([CustomValidators.number, Validators.required]) ],
             material_conductor: [source? source.material_conductor:'', Validators.required],
             distancia_del_conductor_mas_largo: [source? source.distancia_del_conductor_mas_largo:'',   Validators.compose([CustomValidators.number, Validators.required])],
-            caida_de_tension_de_diseño: [source? source.caida_de_tension_de_diseño:'',  Validators.compose([CustomValidators.number, Validators.required])],
+            caida_de_tension_de_diseno: [source? source.caida_de_tension_de_diseno:'',  Validators.compose([CustomValidators.number, Validators.required])],
             tapa_superior_bandeja_portacable: [source? source.tapa_superior_bandeja_portacable:'', ],
             tapa_inferior_bandeja_portacable: [source? source.tapa_inferior_bandeja_portacable:'', ],
             perfiles_separadores: [source? source.perfiles_separadores:'', ],
@@ -59,12 +59,11 @@ export class SourceFormBuilder extends BaseFormBuilder {
         source.material_bandeja = form.get('material_bandeja').value;
         source.tamanio_canalizacion = form.get('tamanio_canalizacion').value;
         source.tipo_acabado = form.get('tipo_acabado').value;
-        source.disenio_bandeja = form.get('disenio_bandeja').value;
+        source.caida_de_tension_de_diseno = form.get('caida_de_tension_de_diseno').value;
         source.tipo_conductor = form.get('tipo_conductor').value;
         source.material_conductor = form.get('material_conductor').value;
         source.distancia_del_conductor_mas_largo = form.get('distancia_del_conductor_mas_largo').value;
-        source.caida_de_tension_de_diseño = form.get('caida_de_tension_de_diseño').value;
-
+        source.disenio_bandeja = form.get('disenio_bandeja').value;
         source.tapa_superior_bandeja_portacable= form.get('tapa_superior_bandeja_portacable').value;
         source.tapa_inferior_bandeja_portacable= form.get('tapa_inferior_bandeja_portacable').value;
         source.perfiles_separadores= form.get('perfiles_separadores').value;

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { MttpSpecifications, Mttp, PanelSolar, Sfv } from '../../core/models';
 import { FvFieldService, SfvService } from '../../core/services';
@@ -15,7 +15,7 @@ import {
 import { FormGroup } from '@angular/forms';
 import { MttpFormBuilder } from '../../core/forms/mttp.form';
 import { MatSnackBar } from '@angular/material';
-import { NominalArrayDataComponent } from '@app/components/mppt-configuration/nominal-array-data/nominal-array-data.component';
+import { NominalArrayDataComponent } from './nominal-array-data/nominal-array-data.component';
 @Component({
   selector: 'app-mppt-configuration',
   templateUrl: './mppt-configuration.component.html',
@@ -48,7 +48,7 @@ export class MpptConfigurationComponent implements OnInit {
 
   saveChanges(): boolean {
     this._mttpFormBuilder.markFormGroupTouched(this.mttpForm);
-    if (this.mttpForm.valid) {
+    if (this.valid) {
       let _fvField = this._fvFieldService.get(this.fvFieldId);
       this.mttp = this._mttpFormBuilder.extractData(this.mttpForm, this.mttp);
 
@@ -117,6 +117,9 @@ export class MpptConfigurationComponent implements OnInit {
         }
       );
   }
+  get valid(): boolean {
+    return this.mttpForm.valid && this.nominal_array_data.valid();
+  }
   updateMttpSpecifications(numero_de_paneles_en_serie_por_cadena: number, numero_de_cadenas_en_paralelo: number) {
     this.mttpSpecifications.total_de_paneles = total_de_paneles(numero_de_cadenas_en_paralelo, numero_de_paneles_en_serie_por_cadena);
     this.mttpSpecifications.potencia_nominal = potencia_nominal(this.mttpSpecifications.total_de_paneles, this._solarPanel.pmax);
@@ -127,11 +130,6 @@ export class MpptConfigurationComponent implements OnInit {
       Number(this._solarPanel.voc),
       parseFloat(this._solarPanel.coef_voc.substr(0, this._solarPanel.coef_voc.length - 1).replace(',', '.')),
       Number(this._sfv.minima_temperatura_ambiente_esperada)).toFixed(2));
-console.log(
-  numero_de_paneles_en_serie_por_cadena,
-  Number(this._solarPanel.voc),
-  parseFloat(this._solarPanel.coef_voc.substr(0, this._solarPanel.coef_voc.length - 1).replace(',', '.')),
-  Number(this._sfv.minima_temperatura_ambiente_esperada), "variables para calcular tension maxima");
     this.mttpSpecifications.tension_Mpp_MPPTn = tension_Mpp_MPPTn(numero_de_paneles_en_serie_por_cadena, this._solarPanel.vmpp);
   }
 }
