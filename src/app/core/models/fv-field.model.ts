@@ -11,7 +11,7 @@ export class FvField {
     modelo_panel_solar_2: string;
     mttps: Mttp[];
     /* Salida del inversor */
-    salida_inversor: {input: Source, output: Source};
+    salida_inversor: {output: Source};
     constructor() {
         this._id = uuid();
         this.nombre = "";
@@ -20,7 +20,7 @@ export class FvField {
         this.modelo_panel_solar_2 = "";
         this.fabricante_2 = "";
         this.mttps  = undefined;
-        this.salida_inversor = {input: new Source(), output: new Source()};
+        this.salida_inversor = {output: new Source()};
     }
     get id() {
         return this._id;
