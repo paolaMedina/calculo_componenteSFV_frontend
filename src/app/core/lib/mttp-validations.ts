@@ -56,14 +56,14 @@ export function validar_tension_mppt(inversor: Inversor, tension_mppt: number): 
         };
     }
 
-    /** por ahora siempre sera valido, para test */
+    /** por ahora siempre sera valido, para test 
 
         resultado = {
             resultadoValidacion: ResultadoValidacion.CORRECTO,
             mensajeError: "La tension se encuentra dentro de los valores de operacion recomendados del Inv"
 
         };
-        /** Fin de el test */
+         Fin de el test */
 
     return resultado;
 

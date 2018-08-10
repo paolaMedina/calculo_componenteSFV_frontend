@@ -30,7 +30,7 @@
             <div fxLayout="column">
                 <div fxLayout="row">
                     <span>{{functPotenciaFvTotal()}}W</span>
-                    <mat-icon [hidden]="!functValidarPotenciaFvTotal()">clear</mat-icon>
+                    <mat-icon class="yellow-icon" [hidden]="!functValidarPotenciaFvTotal()">warning</mat-icon>
                 </div>
                 <span>{{functCargabilidadInversor() |  number: '1.1-2'}}%</span>
             </div>

@@ -264,7 +264,7 @@ export class MpptsConfigurationComponent implements OnInit {
     if (validate) {
       this.markAllMpptsFormsAsTouched();
       if (!this.checkAllMpptsFormsValid()) {
-        this.snackBar.open("Se han enncontrado algunos errores", "Aceptar", {
+        this.snackBar.open("Se han encontrado algunos errores", "Aceptar", {
           duration: 2000,
         });
         return false;
