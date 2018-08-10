@@ -22,7 +22,9 @@ export class FvFieldsConfigurationComponent implements OnInit {
     this.fvFields = new Array<FvField>();
   }
   sendData() {
+    this.saveFvFields();
     this.sfv.fvs = this._fvFieldService.getFvFields();
+    console.log('enviando datos')
     this._sfvService.send(this.sfv);
   }
   ngOnInit() {

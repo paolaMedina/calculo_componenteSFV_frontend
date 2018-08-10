@@ -18,6 +18,7 @@ import { NominalArrayDataComponent } from './components/mppt-configuration/nomin
 import { InvestorOutputComponent } from './pages/investor-output/investor-output.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,7 +41,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     CoreModule,
     SharedModule
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

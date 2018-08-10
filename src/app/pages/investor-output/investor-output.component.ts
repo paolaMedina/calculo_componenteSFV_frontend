@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ParamMap, ActivatedRoute, Router } from '@angular/router';
 import { SourceFormBuilder } from '../../core/forms/source.form';
 import { MatSnackBar } from '@angular/material';
@@ -9,6 +9,7 @@ import { Mttp, FvField } from '../../core/models';
 import { routercTransition } from '../../router.animations';
 import { NgxGalleryComponent, INgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { galleryOptionsFullScreenOnly } from '../../core/const';
+import { APP_BASE_HREF } from "@angular/common";
 
 @Component({
   selector: 'app-investor-output',
@@ -20,13 +21,14 @@ export class InvestorOutputComponent implements OnInit {
   fvField: FvField;
   galleryImageOptions = galleryOptionsFullScreenOnly;
   helpImages: INgxGalleryImage[] = [{
-    big: '/assets/img/cableado-help.png'
+    big: `${this.baseHref}/assets/img/cableado-help.png`
   }];
   @ViewChild('helpImage') onlyPreviewGallery: NgxGalleryComponent;
 
   @ViewChild('inputSource') inputSourceCircuitComponent: InputSourceCircuitComponent;
   @ViewChild('outputSource') outputSourceCircuitComponent: InputSourceCircuitComponent;
   constructor(
+    @Inject(APP_BASE_HREF) private baseHref: string,
     private _fvFieldService: FvFieldService,
     private _sourceFormBuilder: SourceFormBuilder,
     private _snackBar: MatSnackBar,

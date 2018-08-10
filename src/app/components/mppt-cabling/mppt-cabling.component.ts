@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { APP_BASE_HREF } from "@angular/common";
 
 import { NgxGalleryOptions, INgxGalleryImage, NgxGalleryComponent } from 'ngx-gallery';
-
 
 import { Mttp } from '../../core/models';
 import { InputSourceCircuitComponent } from './input-source-circuit/input-source-circuit.component';
@@ -23,7 +23,7 @@ export class MpptCablingComponent implements OnInit {
   mttp: Mttp;
   galleryImageOptions = galleryOptionsFullScreenOnly;
   helpImages: INgxGalleryImage[] = [{
-    big: '/assets/img/cableado-help.png'
+    big: `${this.baseHref}/assets/img/cableado-help.png`
   }];
 
   fvFieldId: string;
@@ -31,6 +31,7 @@ export class MpptCablingComponent implements OnInit {
   @ViewChild('outputSource') outputSourceCircuitComponent: InputSourceCircuitComponent;
   @ViewChild('helpImage') onlyPreviewGallery: NgxGalleryComponent;
   constructor(
+    @Inject(APP_BASE_HREF) private baseHref: string,
     private _fvFieldService: FvFieldService,
     private _sourceFormBuilder: SourceFormBuilder,
     private _snackBar: MatSnackBar,
