@@ -16,8 +16,7 @@ export class InputSourceCircuitComponent implements OnInit {
 
 
   types_of_wiring = TypeOfWiring;
-  tipoCanalizacion = ["Riel chanel", "tuberia elétrica rigida", "tuberia elétrica flexible"];
-  canalizacion = ["EMT(Interior)", "IMC(Exterior)", "PVC", "Shelude 40"];
+  tipoCanalizacion = ["LFMC (Coraza)", "PVC Tipo A", "PVC Schedule 40", "EMT","IMC"];
   secuencia = [1, 2, 3];
   disenoBandeja = ["Escalera", "Ducto perforado", "Ducto solido", "Bandejas de aluminio", "malla"];
   materialBandeja = ["Aluminio", "Acero", "Acero inoxidable", "PVC"];
@@ -29,6 +28,8 @@ export class InputSourceCircuitComponent implements OnInit {
   alto = ["50", "60", "75", "80", "100", "150"]
   carga = ["Carga ligera", "Carga media", "Carga pesada"];
   materialConductor = ["Cobre", "Aluminio"];
+  tipoConductor = ["Fotovoltaico","THHN/THWN-2 CT","RHHW-2" ]
+  tamCanalizacion = ["½","¾","1","1 ¼","1 ½","2","2 ½","3","3 ½","4","5","6" ]
 
 
   constructor( private _sourceFormBuilder: SourceFormBuilder) {

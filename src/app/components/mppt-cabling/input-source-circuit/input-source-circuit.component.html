@@ -37,25 +37,14 @@
         </mat-form-field>
       </div>
 
-      <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
-        <span>Canalización</span>
-        <span class="spacer"></span>
-        <mat-form-field>
-          <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.Canalization || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
-            formControlName="canalizacion">
-            <mat-option *ngFor="let x of canalizacion" [value]="x">
-              {{x}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
+      
       <div fxLayout="column" class="width-responsive" fxLayoutAlign="center left">
         <span>Tamaño de canalización</span>
         <span class="spacer"></span>
         <mat-form-field>
           <mat-select [required]="sourceForm.get('tipo_alambrado').value === types_of_wiring.Canalization || sourceForm.get('tipo_alambrado').value === types_of_wiring.CableTrayChanneling"
             formControlName="tamanio_canalizacion">
-            <mat-option *ngFor="let x of secuencia" [value]="x">
+            <mat-option *ngFor="let x of tamCanalizacion" [value]="x">
               {{x}}
             </mat-option>
           </mat-select>
@@ -152,7 +141,7 @@
       <span> Tipo de conductor</span>
       <mat-form-field>
         <mat-select formControlName="tipo_conductor">
-          <mat-option *ngFor="let x of secuencia" [value]="x">
+          <mat-option *ngFor="let x of tipoConductor" [value]="x">
             {{x}}
           </mat-option>
         </mat-select>
