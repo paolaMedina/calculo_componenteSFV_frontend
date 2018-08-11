@@ -24,7 +24,7 @@ export class SourceFormBuilder extends BaseFormBuilder {
             disenio_bandeja: [source? source.disenio_bandeja:''],
             material_bandeja:[source? source.material_bandeja:''],
             tipo_acabado: [source? source.tipo_acabado:''],
-            tipo_conductor: [source? source.tipo_conductor:'',  Validators.compose([CustomValidators.number, Validators.required]) ],
+            tipo_conductor: [source? source.tipo_conductor:'',  Validators.required ],
             material_conductor: [source? source.material_conductor:'', Validators.required],
             distancia_del_conductor_mas_largo: [source? source.distancia_del_conductor_mas_largo:'',   Validators.compose([CustomValidators.number, Validators.required])],
             caida_de_tension_de_diseno: [source? source.caida_de_tension_de_diseno:'',  Validators.compose([CustomValidators.number, Validators.required])],

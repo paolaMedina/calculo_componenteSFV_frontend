@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Sfv } from '../../core/models';
-import { sfv_mock } from '../../mocks';
-import { ApiService } from '../../core/services/api.service';
-import { tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material';
+
+import { Sfv } from '../../core/models';
+import { ApiService } from '../../core/services/api.service';
 
 @Injectable({
   providedIn: 'root'
@@ -41,9 +40,11 @@ export class SfvService {
     this.apiService.post('postData', sfv).subscribe(
       response=> {
         console.log(response)
+        this.apiService.postRedirect('postData', sfv);
       },
       (response: any) => {
         let sfvErrors: Sfv = response.error;
+
         console.log(response.error, 'errores desde catch errors')
         this.postvalidate(sfvErrors);
       }
