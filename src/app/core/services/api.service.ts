@@ -3,6 +3,8 @@ import {  HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { environment } from '@env/environment';
+declare var $:any;
+
 @Injectable()
 export class ApiService {
   protected api_url = environment.apiURL;
@@ -29,7 +31,9 @@ export class ApiService {
       JSON.stringify(body)
     ).pipe(catchError(this.formatErrors));
   }
-
+  postRedirect(path: string, body: Object = {}): void {
+    $.redirect(`${this.api_url}${path}/`, body); 
+  }
   post(path: string, body: Object = {}): Observable<any> {
     console.log(JSON.stringify(body), 'datos a enviar')
     return this.http.post(

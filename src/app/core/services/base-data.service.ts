@@ -18,7 +18,7 @@ export class BaseDataService {
     if (this._baseData) {
       return of(this._baseData);
     } else {
-      return this.apiService.get('csvData')
+      return this.apiService.get('csvData/')
         .pipe(
           tap(
             (base_data: BaseData) => {
