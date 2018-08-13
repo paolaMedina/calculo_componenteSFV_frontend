@@ -8,6 +8,17 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
 <link rel="stylesheet" href="styles.f55fa99136f76a333ecb.css"></head>
 <body>
-  <app-root></app-root>
+    <app-root></app-root>
 <script type="text/javascript" src="runtime.a66f828dca56eeb90e02.js"></script><script type="text/javascript" src="polyfills.7a0e6866a34e280f48e7.js"></script><script type="text/javascript" src="scripts.bf4fb386609474d14354.js"></script><script type="text/javascript" src="main.7010105e3bc0e58e3c94.js"></script></body>
+  <script>
+
+function nobackbutton(){
+	
+   window.location.hash="no-back-button";
+	
+   window.location.hash="Again-No-back-button" //chrome
+
+   window.onhashchange=function(){window.location.hash="no-back-button";}
+}
+  </script>
 </html>
