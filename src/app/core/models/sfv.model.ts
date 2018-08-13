@@ -1,5 +1,6 @@
 import { InvestorTypeEnum } from "../../core/enums";
 import { FvField } from "@app/core/models/fv-field.model";
+import { Source } from "@app/core/models/source.model";
 
 export class Sfv {
     potencia_de_planta_fv: number;
@@ -15,4 +16,9 @@ export class Sfv {
     voltage_servicio: number;
     fvs: FvField[];
     lugar_instalacion: string;
+    combinacion_inversor: {input: Source};
+
+    constructor() {
+        this.combinacion_inversor = {input: new Source()};
+    }
 }
