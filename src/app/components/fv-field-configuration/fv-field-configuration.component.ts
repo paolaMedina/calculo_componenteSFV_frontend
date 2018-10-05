@@ -91,6 +91,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
+      verticalPosition: 'top'
     });
   }
   updatePanelSeleccionado(panel: PanelSolar) {

@@ -29,6 +29,7 @@ export class SfvService {
           let cantidad_errores = errores.length;
           this.snackBar.open(`Se han encontrado errores en los campos ${errores.splice(0,3).join(', ')} ${cantidad_errores>3?  ' y '  + (cantidad_errores - 3) + ' más': ''} en el campo FV ${i+1}`, 'Aceptar', {
             duration: 6000,
+            verticalPosition: 'top'
           });
           return;
         }
@@ -36,16 +37,15 @@ export class SfvService {
     }
   }
   send(sfv: Sfv) {
-    console.log(sfv, 'sfv enviado')
-    this.apiService.post('postData', sfv).subscribe(
+    this.apiService.post('postData2', sfv)
+    .subscribe(
       response=> {
-        console.log(response)
-        this.apiService.postRedirect('postData', sfv);
+        this.apiService.postRedirect('postData2', sfv);
       },
       (response: any) => {
         let sfvErrors: Sfv = response.error;
 
-        console.log(response.error, 'errores desde catch errors')
+        console.log(response, 'errores desde catch errors')
         this.postvalidate(sfvErrors);
       }
     );

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Sfv, BaseData, Inversor } from '../../core/models';
 import { SfvFormBuilder } from '../../core/forms';
@@ -52,6 +52,7 @@ export class SfvComponentsComponent implements OnInit {
     private sfvService: SfvService,
     private baseDataService: BaseDataService,
     private router: Router,
+    private route: ActivatedRoute,
     public snackBar: MatSnackBar
   ) {
     console.log(this.baseHref);
@@ -74,6 +75,7 @@ export class SfvComponentsComponent implements OnInit {
    openSnackBar(message: string, action: string) {
     this.snackBar.open( message, action, {
       duration: 2000,
+      verticalPosition: 'top'
     });
   }
 

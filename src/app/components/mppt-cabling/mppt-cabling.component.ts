@@ -50,11 +50,13 @@ export class MpptCablingComponent implements OnInit {
     if ( !inputSourceForm.valid ) {
       this._snackBar.open("Se han enontrado algunos errores en el circuito fuente", "Aceptar", {
         duration: 3000,
+        verticalPosition: 'top'
       });
       return;
     } else if ( !outputSourceForm.valid ) {
       this._snackBar.open("Se han enontrado algunos errores en el circuito de salida", "Aceptar", {
         duration: 3000,
+        verticalPosition: 'top'
       });
       return;
     } else {

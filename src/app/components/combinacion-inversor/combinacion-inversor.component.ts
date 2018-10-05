@@ -48,6 +48,7 @@ export class CombinacionInversorComponent implements OnInit {
     if ( !inputSourceForm.valid ) {
       this._snackBar.open("Se han enontrado algunos errores en la combinación de inversores", "Aceptar", {
         duration: 3000,
+        verticalPosition: 'top'
       });
       return;
     } else {

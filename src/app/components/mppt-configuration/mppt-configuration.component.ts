@@ -68,6 +68,7 @@ export class MpptConfigurationComponent implements OnInit {
     else {
       this.snackBar.open(`Se han encontrado algunos problemas en el MPPT ${this.mttp.nombre}`, 'Aceptar', {
         duration: 2000,
+        verticalPosition: 'top'
       });
       return false;
     }

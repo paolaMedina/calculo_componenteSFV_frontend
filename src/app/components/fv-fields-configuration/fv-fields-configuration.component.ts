@@ -43,6 +43,7 @@ export class FvFieldsConfigurationComponent implements OnInit {
     } else {
       this.allow_add_and_delete = true;
     }
+    
   }
   saveFvFields(){ 
     this._fvFieldService.setFvFields(this.fvFields);
