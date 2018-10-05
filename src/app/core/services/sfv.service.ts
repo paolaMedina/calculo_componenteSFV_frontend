@@ -1,27 +1,54 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+
 import { Sfv } from '../../core/models';
-import { sfv_mock } from '../../mocks';
-import { ApiService } from '@app/core/services/api.service';
+import { ApiService } from '../../core/services/api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SfvService {
   sfv: Sfv;
+  constructor(private apiService: ApiService, public snackBar: MatSnackBar) {
+    this.sfv = new Sfv();
+
+   }
+
   get(): Sfv {
     return this.sfv;
   }
   set(sfv: Sfv) {
     this.sfv = sfv;
   }
-  send(sfv: Sfv) {
-    this.apiService.post('postData', sfv);
+  private postvalidate(sfvErrors: Sfv) {
+    if ( sfvErrors.fvs ) {
+      for ( let i = 0; i < sfvErrors.fvs.length; i++ ) {
+        let errores: string[] = Object.keys(sfvErrors.fvs[i]);
+        if( errores.length > 0 ) {
+          
+          let cantidad_errores = errores.length;
+          this.snackBar.open(`Se han encontrado errores en los campos ${errores.splice(0,3).join(', ')} ${cantidad_errores>3?  ' y '  + (cantidad_errores - 3) + ' más': ''} en el campo FV ${i+1}`, 'Aceptar', {
+            duration: 6000,
+            verticalPosition: 'top'
+          });
+          return;
+        }
+      }
+    }
   }
-  constructor(private apiService: ApiService) {
-    this.sfv = new Sfv();
-    // load mock 
-   //
-    //this.sfv = sfv_mock;
-   }
+  send(sfv: Sfv) {
+    this.apiService.post('postData2', sfv)
+    .subscribe(
+      response=> {
+        this.apiService.postRedirect('postData2', sfv);
+      },
+      (response: any) => {
+        let sfvErrors: Sfv = response.error;
+
+        console.log(response, 'errores desde catch errors')
+        this.postvalidate(sfvErrors);
+      }
+    );
+  }
 
 }

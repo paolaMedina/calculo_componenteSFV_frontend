@@ -8,7 +8,7 @@ export class Source {
     caida_de_tension_de_diseno: number;
     /** Canalización */
     tipo_canalizacion: string;
-    canalizacion: string;
+    //canalizacion: string;
     tamanio_canalizacion: number;
     material_conductor: string;
     /** Bandeja portacable */

@@ -18,13 +18,12 @@ export class SourceFormBuilder extends BaseFormBuilder {
         sourceForm = this.fb.group({
             tipo_alambrado:  [source? source.tipo_alambrado:'', Validators.required],
             tipo_canalizacion: [source? source.tipo_canalizacion:''],
-            canalizacion: [source? source.canalizacion:''],
             tamanio_canalizacion: [source? source.tamanio_canalizacion:''],
             maximo_numero_de_conductores: [source? source.maximo_numero_de_conductores: ''],
             disenio_bandeja: [source? source.disenio_bandeja:''],
             material_bandeja:[source? source.material_bandeja:''],
             tipo_acabado: [source? source.tipo_acabado:''],
-            tipo_conductor: [source? source.tipo_conductor:'',  Validators.compose([CustomValidators.number, Validators.required]) ],
+            tipo_conductor: [source? source.tipo_conductor:'',  Validators.required ],
             material_conductor: [source? source.material_conductor:'', Validators.required],
             distancia_del_conductor_mas_largo: [source? source.distancia_del_conductor_mas_largo:'',   Validators.compose([CustomValidators.number, Validators.required])],
             caida_de_tension_de_diseno: [source? source.caida_de_tension_de_diseno:'',  Validators.compose([CustomValidators.number, Validators.required])],
@@ -54,7 +53,6 @@ export class SourceFormBuilder extends BaseFormBuilder {
         }
         source.tipo_alambrado = form.get('tipo_alambrado').value;
         source.tipo_canalizacion = form.get('tipo_canalizacion').value;
-        source.canalizacion = form.get('canalizacion').value;
         source.maximo_numero_de_conductores = form.get('maximo_numero_de_conductores').value;
         source.material_bandeja = form.get('material_bandeja').value;
         source.tamanio_canalizacion = form.get('tamanio_canalizacion').value;

@@ -13,14 +13,20 @@
       <h5>{{fvField.nombre}}</h5>
       <span class="spacer"></span>
 
-      <button  *ngIf="allow_add_and_delete"  (click)="deleleteFvField(fvField._id)" fxFlexAlign="end" mat-icon-button> <mat-icon>delete</mat-icon></button>
-      <button (click)="goToFvFieldConfiguration(fvField._id)"fxFlexAlign="end" mat-icon-button> <mat-icon>keyboard_arrow_right</mat-icon></button>
+      <button (click)="goToFvFieldConfiguration(fvField.id)"fxFlexAlign="end" mat-icon-button> <mat-icon>settings</mat-icon></button>
+      <button  *ngIf="allow_add_and_delete"  (click)="deleleteFvField(fvField.id)" fxFlexAlign="end" mat-icon-button> <mat-icon>delete</mat-icon></button>
+      
     </div>
   </div>
 
-  <button *ngIf="allow_add_and_delete" (click)="addDefaultFvField()"class="add-button"mat-mini-fab>
+  <button *ngIf="allow_add_and_delete" (click)="addDefaultFvField()"mat-mini-fab>
     <mat-icon aria-label="Example icon-button with a heart icon">add_circle_outline</mat-icon>
   </button>
-  <button (click)="sendData()">enviar datos a backend</button>
+  <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+    <button color= "accent" mat-flat-button [routerLink]="['/fv-fields-config/combinacion-inversor']" >Circuito combinación de inversores</button>
+  </div>
+  <div  fxLayout="row" fxLayoutAlign="center"> 
+    <button  mat-flat-button (click)="sendData()">Realizar Cotización</button>
+  </div>
   <mat-divider></mat-divider>
 </div>

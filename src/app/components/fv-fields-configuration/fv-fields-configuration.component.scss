@@ -3,9 +3,8 @@
 }
 
 .add-button {
-    position: absolute;
-    right: 20px;
-    bottom: 20px; 
+    position: relative;
+    margin: 20px 20px;
 }
 
 /deep/ .mat-simple-snackbar-action .mat-button{

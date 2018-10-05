@@ -53,6 +53,9 @@ export class MpptConfigurationComponent implements OnInit {
       this.mttp = this._mttpFormBuilder.extractData(this.mttpForm, this.mttp);
 
       /** Si ya existia el mttp en el fv field entonces updatear si no pushear */
+      if (! _fvField.mttps) {
+        _fvField.mttps = new Array<Mttp>();
+      }
       if (_fvField.mttps.filter(mttp => mttp._id === this.mttp._id).length > 0) {
         let index_of_mttp_to_update = _fvField.mttps.findIndex(mttp => mttp._id === this.mttp._id);
         _fvField.mttps[index_of_mttp_to_update] = this.mttp;
@@ -65,6 +68,7 @@ export class MpptConfigurationComponent implements OnInit {
     else {
       this.snackBar.open(`Se han encontrado algunos problemas en el MPPT ${this.mttp.nombre}`, 'Aceptar', {
         duration: 2000,
+        verticalPosition: 'top'
       });
       return false;
     }
@@ -118,7 +122,7 @@ export class MpptConfigurationComponent implements OnInit {
       );
   }
   get valid(): boolean {
-    return this.mttpForm.valid && this.nominal_array_data.valid();
+    return this.mttpForm.valid && this.nominal_array_data.valid() ;
   }
   updateMttpSpecifications(numero_de_paneles_en_serie_por_cadena: number, numero_de_cadenas_en_paralelo: number) {
     this.mttpSpecifications.total_de_paneles = total_de_paneles(numero_de_cadenas_en_paralelo, numero_de_paneles_en_serie_por_cadena);

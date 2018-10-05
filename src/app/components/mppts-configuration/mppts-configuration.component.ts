@@ -264,8 +264,9 @@ export class MpptsConfigurationComponent implements OnInit {
     if (validate) {
       this.markAllMpptsFormsAsTouched();
       if (!this.checkAllMpptsFormsValid()) {
-        this.snackBar.open("Se han enncontrado algunos errores", "Aceptar", {
+        this.snackBar.open("Se han encontrado algunos errores", "Aceptar", {
           duration: 2000,
+          verticalPosition: 'top'
         });
         return false;
       }
@@ -274,6 +275,7 @@ export class MpptsConfigurationComponent implements OnInit {
     this._fvFieldService.updateField(this.fvField);
     this.snackBar.open("Datos almacenados correctamente", "Aceptar", {
       duration: 2000,
+      verticalPosition: 'top'
     });
     return true;
 

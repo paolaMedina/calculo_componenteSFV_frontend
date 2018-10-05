@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { ParamMap, ActivatedRoute, Router } from '@angular/router';
 import { SourceFormBuilder } from '../../core/forms/source.form';
 import { MatSnackBar } from '@angular/material';
@@ -9,6 +9,7 @@ import { Mttp, FvField } from '../../core/models';
 import { routercTransition } from '../../router.animations';
 import { NgxGalleryComponent, INgxGalleryImage, NgxGalleryOptions } from 'ngx-gallery';
 import { galleryOptionsFullScreenOnly } from '../../core/const';
+import { APP_BASE_HREF } from "@angular/common";
 
 @Component({
   selector: 'app-investor-output',
@@ -20,13 +21,14 @@ export class InvestorOutputComponent implements OnInit {
   fvField: FvField;
   galleryImageOptions = galleryOptionsFullScreenOnly;
   helpImages: INgxGalleryImage[] = [{
-    big: '/assets/img/cableado-help.png'
+    big: `${this.baseHref}/assets/img/cableado-help.png`
   }];
   @ViewChild('helpImage') onlyPreviewGallery: NgxGalleryComponent;
 
   @ViewChild('inputSource') inputSourceCircuitComponent: InputSourceCircuitComponent;
   @ViewChild('outputSource') outputSourceCircuitComponent: InputSourceCircuitComponent;
   constructor(
+    @Inject(APP_BASE_HREF) private baseHref: string,
     private _fvFieldService: FvFieldService,
     private _sourceFormBuilder: SourceFormBuilder,
     private _snackBar: MatSnackBar,
@@ -38,22 +40,15 @@ export class InvestorOutputComponent implements OnInit {
     this.onlyPreviewGallery.openPreview(0);
   }
   saveData() {
-    let inputSourceForm = this.inputSourceCircuitComponent.sourceForm;
     let outputSourceForm = this.outputSourceCircuitComponent.sourceForm;
-    this._sourceFormBuilder.markFormGroupTouched(inputSourceForm);
     this._sourceFormBuilder.markFormGroupTouched(outputSourceForm);
-    if ( !inputSourceForm.valid ) {
-      this._snackBar.open("Se han enontrado algunos errores, en el circuito fuente", "Aceptar", {
-        duration: 3000,
-      });
-      return;
-    } else if ( !outputSourceForm.valid ) {
+    if ( !outputSourceForm.valid ) {
       this._snackBar.open("Se han enontrado algunos errores en el circuito de salida", "Aceptar", {
         duration: 3000,
+        verticalPosition: 'top'
       });
       return;
     } else {
-      this.fvField.salida_inversor.input = this._sourceFormBuilder.extractData(inputSourceForm, this.fvField.salida_inversor.input);
       this.fvField.salida_inversor.output = this._sourceFormBuilder.extractData(outputSourceForm, this.fvField.salida_inversor.output);
       this._fvFieldService.updateField(this.fvField);
       this._router.navigate(['/fv-field-config', this.fvField.id]);

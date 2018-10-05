@@ -6,6 +6,7 @@ import { FvFieldConfigurationComponent } from './components/fv-field-configurati
 import { MpptsConfigurationComponent } from './components/mppts-configuration/mppts-configuration.component';
 import { MpptCablingComponent } from './components/mppt-cabling/mppt-cabling.component';
 import { InvestorOutputComponent } from './pages/investor-output/investor-output.component';
+import { CombinacionInversorComponent } from './components/combinacion-inversor/combinacion-inversor.component';
 const routes: Routes = [
   {
     path: '',
@@ -30,6 +31,11 @@ const routes: Routes = [
   {
     path: 'fv-field-config/investor-output/:fv_id',
     component: InvestorOutputComponent
+  },
+
+  {
+    path: 'fv-fields-config/combinacion-inversor',
+    component: CombinacionInversorComponent
   }
 
 ];

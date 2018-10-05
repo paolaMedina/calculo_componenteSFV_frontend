@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
+import { APP_BASE_HREF } from "@angular/common";
 
 import { FvField, Inversor, BaseData, PanelSolar } from '../../core/models';
 import { FvFieldService, BaseDataService, SfvService } from '../../core/services';
@@ -26,6 +27,7 @@ export interface Food {
 export class FvFieldConfigurationComponent implements OnInit {
   fvField: FvField;
   paneles_solares: PanelSolar[];
+  CONFIG_IMAGE_URL: string;
   fabricantes_paneles: String[];
   fvFieldForm: FormGroup;
   inversores: Inversor[];
@@ -54,6 +56,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   ];
 
   constructor(
+    @Inject(APP_BASE_HREF) private baseHref: string,
     private _sfvService: SfvService,
     private _fvFieldService: FvFieldService,
     private _fvFormBuilder: FvFormBuilder,
@@ -61,6 +64,7 @@ export class FvFieldConfigurationComponent implements OnInit {
     private router: Router,
     public snackBar: MatSnackBar,
     private route: ActivatedRoute) {
+      this.CONFIG_IMAGE_URL = `${this.baseHref}assets/img/configuration.png`
     this.fvFieldForm = this._fvFormBuilder.makeForm();
       this.panelSeleccionado = this._fvFieldService.getSelectedSolarPanel();
       this.inversorSeleccionado = this._fvFieldService.getSelectedInversor();
@@ -87,6 +91,7 @@ export class FvFieldConfigurationComponent implements OnInit {
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
       duration: 2000,
+      verticalPosition: 'top'
     });
   }
   updatePanelSeleccionado(panel: PanelSolar) {
@@ -203,7 +208,7 @@ export class FvFieldConfigurationComponent implements OnInit {
 
     this.route.params.subscribe(params => {
       this.fvField = this._fvFieldService.get(params['_id']);
-      if ( this.fvField.mttps.length > 0 ) {
+      if ( this.fvField.mttps && this.fvField.mttps.length > 0 ) {
        this.potencia_fv = potencia_fv_total(this.fvField.mttps, this.panelSeleccionado.pmax);
        this.carga_inversor = cargabilidad_inversor(this.potencia_fv, this.inversorSeleccionado.pot_nom);
       }
