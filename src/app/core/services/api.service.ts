@@ -48,9 +48,15 @@ export class ApiService {
       JSON.stringify(body)
     ).pipe(catchError(this.formatErrors));
   }
-  postRedirect(path: string, body: Object = {}): void {
+  /**
+   * Realizar un post y seguidamente redireccionar a la url target
+   * @param nombre_projecto Nombre de el proyecto que se va a enviar 
+   * @param body El objeto que se enviara en el post
+   */
+  postRedirect(nombre_projecto: string, body: Object = {}): void {
     var _body = {validated_data: JSON.stringify(body)};
-    ($.redirect(`${this.api_url}${path}/`, _body)); 
+    this.http.post(`${this.api_url}postData2/`, _body); 
+    window.top.location.href=`${this.api_url}media/cotizaciones/cotizacion_${nombre_projecto}.pdf/`;
   }
   post(path: string, body: Object = {}): Observable<any> {
     this.appendDjangoCSFRtokenToHeaders();
