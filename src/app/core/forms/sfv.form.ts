@@ -14,8 +14,8 @@ export class SfvFormBuilder extends BaseFormBuilder{
     makeForm(sfv?: Sfv): FormGroup {
         let sfvForm: FormGroup;
         sfvForm = this.fb.group({
-            potencia_de_planta_fv: [sfv? sfv.potencia_de_planta_fv:'',  Validators.compose([Validators.required, CustomValidators.number])],
-            nombre_proyecto: [sfv? sfv.nombre_proyecto: '', Validators.required],
+        potencia_de_planta_fv: [sfv? sfv.potencia_de_planta_fv:'',  Validators.compose([Validators.required, CustomValidators.number])],
+            nombre_proyecto: [sfv? sfv.nombre_proyecto: '', Validators.compose([Validators.required, Validators.pattern("[A-Za-z0-9]{3,}[A-Za-z0-9 \- _]+")])],
             potencial_de_panel_fv: [sfv? sfv.potencial_de_panel_fv: 0, CustomValidators.number],
             total_paneles_fv: [sfv? sfv.total_paneles_fv:0, CustomValidators.number],
             calcular_potencial_de_planta: [sfv? sfv.calcular_potencial_de_planta: ''],
