@@ -24,7 +24,7 @@ export class InputSourceCircuitComponent implements OnInit {
     "Galvanizado en continuo", "Galvanizado en caliente", "Galvanizado en caliente (Zn + Al)",
     "Acero indoxidable 304L", "Acero indoxidable 316L"]
   longitud = ["2,4", "3"];
-  ancho = ["50", "75", "10", "15", "20", "22", "30", "40", "45", "50", "60", "70", "75", "80", "90"];
+  ancho = ["50", "75", "100", "150", "200", "225", "300", "400", "450", "500", "600", "700", "750", "800", "900"];
   alto = ["50", "60", "75", "80", "100", "150"]
   carga = ["Carga ligera", "Carga media", "Carga pesada"];
   materialConductor = ["Cobre", "Aluminio"];
