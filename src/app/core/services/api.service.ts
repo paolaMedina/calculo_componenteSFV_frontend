@@ -16,7 +16,7 @@ export class ApiService {
   }
 
   private formatErrors(error: any) {
-    console.log(error, 'error in format errores')
+    //console.log(error, 'error in format errores')
     return new Observable(error.error);
   }
 
@@ -25,7 +25,7 @@ export class ApiService {
       .pipe(catchError(this.formatErrors));
   }
   private getDjangoCSFRtoken(): string | false {
-    console.log(document.getElementsByName("csrfmiddlewaretoken"), 'elements by name csrf middleware token ');
+    //console.log(document.getElementsByName("csrfmiddlewaretoken"), 'elements by name csrf middleware token ');
     const hiddenCsfrInput = <HTMLInputElement> document.getElementsByName("csrfmiddlewaretoken")[0]; //
     if ( hiddenCsfrInput ) { 
       return hiddenCsfrInput.value;
@@ -55,19 +55,21 @@ export class ApiService {
    */
   postRedirect(nombre_projecto: string, body: Object = {}): void {
     var _body = {validated_data: JSON.stringify(body)};
-    this.http.post(`${this.api_url}postData2/`, _body); 
-    window.top.location.href=`${this.api_url}media/cotizaciones/cotizacion_${nombre_projecto}.pdf/`;
+    //console.log("estoy a punto de hacer el post data 2 super valid");
+    this.post(`postData2`, _body).subscribe(
+      _ => {
+        window.top.location.href=`${this.api_url}pdf/cotizacion_${nombre_projecto}/`;
+      }
+    ); 
   }
   post(path: string, body: Object = {}): Observable<any> {
     this.appendDjangoCSFRtokenToHeaders();
-    console.log(this.headers.get('X-CSRFToken'));
-    console.log(JSON.stringify(body), 'datos a enviar')
     return this.http.post(
       `${this.api_url}${path}/`,
       JSON.stringify(body),
       {headers: this.headers},
 
-    ).pipe(tap(response=> console.log(response,'algo de respuesta')));
+    ).pipe(tap(response=>{}));
   }
 
   delete(path): Observable<any> {

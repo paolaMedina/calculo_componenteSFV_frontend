@@ -55,7 +55,7 @@ export class SfvComponentsComponent implements OnInit {
     private route: ActivatedRoute,
     public snackBar: MatSnackBar
   ) {
-    console.log(this.baseHref);
+    //console.log(this.baseHref);
     this.sfv = this.sfvService.get();
     this.sfvForm = this.sfvFormBuilder.makeForm();
 

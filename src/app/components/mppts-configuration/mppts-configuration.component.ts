@@ -288,7 +288,7 @@ export class MpptsConfigurationComponent implements OnInit {
     }
   }
   ngOnInit() {
-    console.log(this._inversor, 'inversor en mttps config');
+   // console.log(this._inversor, 'inversor en mttps config');
     this.max_number_of_mttps = this._inversor.no_mppt;
    
     this.route.params.subscribe(params => {

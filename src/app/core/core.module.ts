@@ -25,7 +25,7 @@ import { APP_BASE_HREF, PlatformLocation } from "@angular/common";
  * @return a string instance of the `<base href="" />` value from `index.html`
  */
 export function getBaseHref(platformLocation: PlatformLocation): string {
-  console.log(platformLocation.getBaseHrefFromDOM(), 'base href from doom');
+  //console.log(platformLocation.getBaseHrefFromDOM(), 'base href from doom');
     return platformLocation.getBaseHrefFromDOM();
 }
 
