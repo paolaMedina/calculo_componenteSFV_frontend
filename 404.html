@@ -10,5 +10,22 @@
 <link rel="stylesheet" href="styles.f55fa99136f76a333ecb.css"></head>
 <body>
   <app-root></app-root>
-<script type="text/javascript" src="runtime.a66f828dca56eeb90e02.js"></script><script type="text/javascript" src="polyfills.7a0e6866a34e280f48e7.js"></script><script type="text/javascript" src="scripts.bf4fb386609474d14354.js"></script><script type="text/javascript" src="main.9d63d032303a0fdbfe65.js"></script></body>
+  <script>
+(function () {
+    var location = window.document.location;
+
+    var preventNavigation = function () {
+        var originalHashValue = location.hash;
+
+        window.setTimeout(function () {
+            location.hash = 'preventNavigation' + ~~ (9999 * Math.random());
+            location.hash = originalHashValue;
+        }, 0);
+    };
+
+    window.addEventListener('beforeunload', preventNavigation, false);
+    window.addEventListener('unload', preventNavigation, false);
+})();
+  </script>
+<script type="text/javascript" src="runtime.a66f828dca56eeb90e02.js"></script><script type="text/javascript" src="polyfills.7a0e6866a34e280f48e7.js"></script><script type="text/javascript" src="scripts.bf4fb386609474d14354.js"></script><script type="text/javascript" src="main.ef54b48e6ebd8b2f0628.js"></script></body>
 </html>
