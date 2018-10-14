@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiURL: 'https://simulador-fv-paolamedina.c9users.io/cotizadorFV/'
+  apiURL: 'http://192.168.1.2/cotizadorFV/'
 };
 
 /*

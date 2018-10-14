@@ -21,6 +21,13 @@ export class SfvService {
     this.sfv = sfv;
   }
   private postvalidate(sfvErrors: Sfv) {
+    
+    if(sfvErrors.combinacion_inversor) {
+      this.snackBar.open('Debe ingresar información de combinación de inversor', 'Aceptar', {
+        duration: 6000,
+      });
+      return;
+    }
     if ( sfvErrors.fvs ) {
       for ( let i = 0; i < sfvErrors.fvs.length; i++ ) {
         let errores: string[] = Object.keys(sfvErrors.fvs[i]);
