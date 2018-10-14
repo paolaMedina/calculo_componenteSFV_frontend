@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build-github": "ng build --prod --base-href './'",
+    "build-github": "ng build --prod --base-href ./",
     "build": "ng build",
     "start-c9": "ng serve --host $IP --port $PORT --public-host $C9_HOSTNAME",
     "test": "ng test",
